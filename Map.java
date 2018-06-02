@@ -35,5 +35,9 @@ public class Map {
 		frame.add(canvas);
 		frame.pack();
 	}	
-
+	
+	public Canvas getCanvas(){
+		return canvas;
+	}
+	
 }
