@@ -10,7 +10,7 @@ public class Game implements Runnable{
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
-	private BufferedImage background;
+
 	
 	public Game(String title , int width , int height) {
 		this.width = width;
@@ -20,12 +20,14 @@ public class Game implements Runnable{
 
 	private void init(){
 		map = new Map(title, width, height);
-		background = ImageLoader.loadImage("/images/last_map.png");
+		Assets.init();
+
 		
 	}
 
+	int x = 0;
 	private void tick(){
-	
+	//x += 1;
 	}
 	
 	private void render(){
@@ -39,7 +41,7 @@ public class Game implements Runnable{
 		g.clearRect(0, 0, width, height);
 		//Draw Here!
 		
-		g.drawImage(background,400,0,null);
+		g.drawImage(Assets.background,x+400,x,null);
 		
 		//End Drawing!
 		bs.show();
@@ -50,9 +52,31 @@ public class Game implements Runnable{
 		
 		init();
 		
+		int fps = 60;
+		double timepPerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
 		while(running){
+			now = System.nanoTime();
+			delta += (now - lastTime)/timepPerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			
+			if(delta >= 1){
 			tick();
 			render();
+			ticks++;
+			delta--;
+			}
+			
+			if(timer >= 1000000000) {
+				ticks = 0;
+				timer = 0;
+			}
 		}
 		
 		stop();
