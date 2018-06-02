@@ -1,11 +1,16 @@
 import java.awt.Container;
+import java.awt.Dimension;
+
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.Canvas;
+
+
 public class Map {
 	private JFrame frame;
 	private String title;
 	private int width, height;
-
+	private Canvas canvas;
 
 	public Map(String title, int width, int height){
 		this.title = title;
@@ -21,6 +26,14 @@ public class Map {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(width,height));
+		canvas.setMaximumSize(new Dimension(width-400,height));
+		canvas.setMinimumSize(new Dimension(width-400,height));
+		
+		frame.add(canvas);
+		frame.pack();
 	}	
 
 }
