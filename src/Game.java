@@ -29,7 +29,7 @@ public class Game implements Runnable{
 	int x = 0;
 	private void tick(){
 		if(State.getState() != null)
-			gameState.tick();
+			State.getState().tick();
 	}
 	
 	private void render(){
@@ -44,7 +44,7 @@ public class Game implements Runnable{
 		//Draw Here!
 		
 		if(State.getState() != null)
-			gameState.render(g);
+			State.getState().render(g);
 		
 		//End Drawing!
 		bs.show();
