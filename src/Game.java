@@ -41,7 +41,7 @@ public class Game implements Runnable{
 		g.clearRect(0, 0, width, height);
 		//Draw Here!
 		
-		g.drawImage(Assets.background,x+400,x,null);
+		g.drawImage(Assets.background, 400 ,0, null);
 		
 		//End Drawing!
 		bs.show();
@@ -58,7 +58,7 @@ public class Game implements Runnable{
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int ticks = 0;
+		int time = 0;
 		
 		while(running){
 			now = System.nanoTime();
@@ -69,13 +69,14 @@ public class Game implements Runnable{
 			if(delta >= 1){
 			tick();
 			render();
-			ticks++;
 			delta--;
 			}
 			
 			if(timer >= 1000000000) {
-				ticks = 0;
+				time += 1;
 				timer = 0;
+				System.out.println("current time:" + time);
+				
 			}
 		}
 		
