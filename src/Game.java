@@ -26,7 +26,6 @@ public class Game implements Runnable{
 		
 	}
 
-	int x = 0;
 	private void tick(){
 		if(State.getState() != null)
 			State.getState().tick();
