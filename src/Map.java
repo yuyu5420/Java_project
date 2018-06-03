@@ -29,8 +29,8 @@ public class Map {
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width,height));
-		canvas.setMaximumSize(new Dimension(width-400,height));
-		canvas.setMinimumSize(new Dimension(width-400,height));
+		canvas.setMaximumSize(new Dimension(width,height));
+		canvas.setMinimumSize(new Dimension(width,height));
 		
 		frame.add(canvas);
 		frame.pack();
