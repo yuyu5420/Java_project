@@ -11,7 +11,7 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	private State gameState;
-	public static boolean go[][] = new boolean [9][11];
+	public static boolean go[][] = new boolean [11][9];
 	
 	public Game(String title , int width , int height) {
 		this.width = width;
@@ -21,8 +21,8 @@ public class Game implements Runnable{
 
 	private void init(){
 		map = new Map(title, width, height);
-		for(int x = 0; x < 9; x++)
-			for(int y = 0; y < 11; y++)		go[x][y] = true;
+		for(int x = 0; x < 11; x++)
+			for(int y = 0; y < 9; y++)		go[x][y] = true;
 		Assets.init();
 		gameState = new GameState();
 		State.setState(gameState);
