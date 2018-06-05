@@ -1,11 +1,11 @@
 import java.awt.Graphics;
 
-
-
 public class GameState extends State {
 
+	private Player player1;
+	
 	public GameState(){
-		
+		player1 = new Player(400, 400);
 	}
 	
 	public void tick() {
@@ -38,6 +38,8 @@ public class GameState extends State {
 			String y = tokens4[1];
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x) , Integer.valueOf(y), null);	
 		}
+		
+		player1.render(g);
 	}
 
 }

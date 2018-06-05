@@ -13,6 +13,7 @@ public class Game implements Runnable{
 	private State gameState;
 	public static boolean go[][] = new boolean [11][9];
 	
+	
 	public Game(String title , int width , int height) {
 		this.width = width;
 		this.height = height;
