@@ -22,11 +22,18 @@ public class Game implements Runnable{
 	private void init(){
 		map = new Map(title, width, height);
 		for(int x = 0; x < 11; x++)
-			for(int y = 0; y < 9; y++)		go[x][y] = true;
+			for(int y = 0; y < 9; y++)		go[x][y] = false;
 		Assets.init();
 		gameState = new GameState();
 		State.setState(gameState);
-		
+		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
+		String[] tokens = s1.split(" ");
+		for (String token:tokens) {
+			String[] tokens2 = token.split(",");
+			String x = tokens2[0];
+			String y = tokens2[1];
+			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
+		}
 	}
 
 	private void tick(){

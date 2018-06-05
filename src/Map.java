@@ -17,7 +17,7 @@ public class Map {
 		this.width = width;
 		this.height = height;	
 		Display();
-	}
+	} 
 	
 	private void Display(){
 		frame = new JFrame(title);
