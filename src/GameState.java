@@ -7,7 +7,7 @@ public class GameState extends State {
 	public GameState(){
 		
 	}
-	
+
 	public void tick() {
 		
 	}
@@ -38,6 +38,7 @@ public class GameState extends State {
 			String y = tokens4[1];
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x) , Integer.valueOf(y), null);	
 		}
+		
 	}
 
 }
