@@ -14,7 +14,7 @@ public class Game implements Runnable{
 	private Graphics g;
 	private State gameState;
 	public static boolean go[][] = new boolean [11][9];
-	
+	private KeyManager keyManager;
 	
 	public Game(String title , int width , int height) {
 		this.width = width;
@@ -27,7 +27,7 @@ public class Game implements Runnable{
 		for(int x = 0; x < 11; x++)
 			for(int y = 0; y < 9; y++)		go[x][y] = false;
 		Assets.init();
-		gameState = new GameState();
+		gameState = new GameState(this);
 		State.setState(gameState);
 		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
 		String[] tokens = s1.split(" ");
@@ -37,7 +37,13 @@ public class Game implements Runnable{
 			String y = tokens2[1];
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
-		
+		keyManager = new KeyManager();
+		map.getFrame().addKeyListener(keyManager);
+	}
+	
+
+	public KeyManager getKeyManager() {
+		return keyManager;
 	}
 
 	private void tick(){

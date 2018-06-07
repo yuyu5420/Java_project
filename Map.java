@@ -10,6 +10,8 @@ import java.awt.Canvas;
 
 public class Map {
 	private JFrame frame;
+
+
 	private String title;
 	private int width, height;
 	private Canvas canvas;
@@ -28,7 +30,6 @@ public class Map {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		frame.addKeyListener(new KeyManager());
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width,height));
@@ -42,12 +43,8 @@ public class Map {
 	public Canvas getCanvas(){
 		return canvas;
 	}
-	
-	class KeyManager extends KeyAdapter{
-		@Override
-		public void keyPressed(KeyEvent e) {
-			super.keyPressed(e);
-			
-		}
+	public JFrame getFrame() {
+		return frame;
 	}
+	
 }

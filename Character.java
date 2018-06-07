@@ -1,10 +1,10 @@
 import java.awt.Graphics;
 import javax.swing.JComponent;
 
-public abstract class Character implements Default{
+public abstract class Character implements GameStateDefault{
 	
-	private int Xcoordinate;
-	private int Ycoordinate;
+	protected int Xcoordinate;
+	protected int Ycoordinate;
 	private int moveSpeed;
 	private int bombTotal;	/* total bomb number can put */
 	private int bombNum;	
@@ -23,6 +23,16 @@ public abstract class Character implements Default{
 	
 	public abstract void render(Graphics g) ;
 	public abstract void tick() ;
+
+	public abstract void putBomb();
+	
+	public void setXcoordinate(int xcoordinate) {
+		Xcoordinate = xcoordinate;
+	}
+
+	public void setYcoordinate(int ycoordinate) {
+		Ycoordinate = ycoordinate;
+	}
 
 	public int getYcoordinate() {
 		return Ycoordinate;
