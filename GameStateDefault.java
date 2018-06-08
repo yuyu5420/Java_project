@@ -14,5 +14,6 @@ public interface GameStateDefault {
 	static final int DEFAULT_MAX_X = 1445;
 	static final int DEFAULT_MIN_Y = 15;
 	static final int DEFAULT_MAX_Y = 815;
+	static final int DEFAULT_PACE = 100;
 	
 }

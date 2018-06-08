@@ -20,13 +20,13 @@ public abstract class User extends Character {
 	public void tick() {
 		movable();
 		if(game.getKeyManager().up && up_movable) {
-			super.setYcoordinate(super.getYcoordinate()-5);
+			super.setYcoordinate(super.getYcoordinate()-DEFAULT_PACE);
 		} else if(game.getKeyManager().down && down_movable) {
-			super.setYcoordinate(super.getYcoordinate()+5);
+			super.setYcoordinate(super.getYcoordinate()+DEFAULT_PACE);
 		} else if(game.getKeyManager().left && left_movable) {
-			super.setXcoordinate(super.getXcoordinate()-5);
+			super.setXcoordinate(super.getXcoordinate()-DEFAULT_PACE);
 		} else if(game.getKeyManager().right && right_movable) {
-			super.setXcoordinate(super.getXcoordinate()+5);
+			super.setXcoordinate(super.getXcoordinate()+DEFAULT_PACE);
 		}
 		
 	}
