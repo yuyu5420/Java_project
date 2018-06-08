@@ -8,7 +8,7 @@ public abstract class User extends Character {
 	private Game game;
 	
 	public User(Game game, int Xcoordinate, int Ycoordinate) {
-		super(Xcoordinate, Ycoordinate);
+		super(game, Xcoordinate, Ycoordinate);
 		this.game = game;
 		
 	}
@@ -18,13 +18,14 @@ public abstract class User extends Character {
 
 	@Override
 	public void tick() {
-		if(game.getKeyManager().up) {
+		movable();
+		if(game.getKeyManager().up && up_movable) {
 			super.setYcoordinate(super.getYcoordinate()-5);
-		} else if(game.getKeyManager().down) {
+		} else if(game.getKeyManager().down && down_movable) {
 			super.setYcoordinate(super.getYcoordinate()+5);
-		} else if(game.getKeyManager().left) {
+		} else if(game.getKeyManager().left && left_movable) {
 			super.setXcoordinate(super.getXcoordinate()-5);
-		} else if(game.getKeyManager().right) {
+		} else if(game.getKeyManager().right && right_movable) {
 			super.setXcoordinate(super.getXcoordinate()+5);
 		}
 		
