@@ -42,5 +42,26 @@ public abstract class Character implements GameStateDefault{
 		return Xcoordinate;
 	}
 
+	public void move(boolean[][] go) {
+		if(Xcoordinate == 445) {
+			if(Ycoordinate == 15) {
+				
+			} else if(Ycoordinate > 15) {
+				
+			} else if(Ycoordinate == 730) {
+				
+			} else if(Ycoordinate < 730) {
+				
+			}
+		} else if(Xcoordinate > 445) {
+			
+		} else if(Xcoordinate == 1455) {
+			
+		} else if(Xcoordinate < 1455) {
+			
+		}
+		
+	}
+
 
 }

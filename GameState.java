@@ -6,7 +6,7 @@ public class GameState extends State implements GameStateDefault{
 	private Player player1;
 	
 	public GameState(Game game){
-		player1 = new Player(game, DEFAULT_PLAYER_1_X, DEFAULT_PLAYER_1_Y);
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MAX_Y);
 	}
 	
 	public void tick() {

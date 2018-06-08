@@ -21,4 +21,10 @@ public class Player extends User {
 		
 	}
 
+	@Override
+	public void tick() {
+		super.tick();
+		
+	}
+
 }
