@@ -1,15 +1,16 @@
 import java.awt.Graphics;
+import javax.swing.JComponent;
 
-public class GameState extends State {
+public class GameState extends State implements GameStateDefault{
 
 	private Player player1;
 	
-	public GameState(){
-		player1 = new Player(400, 400);
+	public GameState(Game game){
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
 	}
-
+	
 	public void tick() {
-		
+		player1.tick();
 	}
 
 	public void render(Graphics g) {
@@ -38,8 +39,6 @@ public class GameState extends State {
 			String y = tokens4[1];
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x) , Integer.valueOf(y), null);	
 		}
-		
-
 		player1.render(g);
 
 	}

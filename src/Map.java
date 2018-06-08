@@ -1,5 +1,7 @@
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -8,6 +10,8 @@ import java.awt.Canvas;
 
 public class Map {
 	private JFrame frame;
+
+
 	private String title;
 	private int width, height;
 	private Canvas canvas;
@@ -31,12 +35,16 @@ public class Map {
 		canvas.setPreferredSize(new Dimension(width,height));
 		canvas.setMaximumSize(new Dimension(width,height));
 		canvas.setMinimumSize(new Dimension(width,height));
+		canvas.setFocusable(false);
 		
 		frame.add(canvas);
 		frame.pack();
 	}	
 	public Canvas getCanvas(){
 		return canvas;
+	}
+	public JFrame getFrame() {
+		return frame;
 	}
 	
 }
