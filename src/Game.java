@@ -217,7 +217,13 @@ public class Game implements Runnable{
 		}
 	}
 	
-	
+	public boolean isBombbb() {
+		return bombbb;
+	}
+
+	public void setBombbb(boolean bombbb) {
+		this.bombbb = bombbb;
+	}
 	
 	
 }
