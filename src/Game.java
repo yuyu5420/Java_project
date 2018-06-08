@@ -20,9 +20,6 @@ public class Game implements Runnable{
 	private boolean bombbb;
 	public static boolean go[][] = new boolean [11][9];
 	
-
-	
-
 	int time = 0;
 	public int k = 0;
 	private Image[] icon = new Image[50];
@@ -30,8 +27,8 @@ public class Game implements Runnable{
 	public short yy[] = new short[50];
 	public long start_time[] = new long[50];
 	public float b_duration[] = new float[50];
+	public float f_duration[] = new float[50];
 	public long b_timer[] = new long[50];
-
 	public Game(String title , int width , int height) {
 		this.width = width;
 		this.height = height;
@@ -54,7 +51,9 @@ public class Game implements Runnable{
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
 
-		for (Image image:icon)	image = null;
+		for (int i=0; i<xx.length ; i++) {
+			xx[i] = 2000;
+		}
 	}
 
 	private void tick(){
@@ -63,6 +62,7 @@ public class Game implements Runnable{
 	}
 	boolean f = true;
 	boolean s = true;
+	boolean a = false;
 	private void render(){
 		bs = map.getCanvas().getBufferStrategy();
 		if(bs == null){
@@ -81,44 +81,50 @@ public class Game implements Runnable{
 		 * xx[k] = x(bomb's x coordinate)
 		 * yy[k] = y(bomb's y coordinate)
 		 */
-		try {
 				if(isBombbb()) {
 					if(k == 50)	k = 0;
-					icon[k] = new ImageIcon(new URL("https://i.imgur.com/fXbu8CJ.gif")).getImage();
 					start_time[k] = System.nanoTime();
 					b_timer[k] = 0;
 					b_duration[k] = 0;
+					f_duration[k] = 0;
 					k++;
 					setBombbb(false);
 					System.out.println("k="+k);
 				}
-			
-		} 
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		for(int i = 0; i < 50; i++)	{
-	
-			if(icon[i] != null)	{
+			if(xx[i] != 2000)	{
 				long now = System.nanoTime();
 				b_timer[i] +=  (now-start_time[i]);
 				start_time[i] = now;
 				if(b_timer[i] >= 1000000000) {
 					b_duration[i] += 1;
+					f_duration[i] += 1;
 					b_timer[i] = 0;
+					System.out.println("which:" + i +"  duration:" + b_duration[i] );
 				}
-				if(b_duration[i] <= 3)	g.drawImage(icon[i], xx[i], yy[i], null);
-				else	icon[i] = null;
-				System.out.println("i ===="+i);
+				if(b_duration[i] <= 1)	{
+					System.out.println("drew" + i + "  time_now:"+time + "   position:" + xx[i]);
+					g.drawImage(Assets.bomb, xx[i], yy[i],80,80, null);
+				}
+				else a = true;
+				
+				if(f_duration[i] >= 2 &&f_duration[i] <= 2 && a) {
+					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]+50 ,null);
+					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]-50 ,null);
+					g.drawImage(Assets.obstacle1 , xx[i]+50 , yy[i] ,null);
+					g.drawImage(Assets.obstacle1 , xx[i]-50 , yy[i] ,null);
+				}
+				else	a = false;
+				//System.out.println("i ===="+i);
 			}
 		}
+
 		
 		//End Drawing!
 		bs.show();
 		g.dispose();
 	}
-	
+	boolean tt = true;
 	public void run(){
 		
 		init();
@@ -144,16 +150,27 @@ public class Game implements Runnable{
 			}
 			if (time == 3 && f) {
 				setBombbb(true);
+				System.out.println("K0: " +k);
 				xx[k] = 400;
 				yy[k] = 300;
 				f = false;
+				a = true;
 				System.out.println("start!!!!!!!!!!!!!!!");
 			}
 			if (time == 6 && s) {
 				setBombbb(true);
+				System.out.println("K: " +k);
 				xx[k] = 700;
 				yy[k] = 300;
 				s  = false;
+			}
+			if (time == 9 && tt) {
+				setBombbb(true);
+				System.out.println("K1: " +k);
+				xx[k] = 1000;
+				yy[k] = 300;
+				s  = false;
+				tt = false;
 			}
 
 			if(timer >= 1000000000) {
