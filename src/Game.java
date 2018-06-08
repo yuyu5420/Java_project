@@ -1,13 +1,13 @@
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.Image;
 import java.awt.image.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.imageio.*;
+import javax.swing.ImageIcon;
 public class Game implements Runnable{
-	
-	
-	private KeyManager keyManager;
-//	protected boolean current[][] = new boolean [11][9];
 	
 	private Map map;
 	public int width , height;
@@ -22,14 +22,13 @@ public class Game implements Runnable{
 	
 	int time = 0;
 	public int k = 0;
-	//private Image[] icon = new Image[50];
+	private Image[] icon = new Image[50];
 	public short xx[] = new short[50];
 	public short yy[] = new short[50];
 	public long start_time[] = new long[50];
 	public float b_duration[] = new float[50];
+	public float f_duration[] = new float[50];
 	public long b_timer[] = new long[50];
-
-
 	public Game(String title , int width , int height) {
 		this.width = width;
 		this.height = height;
@@ -41,7 +40,7 @@ public class Game implements Runnable{
 		for(int x = 0; x < 11; x++)
 			for(int y = 0; y < 9; y++)		go[x][y] = false;
 		Assets.init();
-		gameState = new GameState(this);
+		gameState = new GameState();
 		State.setState(gameState);
 		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
 		String[] tokens = s1.split(" ");
@@ -51,32 +50,19 @@ public class Game implements Runnable{
 			String y = tokens2[1];
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
-		keyManager = new KeyManager();
-		map.getFrame().addKeyListener(keyManager);
-	}
-	
-
-
-	public KeyManager getKeyManager() {
-		return keyManager;
 
 		for (int i=0; i<xx.length ; i++) {
 			xx[i] = 2000;
 		}
-
 	}
 
 	private void tick(){
 		if(State.getState() != null)
 			State.getState().tick();
 	}
-
-	
-
 	boolean f = true;
 	boolean s = true;
 	boolean a = false;
-
 	private void render(){
 		bs = map.getCanvas().getBufferStrategy();
 		if(bs == null){
@@ -90,7 +76,6 @@ public class Game implements Runnable{
 		
 		if(State.getState() != null)
 			State.getState().render(g);
-
 		/* Usage of putting bombs: 
 		 * call setBombbb(true)
 		 * xx[k] = x(bomb's x coordinate)
@@ -124,16 +109,16 @@ public class Game implements Runnable{
 				else a = true;
 				
 				if(f_duration[i] >= 2 &&f_duration[i] <= 2 && a) {
-					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]+50 ,null);
-					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]-50 ,null);
-					g.drawImage(Assets.obstacle1 , xx[i]+50 , yy[i] ,null);
-					g.drawImage(Assets.obstacle1 , xx[i]-50 , yy[i] ,null);
+					g.drawImage(Assets.fire, xx[i] , yy[i] ,95,95,null);
+					g.drawImage(Assets.fire , xx[i] , yy[i]+86 ,95,95,null);
+					g.drawImage(Assets.fire , xx[i] , yy[i]-86 ,95,95,null);
+					g.drawImage(Assets.fire , xx[i]+86 , yy[i] ,95,95,null);
+					g.drawImage(Assets.fire , xx[i]-86 , yy[i] ,95,95,null);
 				}
 				else	a = false;
 				//System.out.println("i ===="+i);
 			}
 		}
-
 
 		
 		//End Drawing!
@@ -151,7 +136,7 @@ public class Game implements Runnable{
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int time = 0;
+		
 		
 		while(running){
 			now = System.nanoTime();
@@ -164,7 +149,6 @@ public class Game implements Runnable{
 			render();
 			delta--;
 			}
-
 			if (time == 3 && f) {
 				setBombbb(true);
 				System.out.println("K0: " +k);
@@ -218,7 +202,7 @@ public class Game implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean isBombbb() {
 		return bombbb;
 	}
@@ -226,6 +210,6 @@ public class Game implements Runnable{
 	public void setBombbb(boolean bombbb) {
 		this.bombbb = bombbb;
 	}
-	
+
 	
 }
