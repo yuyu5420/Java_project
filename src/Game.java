@@ -1,6 +1,12 @@
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import javax.imageio.*;
+import javax.swing.ImageIcon;
 public class Game implements Runnable{
 	
 	private Map map;
@@ -11,9 +17,21 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	private State gameState;
+	private boolean bombbb;
 	public static boolean go[][] = new boolean [11][9];
 	
+
 	
+
+	int time = 0;
+	public int k = 0;
+	private Image[] icon = new Image[50];
+	public short xx[] = new short[50];
+	public short yy[] = new short[50];
+	public long start_time[] = new long[50];
+	public float b_duration[] = new float[50];
+	public long b_timer[] = new long[50];
+
 	public Game(String title , int width , int height) {
 		this.width = width;
 		this.height = height;
@@ -35,13 +53,16 @@ public class Game implements Runnable{
 			String y = tokens2[1];
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
+
+		for (Image image:icon)	image = null;
 	}
 
 	private void tick(){
 		if(State.getState() != null)
 			State.getState().tick();
 	}
-	
+	boolean f = true;
+	boolean s = true;
 	private void render(){
 		bs = map.getCanvas().getBufferStrategy();
 		if(bs == null){
@@ -55,6 +76,43 @@ public class Game implements Runnable{
 		
 		if(State.getState() != null)
 			State.getState().render(g);
+		/* Usage of putting bombs: 
+		 * call setBombbb(true)
+		 * xx[k] = x(bomb's x coordinate)
+		 * yy[k] = y(bomb's y coordinate)
+		 */
+		try {
+				if(isBombbb()) {
+					if(k == 50)	k = 0;
+					icon[k] = new ImageIcon(new URL("https://i.imgur.com/fXbu8CJ.gif")).getImage();
+					start_time[k] = System.nanoTime();
+					b_timer[k] = 0;
+					b_duration[k] = 0;
+					k++;
+					setBombbb(false);
+					System.out.println("k="+k);
+				}
+			
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0; i < 50; i++)	{
+	
+			if(icon[i] != null)	{
+				long now = System.nanoTime();
+				b_timer[i] +=  (now-start_time[i]);
+				start_time[i] = now;
+				if(b_timer[i] >= 1000000000) {
+					b_duration[i] += 1;
+					b_timer[i] = 0;
+				}
+				if(b_duration[i] <= 3)	g.drawImage(icon[i], xx[i], yy[i], null);
+				else	icon[i] = null;
+				System.out.println("i ===="+i);
+			}
+		}
 		
 		//End Drawing!
 		bs.show();
@@ -71,7 +129,7 @@ public class Game implements Runnable{
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int time = 0;
+		
 		
 		while(running){
 			now = System.nanoTime();
@@ -84,7 +142,20 @@ public class Game implements Runnable{
 			render();
 			delta--;
 			}
-			
+			if (time == 3 && f) {
+				setBombbb(true);
+				xx[k] = 400;
+				yy[k] = 300;
+				f = false;
+				System.out.println("start!!!!!!!!!!!!!!!");
+			}
+			if (time == 6 && s) {
+				setBombbb(true);
+				xx[k] = 700;
+				yy[k] = 300;
+				s  = false;
+			}
+
 			if(timer >= 1000000000) {
 				time += 1;
 				timer = 0;
@@ -113,4 +184,14 @@ public class Game implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
+	public boolean isBombbb() {
+		return bombbb;
+	}
+
+	public void setBombbb(boolean bombbb) {
+		this.bombbb = bombbb;
+	}
+
+	
 }

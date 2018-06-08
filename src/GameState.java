@@ -7,7 +7,7 @@ public class GameState extends State {
 	public GameState(){
 		player1 = new Player(400, 400);
 	}
-	
+
 	public void tick() {
 		
 	}
@@ -39,7 +39,9 @@ public class GameState extends State {
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x) , Integer.valueOf(y), null);	
 		}
 		
+
 		player1.render(g);
+
 	}
 
 }
