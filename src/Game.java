@@ -5,6 +5,10 @@ import java.awt.image.*;
 
 public class Game implements Runnable{
 	
+	
+	private KeyManager keyManager;
+//	protected boolean current[][] = new boolean [11][9];
+	
 	private Map map;
 	public int width , height;
 	public String title;
@@ -13,20 +17,18 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	private State gameState;
+	private boolean bombbb;
 	public static boolean go[][] = new boolean [11][9];
-	private KeyManager keyManager;
-//	protected boolean current[][] = new boolean [11][9];
 	
-
 	int time = 0;
 	public int k = 0;
-	private Image[] icon = new Image[50];
+	//private Image[] icon = new Image[50];
 	public short xx[] = new short[50];
 	public short yy[] = new short[50];
 	public long start_time[] = new long[50];
 	public float b_duration[] = new float[50];
-	public float f_duration[] = new float[50];
 	public long b_timer[] = new long[50];
+
 
 	public Game(String title , int width , int height) {
 		this.width = width;
