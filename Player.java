@@ -16,15 +16,10 @@ public class Player extends User {
 	}
 
 	@Override
-	public void move(int Xcoordinate, int Ycoordinate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void tick() {
 		super.tick();
 		
 	}
+
 
 }

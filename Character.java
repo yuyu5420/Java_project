@@ -23,8 +23,6 @@ public abstract class Character implements GameStateDefault{
 		score = DEFAULT_SCORE;
 		
 	}
-
-	public abstract void move(int Xcoordinate, int Ycoordinate);
 	
 	public abstract void render(Graphics g) ;
 	public abstract void tick() ;
