@@ -19,6 +19,7 @@ public class Game implements Runnable{
 	private State gameState;
 	private boolean bombbb;
 	public static boolean go[][] = new boolean [11][9];
+	public static boolean put = false;
 	
 	int time = 0;
 	public int k = 0;
@@ -27,9 +28,10 @@ public class Game implements Runnable{
 	public short yy[] = new short[50];
 	public long start_time[] = new long[50];
 	public float b_duration[] = new float[50];
+	public float f_duration[] = new float[50];
 	public long b_timer[] = new long[50];
 
-
+	
 	public Game(String title , int width , int height) {
 		this.width = width;
 		this.height = height;
@@ -59,12 +61,8 @@ public class Game implements Runnable{
 
 	public KeyManager getKeyManager() {
 		return keyManager;
-
-		for (int i=0; i<xx.length ; i++) {
-			xx[i] = 2000;
-		}
-
 	}
+
 
 	private void tick(){
 		if(State.getState() != null)
@@ -73,7 +71,7 @@ public class Game implements Runnable{
 
 	
 
-	boolean f = true;
+	public static boolean f = true;
 	boolean s = true;
 	boolean a = false;
 
@@ -95,7 +93,9 @@ public class Game implements Runnable{
 		 * call setBombbb(true)
 		 * xx[k] = x(bomb's x coordinate)
 		 * yy[k] = y(bomb's y coordinate)
+		 * 
 		 */
+		
 				if(isBombbb()) {
 					if(k == 50)	k = 0;
 					start_time[k] = System.nanoTime();
@@ -120,28 +120,34 @@ public class Game implements Runnable{
 				if(b_duration[i] <= 1)	{
 					System.out.println("drew" + i + "  time_now:"+time + "   position:" + xx[i]);
 					g.drawImage(Assets.bomb, xx[i], yy[i],80,80, null);
+					System.out.println(put);
+					put = false;
+					System.out.println(put);
 				}
 				else a = true;
 				
 				if(f_duration[i] >= 2 &&f_duration[i] <= 2 && a) {
-					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]+50 ,null);
-					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]-50 ,null);
-					g.drawImage(Assets.obstacle1 , xx[i]+50 , yy[i] ,null);
-					g.drawImage(Assets.obstacle1 , xx[i]-50 , yy[i] ,null);
+					g.drawImage(Assets.fire , xx[i] , yy[i]+50 ,null);
+					g.drawImage(Assets.fire , xx[i] , yy[i]-50 ,null);
+					g.drawImage(Assets.fire , xx[i]+50 , yy[i] ,null);
+					g.drawImage(Assets.fire , xx[i]-50 , yy[i] ,null);
 				}
-				else	a = false;
+				else	{
+					a = false;
+				}
 				//System.out.println("i ===="+i);
 			}
-		}
-
-
-		
+		}		
 		//End Drawing!
 		bs.show();
 		g.dispose();
 	}
 	boolean tt = true;
 	public void run(){
+		
+		for(int m = 0; m < xx.length ; m++) {
+			xx[m] = 2000;
+		}
 		
 		init();
 		
@@ -165,30 +171,30 @@ public class Game implements Runnable{
 			delta--;
 			}
 
-			if (time == 3 && f) {
+			if (put && f) {
 				setBombbb(true);
 				System.out.println("K0: " +k);
-				xx[k] = 400;
-				yy[k] = 300;
+				xx[k] = 450;                 
+				yy[k] = 65;
 				f = false;
 				a = true;
 				System.out.println("start!!!!!!!!!!!!!!!");
 			}
-			if (time == 6 && s) {
-				setBombbb(true);
-				System.out.println("K: " +k);
-				xx[k] = 700;
-				yy[k] = 300;
-				s  = false;
-			}
-			if (time == 9 && tt) {
-				setBombbb(true);
-				System.out.println("K1: " +k);
-				xx[k] = 1000;
-				yy[k] = 300;
-				s  = false;
-				tt = false;
-			}
+//			if (put && s) {
+//				setBombbb(true);
+//				System.out.println("K: " +k);
+//				xx[k] = 700;
+//				yy[k] = 300;
+//				s  = false;
+//			}
+//			if (put && tt) {
+//				setBombbb(true);
+//				System.out.println("K1: " +k);
+//				xx[k] = 1000;
+//				yy[k] = 300;
+//				s  = false;
+//				tt = false;
+//			}
 
 			if(timer >= 1000000000) {
 				time += 1;

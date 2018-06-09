@@ -4,13 +4,14 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	public boolean up, down, left, right;
-	private int moveUp, moveDown, moveRight, moveLeft;
+	private int moveUp, moveDown, moveRight, moveLeft , put;
 	
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
+		put = KeyEvent.VK_SPACE;
 	}
 	
 	@Override
@@ -36,7 +37,11 @@ public class KeyManager extends KeyAdapter {
 			down = false;
 			left = true;
 			right = false;
+		}else if(e.getKeyCode() == put) {
+			Game.put = true;
+			Game.f = true;
 		}
+		
 	}
 
 	@Override

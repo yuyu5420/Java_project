@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.*;
 
 public abstract class User extends Character {
 

@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.*;
 
 public class Player extends User {
 	
