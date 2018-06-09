@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	public boolean up, down, left, right;
-	private int moveUp, moveDown, moveRight, moveLeft , put;
+	private int moveUp, moveDown, moveRight, moveLeft , put , k = 0;
 	
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
@@ -38,8 +38,9 @@ public class KeyManager extends KeyAdapter {
 			left = true;
 			right = false;
 		}else if(e.getKeyCode() == put) {
-			Game.put = true;
-			Game.f = true;
+			if (k == 50)	k = 0;
+			GameState.bomb[k] = new Bomb(2,2,3);
+			k += 1;
 		}
 		
 	}

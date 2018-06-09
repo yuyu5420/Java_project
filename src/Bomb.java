@@ -1,50 +1,95 @@
-import java.awt.Graphics;
+
 
 public class Bomb{
-
-	private int x;
-	private int y;
-	private Graphics g;
-	private boolean G = true;
-	public Bomb(Graphics g, int x, int y) {
+	private int b_x;
+	private int b_y;
+	private int range;
+	private int up, down, right, left;
+	private long start_time;
+	private short b_duration = 0;
+	private short f_duration = 0;
+	private long b_timer = 0;
+	private boolean first = true;
+	public Bomb(int i, int j, int range) {
+		this.setB_x(i);
+		this.setB_y(j);
+		this.setRange(range);
+		this.start_time = System.nanoTime();
 		
-		this.setX(x);
-		this.setY(y);
-		this.setG(g);
-		
 	}
-	
-	public Graphics getG() {
-		return g;
+	public int getB_x() {
+		return b_x;
 	}
-
-
-	public void setG(Graphics g) {
-		this.g = g;
+	public void setB_x(int i) {
+		this.b_x = i;
 	}
-
-	public int getY() {
-		return y;
+	public int getB_y() {
+		return b_y;
 	}
-
-
-	public void setY(int y) {
-		this.y = y;
+	public void setB_y(int j) {
+		this.b_y = j;
 	}
-
-	public int getX() {
-		return x;
+	public short getB_duration() {
+		return b_duration;
 	}
-
-	public void setX(int x) {
-		this.x = x;
+	public void setB_duration() {
+		long now = System.nanoTime();
+		this.setB_timer(getB_timer()+now-this.start_time);
+		this.start_time = now;
+		if(this.getB_timer() >= 1000000000) {
+			this.b_duration += 1;
+			this.f_duration += 1;
+			this.b_timer = 0;
+		}
 	}
-
-	public boolean isG() {
-		return G;
+	public short getF_duration() {
+		return f_duration;
+	}
+	public void setF_duration(short f_duration) {
+		this.f_duration = f_duration;
 	}
 
-	public void setG(boolean g) {
-		G = g;
+	public long getB_timer() {
+		return b_timer;
 	}
+	public void setB_timer(long b_timer) {
+		this.b_timer = b_timer;
+	}
+	public int getRange() {
+		return range;
+	}
+	public void setRange(int range) {
+		this.range = range;
+	}
+	public boolean isFirst() {
+		return first;
+	}
+	public void setFirst(boolean first) {
+		this.first = first;
+	}
+	public int getDown() {
+		return down;
+	}
+	public void setDown(int down) {
+		this.down = down;
+	}
+	public int getLeft() {
+		return left;
+	}
+	public void setLeft(int left) {
+		this.left = left;
+	}
+	public int getUp() {
+		return up;
+	}
+	public void setUp(int up) {
+		this.up = up;
+	}
+	public int getRight() {
+		return right;
+	}
+	public void setRight(int right) {
+		this.right = right;
+	}
+
 }
