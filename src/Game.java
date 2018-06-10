@@ -43,7 +43,7 @@ public class Game implements Runnable{
 		Assets.init();
 		gameState = new GameState(this);
 		State.setState(gameState);
-		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7 2,0 3,0 4,0 5,0 6,0";
+		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7 0,2 0,3 0,4 0,5 0,6";
 		String[] tokens = s1.split(" ");
 		for (String token:tokens) {
 			String[] tokens2 = token.split(",");
