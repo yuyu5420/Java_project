@@ -5,7 +5,7 @@ public class KeyManager extends KeyAdapter {
 
 	public boolean finish = true;
 	public boolean up, down, left, right;
-	protected boolean tem_up, tem_down, tem_right, tem_left;
+	protected boolean temp_up, temp_down, temp_right, temp_left;
 	private int moveUp, moveDown, moveRight, moveLeft;
 	
 	public KeyManager() {
@@ -26,17 +26,20 @@ public class KeyManager extends KeyAdapter {
 				down = false;
 				left = false;
 				right = false;
-		} else if(e.getKeyCode() == moveDown) {
+		} 
+		if(e.getKeyCode() == moveDown) {
 				up = false;
 				down = true;
 				left = false;
 				right = false;
-		} else if(e.getKeyCode() == moveRight) {
+		} 
+		if(e.getKeyCode() == moveRight) {
 				up = false;
 				down = false;
 				left = false;
 				right = true;
-		} else if(e.getKeyCode() == moveLeft) {
+		} 
+		if(e.getKeyCode() == moveLeft) {
 				up = false;
 				down = false;
 				left = true;
@@ -45,22 +48,26 @@ public class KeyManager extends KeyAdapter {
 	}
 
 
-	@Override
+/*	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
-		if(!finish)
+		if(!finish) {
 			return;
-		if(e.getKeyCode() == moveUp) {
-			up = false;
-		} else if(e.getKeyCode() == moveDown) {
-			down = false;
-		} else if(e.getKeyCode() == moveRight) {
-			right = false;
-		} else if(e.getKeyCode() == moveLeft) {
-			left = false;
 		}
+		if(e.getKeyCode() == moveUp) {
+			temp_up = false;
+		} 
+		if(e.getKeyCode() == moveDown) {
+			temp_down = false;
+		} 
+		if(e.getKeyCode() == moveRight) {
+			temp_right = false;
+		} 
+		if(e.getKeyCode() == moveLeft) {
+			temp_left = false;
+		}		
 	}
-
+*/
 	public int getMoveUp() {
 		return moveUp;
 	}
