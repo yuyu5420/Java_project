@@ -5,6 +5,10 @@ import java.awt.image.*;
 
 public class Game implements Runnable{
 	
+	
+	private KeyManager keyManager;
+//	protected boolean current[][] = new boolean [11][9];
+	
 	private Map map;
 	public int width , height;
 	public String title;
@@ -13,20 +17,18 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	private State gameState;
+	private boolean bombbb;
 	public static boolean go[][] = new boolean [11][9];
-	private KeyManager keyManager;
-//	protected boolean current[][] = new boolean [11][9];
 	
-
 	int time = 0;
 	public int k = 0;
-	private Image[] icon = new Image[50];
+	//private Image[] icon = new Image[50];
 	public short xx[] = new short[50];
 	public short yy[] = new short[50];
 	public long start_time[] = new long[50];
 	public float b_duration[] = new float[50];
-	public float f_duration[] = new float[50];
 	public long b_timer[] = new long[50];
+
 
 	public Game(String title , int width , int height) {
 		this.width = width;
@@ -41,7 +43,7 @@ public class Game implements Runnable{
 		Assets.init();
 		gameState = new GameState(this);
 		State.setState(gameState);
-		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
+		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7 1,1 1,2 1,3 2,1 2,2 2,3";
 		String[] tokens = s1.split(" ");
 		for (String token:tokens) {
 			String[] tokens2 = token.split(",");
@@ -58,10 +60,10 @@ public class Game implements Runnable{
 	public KeyManager getKeyManager() {
 		return keyManager;
 
-		for (int i=0; i<xx.length ; i++) {
+/*		for (int i=0; i<xx.length ; i++) {
 			xx[i] = 2000;
 		}
-
+*/
 	}
 
 	private void tick(){
@@ -99,7 +101,7 @@ public class Game implements Runnable{
 					start_time[k] = System.nanoTime();
 					b_timer[k] = 0;
 					b_duration[k] = 0;
-					f_duration[k] = 0;
+//					f_duration[k] = 0;
 					k++;
 					setBombbb(false);
 					System.out.println("k="+k);
@@ -111,17 +113,17 @@ public class Game implements Runnable{
 				start_time[i] = now;
 				if(b_timer[i] >= 1000000000) {
 					b_duration[i] += 1;
-					f_duration[i] += 1;
+//					f_duration[i] += 1;
 					b_timer[i] = 0;
 					System.out.println("which:" + i +"  duration:" + b_duration[i] );
 				}
 				if(b_duration[i] <= 1)	{
 					System.out.println("drew" + i + "  time_now:"+time + "   position:" + xx[i]);
-					g.drawImage(Assets.bomb, xx[i], yy[i],80,80, null);
+//					g.drawImage(Assets.bomb, xx[i], yy[i],80,80, null);
 				}
 				else a = true;
 				
-				if(f_duration[i] >= 2 &&f_duration[i] <= 2 && a) {
+/*				if(f_duration[i] >= 2 &&f_duration[i] <= 2 && a) {
 					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]+50 ,null);
 					g.drawImage(Assets.obstacle1 , xx[i] , yy[i]-50 ,null);
 					g.drawImage(Assets.obstacle1 , xx[i]+50 , yy[i] ,null);
@@ -129,7 +131,7 @@ public class Game implements Runnable{
 				}
 				else	a = false;
 				//System.out.println("i ===="+i);
-			}
+*/			}
 		}
 
 
@@ -217,7 +219,16 @@ public class Game implements Runnable{
 		}
 	}
 	
-	
+	public boolean isBombbb() {
+		return bombbb;
+	}
+
+	public void setBombbb(boolean bombbb) {
+		this.bombbb = bombbb;
+	}
+
+
+
 	
 	
 }

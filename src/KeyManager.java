@@ -39,7 +39,7 @@ public class KeyManager extends KeyAdapter {
 		}
 	}
 
-	@Override
+/*	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
 		if(e.getKeyCode() == moveUp) {
@@ -52,7 +52,7 @@ public class KeyManager extends KeyAdapter {
 			left = false;
 		}
 	}
-
+*/
 	public int getMoveUp() {
 		return moveUp;
 	}
