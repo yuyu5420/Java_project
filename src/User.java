@@ -25,17 +25,17 @@ public abstract class User extends Character {
 			game.getKeyManager().finish = false;
 			this.Ycoordinate -= DEFAULT_PACE;
 			if(this.Xcoordinate == this.ideal_up[0] && this.Ycoordinate == this.ideal_up[1]) {	
-				game.getKeyManager().up = false;
-				this.setIdealLocation();
 				game.getKeyManager().finish = true;
+				game.getKeyManager().up = false;
+				this.setIdealLocation();	
 			}
 		} else if(game.getKeyManager().down && this.down_movable) {
 			game.getKeyManager().finish = false;
 			this.Ycoordinate += DEFAULT_PACE;
 			if(this.Xcoordinate == this.ideal_down[0] && this.Ycoordinate == this.ideal_down[1]) {
+				game.getKeyManager().finish = true;
 				game.getKeyManager().down = false;
 				this.setIdealLocation();
-				game.getKeyManager().finish = true;
 			}
 		} else if(game.getKeyManager().left && this.left_movable) {
 			game.getKeyManager().finish = false;
