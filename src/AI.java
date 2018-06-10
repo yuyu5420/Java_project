@@ -1,3 +1,4 @@
+
 import java.awt.Graphics;
 
 public abstract class AI extends Character {
@@ -14,11 +15,6 @@ public abstract class AI extends Character {
 
 	@Override
 	public void tick() {
-
-	}
-
-	@Override
-	public void putBomb() {
 
 	}
 

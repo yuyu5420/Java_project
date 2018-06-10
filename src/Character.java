@@ -1,33 +1,36 @@
+
 import java.awt.Graphics;
 import javax.swing.JComponent;
 
 public abstract class Character implements GameStateDefault {
 
 	private Game game;
-	protected int Xcoordinate;
-	protected int Ycoordinate;
-	protected int moveSpeed;
-	protected int bombTotal; /* total bomb number can put */
-	protected int bombNum;
-	protected int score;
+	protected int Xcoordinate, Ycoordinate;
 	protected boolean left_movable = true, right_movable = true, up_movable = true, down_movable = true;
+	protected int pace;
+	protected int[] ideal_up = new int[2];
+	protected int[] ideal_down = new int[2];
+	protected int[] ideal_left = new int[2];
+	protected int[] ideal_right = new int[2];
 
 	public Character(Game game, int Xcoordinate, int Ycoordinate) {
+		this.game = game;
 		this.Xcoordinate = Xcoordinate;
 		this.Ycoordinate = Ycoordinate;
-		this.game = game;
-		moveSpeed = DEFAULT_MOVESPEED;
-		bombTotal = DEFAULT_BOMBTOTAL;
-		bombNum = DEFAULT_BOMBTOTAL;
-		score = DEFAULT_SCORE;
-
+		this.pace = DEFAULT_PACE;
+		ideal_up[0] = Xcoordinate;
+		ideal_up[1] = Ycoordinate - 100;
+		ideal_down[0] = Xcoordinate;
+		ideal_down[1] = Ycoordinate + 100;
+		ideal_left[0] = Xcoordinate - 100;
+		ideal_left[1] = Ycoordinate;
+		ideal_right[0] = Xcoordinate + 100;
+		ideal_right[1] = Ycoordinate;
 	}
 
 	public abstract void render(Graphics g);
 
 	public abstract void tick();
-
-	public abstract void putBomb();
 
 	public void movable() {
 
@@ -36,51 +39,48 @@ public abstract class Character implements GameStateDefault {
 		this.left_movable = true;
 		this.right_movable = true;
 
-		if (this.Ycoordinate <= DEFAULT_MIN_Y) {
+		// out border
+		if (this.ideal_up[1] < DEFAULT_MIN_Y) {
 			this.up_movable = false;
 		}
-		if (this.Ycoordinate >= DEFAULT_MAX_Y) {
+		if (this.ideal_down[1] > DEFAULT_MAX_Y) {
 			this.down_movable = false;
 		}
-		if (this.Xcoordinate <= DEFAULT_MIN_X) {
+		if (this.ideal_left[0] < DEFAULT_MIN_X) {
 			this.left_movable = false;
 		}
-		if (this.Xcoordinate >= DEFAULT_MAX_X) {
+		if (this.ideal_right[0] > DEFAULT_MAX_X) {
 			this.right_movable = false;
 		}
 
 		if (this.up_movable) {
-			if (!Game.go[(this.Xcoordinate - 400) / 100][(this.Ycoordinate - DEFAULT_PACE) / 100])
+			if (!Game.go[(this.ideal_up[0] - 400) / 100][(this.ideal_up[1]) / 100])
 				this.up_movable = false;
 		}
 		if (this.down_movable) {
-			if (!Game.go[(this.Xcoordinate - 400) / 100][(this.Ycoordinate + DEFAULT_PACE) / 100])
+			if (!Game.go[(this.ideal_down[0] - 400) / 100][(this.ideal_down[1]) / 100])
 				this.down_movable = false;
 		}
 		if (this.left_movable) {
-			if (!Game.go[(this.Xcoordinate - 400 - DEFAULT_PACE) / 100][(this.Ycoordinate) / 100])
+			if (!Game.go[(this.ideal_left[0] - 400) / 100][(this.ideal_left[1]) / 100])
 				this.left_movable = false;
 		}
 		if (this.right_movable) {
-			if (!Game.go[(this.Xcoordinate - 400 + DEFAULT_PACE) / 100][(this.Ycoordinate) / 100])
+			if (!Game.go[(this.ideal_right[0] - 400) / 100][(this.ideal_right[1]) / 100])
 				this.right_movable = false;
 		}
 	}
 
-	public void setXcoordinate(int xcoordinate) {
-		Xcoordinate = xcoordinate;
-	}
-
-	public void setYcoordinate(int ycoordinate) {
-		Ycoordinate = ycoordinate;
-	}
-
-	public int getYcoordinate() {
-		return Ycoordinate;
-	}
-
-	public int getXcoordinate() {
-		return Xcoordinate;
+	public void setIdealLocation() {
+		ideal_up[0] = this.Xcoordinate;
+		ideal_up[1] = this.Ycoordinate - 100;
+		ideal_down[0] = this.Xcoordinate;
+		ideal_down[1] = this.Ycoordinate + 100;
+		ideal_left[0] = this.Xcoordinate - 100;
+		ideal_left[1] = this.Ycoordinate;
+		ideal_right[0] = this.Xcoordinate + 100;
+		ideal_right[1] = this.Ycoordinate;
+		this.movable();
 	}
 
 }

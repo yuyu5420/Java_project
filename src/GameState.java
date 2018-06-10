@@ -10,6 +10,7 @@ public class GameState extends State implements GameStateDefault {
 	}
 
 	public void tick() {
+		player1.movable();
 		player1.tick();
 	}
 

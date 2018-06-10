@@ -1,6 +1,5 @@
 
-
-public class Bomb{
+public class Bomb {
 	private int b_x;
 	private int b_y;
 	private int range;
@@ -10,41 +9,50 @@ public class Bomb{
 	private short f_duration = 0;
 	private long b_timer = 0;
 	private boolean first = true;
+
 	public Bomb(int i, int j, int range) {
 		this.setB_x(i);
 		this.setB_y(j);
 		this.setRange(range);
 		this.start_time = System.nanoTime();
-		
+
 	}
+
 	public int getB_x() {
 		return b_x;
 	}
+
 	public void setB_x(int i) {
 		this.b_x = i;
 	}
+
 	public int getB_y() {
 		return b_y;
 	}
+
 	public void setB_y(int j) {
 		this.b_y = j;
 	}
+
 	public short getB_duration() {
 		return b_duration;
 	}
+
 	public void setB_duration() {
 		long now = System.nanoTime();
-		this.setB_timer(getB_timer()+now-this.start_time);
+		this.setB_timer(getB_timer() + now - this.start_time);
 		this.start_time = now;
-		if(this.getB_timer() >= 1000000000) {
+		if (this.getB_timer() >= 1000000000) {
 			this.b_duration += 1;
 			this.f_duration += 1;
 			this.b_timer = 0;
 		}
 	}
+
 	public short getF_duration() {
 		return f_duration;
 	}
+
 	public void setF_duration(short f_duration) {
 		this.f_duration = f_duration;
 	}
@@ -52,42 +60,55 @@ public class Bomb{
 	public long getB_timer() {
 		return b_timer;
 	}
+
 	public void setB_timer(long b_timer) {
 		this.b_timer = b_timer;
 	}
+
 	public int getRange() {
 		return range;
 	}
+
 	public void setRange(int range) {
 		this.range = range;
 	}
+
 	public boolean isFirst() {
 		return first;
 	}
+
 	public void setFirst(boolean first) {
 		this.first = first;
 	}
+
 	public int getDown() {
 		return down;
 	}
+
 	public void setDown(int down) {
 		this.down = down;
 	}
+
 	public int getLeft() {
 		return left;
 	}
+
 	public void setLeft(int left) {
 		this.left = left;
 	}
+
 	public int getUp() {
 		return up;
 	}
+
 	public void setUp(int up) {
 		this.up = up;
 	}
+
 	public int getRight() {
 		return right;
 	}
+
 	public void setRight(int right) {
 		this.right = right;
 	}

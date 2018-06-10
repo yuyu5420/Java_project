@@ -3,70 +3,57 @@ import java.awt.event.KeyEvent;
 
 public class KeyManager extends KeyAdapter {
 
+	public boolean finish = true;
 	public boolean up, down, left, right;
-	public static boolean pause = false;
-	private int moveUp, moveDown, moveRight, moveLeft, put, k = 0, esc;
+	protected boolean temp_up, temp_down, temp_right, temp_left;
+	private int moveUp, moveDown, moveRight, moveLeft;
 
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
-		put = KeyEvent.VK_SPACE;
-		esc = KeyEvent.VK_ESCAPE;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
+		if (!finish) {
+			return;
+		}
 		if (e.getKeyCode() == moveUp) {
 			up = true;
 			down = false;
 			left = false;
 			right = false;
-		} else if (e.getKeyCode() == moveDown) {
+		}
+		if (e.getKeyCode() == moveDown) {
 			up = false;
 			down = true;
 			left = false;
 			right = false;
-		} else if (e.getKeyCode() == moveRight) {
+		}
+		if (e.getKeyCode() == moveRight) {
 			up = false;
 			down = false;
 			left = false;
 			right = true;
-		} else if (e.getKeyCode() == moveLeft) {
+		}
+		if (e.getKeyCode() == moveLeft) {
 			up = false;
 			down = false;
 			left = true;
 			right = false;
-		} else if (e.getKeyCode() == put) {
-			if (k == 50)
-				k = 0;
-			GameState.bomb[k] = new Bomb(0, 0, 9);
-			k += 1;
-		} else if (e.getKeyCode() == esc) {
-			if (!pause)
-				pause = true;
-			else
-				pause = false;
-		}
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		super.keyReleased(e);
-		if (e.getKeyCode() == moveUp) {
-			up = false;
-		} else if (e.getKeyCode() == moveDown) {
-			down = false;
-		} else if (e.getKeyCode() == moveRight) {
-			right = false;
-		} else if (e.getKeyCode() == moveLeft) {
-			left = false;
 		}
 	}
 
+	/*
+	 * @Override public void keyReleased(KeyEvent e) { super.keyReleased(e);
+	 * if(!finish) { return; } if(e.getKeyCode() == moveUp) { temp_up = false; }
+	 * if(e.getKeyCode() == moveDown) { temp_down = false; } if(e.getKeyCode() ==
+	 * moveRight) { temp_right = false; } if(e.getKeyCode() == moveLeft) { temp_left
+	 * = false; } }
+	 */
 	public int getMoveUp() {
 		return moveUp;
 	}

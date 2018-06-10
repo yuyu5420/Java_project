@@ -1,16 +1,15 @@
+
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
-
-import javafx.scene.input.*;
 
 public abstract class User extends Character {
 
 	private Game game;
+	private double time = 100; // 100 milli second
 
 	public User(Game game, int Xcoordinate, int Ycoordinate) {
 		super(game, Xcoordinate, Ycoordinate);
 		this.game = game;
-
 	}
 
 	@Override
@@ -18,23 +17,54 @@ public abstract class User extends Character {
 
 	@Override
 	public void tick() {
-		movable();
-		if (game.getKeyManager().up && up_movable) {
-			super.setYcoordinate(super.getYcoordinate() - DEFAULT_PACE);
-		} else if (game.getKeyManager().down && down_movable) {
-			super.setYcoordinate(super.getYcoordinate() + DEFAULT_PACE);
-		} else if (game.getKeyManager().left && left_movable) {
-			super.setXcoordinate(super.getXcoordinate() - DEFAULT_PACE);
-		} else if (game.getKeyManager().right && right_movable) {
-			super.setXcoordinate(super.getXcoordinate() + DEFAULT_PACE);
-		}
 
+		if (game.getKeyManager().up && this.up_movable) {
+			game.getKeyManager().finish = false;
+			this.Ycoordinate -= DEFAULT_PACE;
+			if (this.Xcoordinate == this.ideal_up[0] && this.Ycoordinate == this.ideal_up[1]) {
+				game.getKeyManager().finish = true;
+				// game.getKeyManager().up = false;
+				this.setIdealLocation();
+			}
+		} else if (game.getKeyManager().down && this.down_movable) {
+			game.getKeyManager().finish = false;
+			System.out.println("User");
+			System.out.println(game.getKeyManager().down);
+			this.Ycoordinate += DEFAULT_PACE;
+			if (this.Xcoordinate == this.ideal_down[0] && this.Ycoordinate == this.ideal_down[1]) {
+				game.getKeyManager().finish = true;
+				// game.getKeyManager().down = false;
+				this.setIdealLocation();
+			}
+		} else if (game.getKeyManager().left && this.left_movable) {
+			game.getKeyManager().finish = false;
+			this.Xcoordinate -= DEFAULT_PACE;
+			if (this.Xcoordinate == this.ideal_left[0] && this.Ycoordinate == this.ideal_left[1]) {
+				game.getKeyManager().finish = true;
+				// game.getKeyManager().left = false;
+				this.setIdealLocation();
+			}
+		} else if (game.getKeyManager().right && this.right_movable) {
+			game.getKeyManager().finish = false;
+			this.Xcoordinate += DEFAULT_PACE;
+			System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
+			if (this.Xcoordinate == this.ideal_right[0] && this.Ycoordinate == this.ideal_right[1]) {
+				game.getKeyManager().finish = true;
+				// game.getKeyManager().right = false;
+				this.setIdealLocation();
+
+			}
+		}
+		this.checkfinish(game.getKeyManager().finish);
 	}
 
-	@Override
-	public void putBomb() {
-		// TODO Auto-generated method stub
-
+	protected void checkfinish(boolean finish) {
+		if (finish) {
+			this.game.getKeyManager().up = false;
+			this.game.getKeyManager().down = false;
+			this.game.getKeyManager().left = false;
+			this.game.getKeyManager().right = false;
+		}
 	}
 
 }
