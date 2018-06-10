@@ -4,57 +4,65 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	public boolean up, down, left, right;
-	private int moveUp, moveDown, moveRight, moveLeft , put , k = 0;
-	
+	public static boolean pause = false;
+	private int moveUp, moveDown, moveRight, moveLeft, put, k = 0, esc;
+
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
 		put = KeyEvent.VK_SPACE;
+		esc = KeyEvent.VK_ESCAPE;
 	}
-	
+
 	@Override
-	public void keyPressed(KeyEvent e) {	
+	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
-		if(e.getKeyCode() == moveUp) {
+		if (e.getKeyCode() == moveUp) {
 			up = true;
 			down = false;
 			left = false;
 			right = false;
-		} else if(e.getKeyCode() == moveDown) {
+		} else if (e.getKeyCode() == moveDown) {
 			up = false;
 			down = true;
 			left = false;
 			right = false;
-		} else if(e.getKeyCode() == moveRight) {
+		} else if (e.getKeyCode() == moveRight) {
 			up = false;
 			down = false;
 			left = false;
 			right = true;
-		} else if(e.getKeyCode() == moveLeft) {
+		} else if (e.getKeyCode() == moveLeft) {
 			up = false;
 			down = false;
 			left = true;
 			right = false;
-		}else if(e.getKeyCode() == put) {
-			if (k == 50)	k = 0;
-			GameState.bomb[k] = new Bomb(2,2,3);
+		} else if (e.getKeyCode() == put) {
+			if (k == 50)
+				k = 0;
+			GameState.bomb[k] = new Bomb(0, 0, 9);
 			k += 1;
+		} else if (e.getKeyCode() == esc) {
+			if (!pause)
+				pause = true;
+			else
+				pause = false;
 		}
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
-		if(e.getKeyCode() == moveUp) {
+		if (e.getKeyCode() == moveUp) {
 			up = false;
-		} else if(e.getKeyCode() == moveDown) {
+		} else if (e.getKeyCode() == moveDown) {
 			down = false;
-		} else if(e.getKeyCode() == moveRight) {
+		} else if (e.getKeyCode() == moveRight) {
 			right = false;
-		} else if(e.getKeyCode() == moveLeft) {
+		} else if (e.getKeyCode() == moveLeft) {
 			left = false;
 		}
 	}
@@ -79,8 +87,4 @@ public class KeyManager extends KeyAdapter {
 		this.moveLeft = moveLeft;
 	}
 
-	
-	
-	
-	
 }

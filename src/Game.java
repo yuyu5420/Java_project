@@ -1,43 +1,38 @@
 import java.awt.Graphics;
 import java.awt.image.*;
 
-public class Game implements Runnable{
-	
-	
+public class Game implements Runnable {
+
 	private KeyManager keyManager;
-//	protected boolean current[][] = new boolean [11][9];
-	
 	private Map map;
-	public int width , height;
+	public int width, height;
 	public String title;
-	private boolean running = false;
+	public static boolean running = false;
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
 	private State gameState;
 	public static boolean box_exist[][] = new boolean[11][9];
-	public static boolean go[][] = new boolean [11][9];
-	int time = 0;
-	public int k = 0;
+	public static boolean go[][] = new boolean[11][9];
+	public static Props props[][] = new Props[11][9];
 
-
-	
-	public Game(String title , int width , int height) {
+	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
 	}
 
-	private void init(){
+	private void init() {
 		map = new Map(title, width, height);
-		for(int x = 0; x < 11; x++)
-			for(int y = 0; y < 9; y++)		{
+		for (int x = 0; x < 11; x++)
+			for (int y = 0; y < 9; y++) {
 				go[x][y] = false;
 				box_exist[x][y] = false;
+				props[x][y] = null;
 			}
 		String s3 = "2,0 2,1 2,2 2,3 2,4 2,5 2,6 2,7 2,8 3,0 3,2 3,4 3,6 3,8 4,0 4,1 4,2 4,3 4,4 4,5 4,6 4,7 4,8 5,0 5,1 5,3 5,5 5,7 6,0 6,1 6,2 6,3 6,4 6,5 6,6 6,7 6,8 7,1 7,2 7,5 7,7 7,8 8,0 8,1 8,2 8,3 8,4 8,5 8,6 8,7 8,8 9,2 9,4 9,6 10,2 10,3 10,4 10,5 10,6 1,2 1,4 0,2 0,3 0,4 0,5";
 		String[] tokens5 = s3.split(" ");
-		for (String token:tokens5) {
+		for (String token : tokens5) {
 			String[] tokens6 = token.split(",");
 			String x = tokens6[0];
 			String y = tokens6[1];
@@ -48,7 +43,7 @@ public class Game implements Runnable{
 		State.setState(gameState);
 		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
 		String[] tokens = s1.split(" ");
-		for (String token:tokens) {
+		for (String token : tokens) {
 			String[] tokens2 = token.split(",");
 			String x = tokens2[0];
 			String y = tokens2[1];
@@ -57,106 +52,92 @@ public class Game implements Runnable{
 		keyManager = new KeyManager();
 		map.getFrame().addKeyListener(keyManager);
 	}
-	
-
 
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
 
-
-	private void tick(){
-		if(State.getState() != null)
+	private void tick() {
+		if (State.getState() != null)
 			State.getState().tick();
 	}
 
-	
-
-	public static boolean f = true;
-	boolean s = true;
-	boolean a = false;
-
-	private void render(){
+	private void render() {
 		bs = map.getCanvas().getBufferStrategy();
-		if(bs == null){
+		if (bs == null) {
 			map.getCanvas().createBufferStrategy(3);
 			return;
 		}
 		g = bs.getDrawGraphics();
-		//Clear Screen
+		// Clear Screen
 		g.clearRect(0, 0, width, height);
-		//Draw Here!
-		
-		
-		
-		if(State.getState() != null)
+		// Draw Here!
+
+		if (State.getState() != null)
 			State.getState().render(g);
 
-		//End Drawing!
+		// End Drawing!
 		bs.show();
 		g.dispose();
 	}
+
 	boolean tt = true;
-	public void run(){
-		
+
+	public void run() {
+
 		for (int i = 0; i < 50; i++) {
 			GameState.bomb[i] = null;
 		}
-		
+
 		init();
-		
+
 		int fps = 60;
 		double timepPerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int time = 0;
-		
-		while(running){
+		int time = 180;
+		int minute = time / 60;
+		int second = time % 60;
+
+		while (running) {
+			while (KeyManager.pause) {// fucking pause the game
+				System.out.print("");
+			}
 			now = System.nanoTime();
-			delta += (now - lastTime)/timepPerTick;
+			delta += (now - lastTime) / timepPerTick;
 			timer += now - lastTime;
 			lastTime = now;
-			
-			if(delta >= 1){
-			tick();
-			render();
-			delta--;
+
+			if (delta >= 1) {
+				tick();
+				render();
+				delta--;
 			}
 
-			/*if (put) {
-				setBombbb(true);
-				System.out.println("K0: " +k);
-				xx[k] = 450;                 
-				yy[k] = 65;
-				f = false;
-				a = true;
-				System.out.println("start!!!!!!!!!!!!!!!");
-			}*/
-
-
-			if(timer >= 1000000000) {
-				time += 1;
+			if (timer >= 1000000000) {
+				time -= 1;
 				timer = 0;
-				System.out.println("current time:" + time);
-				
+				minute = time / 60;
+				second = time % 60;
+				System.out.println("current time:" + minute + " : " + second);
 			}
+
 		}
-		
-		stop();
-		
 	}
-	
-	public synchronized void start(){
-		if(running)	return;
+
+	public synchronized void start() {
+		if (running)
+			return;
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 	}
-	
-	public synchronized void stop(){
-		if(!running)	return;
+
+	public synchronized void stop() {
+		if (!running)
+			return;
 		running = false;
 		try {
 			thread.join();
@@ -164,7 +145,5 @@ public class Game implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }

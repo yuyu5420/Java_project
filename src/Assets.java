@@ -1,9 +1,10 @@
 import java.awt.image.BufferedImage;
 
-public class Assets{
+public class Assets {
 
-	public static BufferedImage background, obstacle1, obstacle2, box, bomb, fire, fire_d, fire_r, player1;
-	
+	public static BufferedImage background, background2, obstacle1, obstacle2, box, bomb, fire, fire_d, fire_r, player1,
+			inventory, power, speed;
+
 	public static void init() {
 		background = ImageLoader.loadImage("/images/last_map.png");
 		obstacle1 = ImageLoader.loadImage("/images/obstacle1.png");
@@ -14,6 +15,10 @@ public class Assets{
 		player1 = ImageLoader.loadImage("/images/player1.png");
 		fire_r = ImageLoader.loadImage("images/fire_r.png");
 		fire_d = ImageLoader.loadImage("images/fire_d.png");
+		inventory = ImageLoader.loadImage("images/inventory.png");
+		power = ImageLoader.loadImage("images/fire_forPower.png");
+		speed = ImageLoader.loadImage("images/boot_forSpeed.png");
+		background2 = ImageLoader.loadImage("images/background2.png");
 	}
-	
+
 }
