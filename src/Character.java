@@ -2,7 +2,7 @@
 import java.awt.Graphics;
 import javax.swing.JComponent;
 
-public abstract class Character extends GameStateDefault {
+public abstract class Character implements GameStateDefault {
 
 	private Game game;
 	protected int Xcoordinate, Ycoordinate;
@@ -43,16 +43,16 @@ public abstract class Character extends GameStateDefault {
 		this.right_movable = true;
 		
 		// out border
-		if(this.ideal_up[1] <= DEFAULT_MIN_Y){
+		if(this.ideal_up[1] < DEFAULT_MIN_Y){
 				this.up_movable = false;
 		}
-		if(this.ideal_down[1] >= DEFAULT_MAX_Y) {
+		if(this.ideal_down[1] > DEFAULT_MAX_Y) {
 				this.down_movable = false;
 		}
-		if(this.ideal_left[0] <= DEFAULT_MIN_X) {
+		if(this.ideal_left[0] < DEFAULT_MIN_X) {
 				this.left_movable = false;
 		}
-		if(this.ideal_right[0] >= DEFAULT_MAX_X) {
+		if(this.ideal_right[0] > DEFAULT_MAX_X) {
 				this.right_movable = false;
 		}
 		

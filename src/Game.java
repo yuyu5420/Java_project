@@ -115,10 +115,10 @@ public class Game implements Runnable{
 					b_duration[i] += 1;
 //					f_duration[i] += 1;
 					b_timer[i] = 0;
-					System.out.println("which:" + i +"  duration:" + b_duration[i] );
+//					System.out.println("which:" + i +"  duration:" + b_duration[i] );
 				}
 				if(b_duration[i] <= 1)	{
-					System.out.println("drew" + i + "  time_now:"+time + "   position:" + xx[i]);
+//					System.out.println("drew" + i + "  time_now:"+time + "   position:" + xx[i]);
 //					g.drawImage(Assets.bomb, xx[i], yy[i],80,80, null);
 				}
 				else a = true;
@@ -172,18 +172,18 @@ public class Game implements Runnable{
 				yy[k] = 300;
 				f = false;
 				a = true;
-				System.out.println("start!!!!!!!!!!!!!!!");
+//				System.out.println("start!!!!!!!!!!!!!!!");
 			}
 			if (time == 6 && s) {
 				setBombbb(true);
-				System.out.println("K: " +k);
+//				System.out.println("K: " +k);
 				xx[k] = 700;
 				yy[k] = 300;
 				s  = false;
 			}
 			if (time == 9 && tt) {
 				setBombbb(true);
-				System.out.println("K1: " +k);
+//				System.out.println("K1: " +k);
 				xx[k] = 1000;
 				yy[k] = 300;
 				s  = false;

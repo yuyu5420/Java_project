@@ -1,12 +1,12 @@
 import java.awt.Graphics;
 import javax.swing.JComponent;
 
-public class GameState extends State {
+public class GameState extends State implements GameStateDefault{
 
 	private Character player1;
 	
 	public GameState(Game game){
-		player1 = new Player(game, 445, 05);
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
 	
 	}
 	

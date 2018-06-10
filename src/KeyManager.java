@@ -39,6 +39,7 @@ public class KeyManager extends KeyAdapter {
 		}
 	}
 
+	
 /*	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);

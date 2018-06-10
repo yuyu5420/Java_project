@@ -1,6 +1,6 @@
 import java.awt.event.KeyEvent;
 
-public abstract class GameStateDefault {
+public interface GameStateDefault {
 	
 	//Character
 	static final int DEFAULT_WIDTH = 100;
@@ -14,6 +14,6 @@ public abstract class GameStateDefault {
 	static final int DEFAULT_MAX_X = 1445;
 	static final int DEFAULT_MIN_Y = 5;
 	static final int DEFAULT_MAX_Y = 805;
-	static final int DEFAULT_PACE = 25;
+	static final int DEFAULT_PACE = 10;
 	
 }
