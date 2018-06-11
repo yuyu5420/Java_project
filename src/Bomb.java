@@ -8,8 +8,10 @@ public class Bomb {
 	private short b_duration = 0;
 	private short f_duration = 0;
 	private long b_timer = 0;
+	private long e_timer = 0;
 	private boolean first = true;
 	private int size = 80;
+	private int e_duration = 0;
 	private boolean change = false;
 	public Bomb(int i, int j, int range) {
 		this.setB_x(i);
@@ -127,6 +129,28 @@ public class Bomb {
 			this.size--;
 			this.change = true;
 		}
+	}
+
+	public int getE_duration() {
+		return e_duration;
+	}
+
+	public void setE_duration(int i) {
+		long now = System.nanoTime();
+		this.setE_timer(getE_timer() + now - GameState.start_time[i]);
+		GameState.start_time[i] = now;
+		if (this.getE_timer() >= 1000000000) {
+			this.e_duration += 1;
+			this.e_timer = 0;
+		}
+	}
+
+	public long getE_timer() {
+		return e_timer;
+	}
+
+	public void setE_timer(long e_timer) {
+		this.e_timer = e_timer;
 	}
 
 }

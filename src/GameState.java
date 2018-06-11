@@ -4,7 +4,11 @@ public class GameState extends State implements GameStateDefault {
 
 	private Player player1;
 	public static Bomb[] bomb = new Bomb[50];
-
+	public static long[] start_time = new long[50];
+	public static boolean[] first = new boolean[50];
+	public static boolean[] second = new boolean[50];
+	public static boolean[] third = new boolean[50];
+	public static boolean[] fourth = new boolean[50];
 	public GameState(Game game) {
 		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
 	}
@@ -23,23 +27,32 @@ public class GameState extends State implements GameStateDefault {
 			String[] tokens6 = token.split(",");
 			String x = tokens6[0];
 			String y = tokens6[1];
-			if (!Game.go[Integer.valueOf(x) + 2][Integer.valueOf(y)])
+			if (Game.box_exist[Integer.valueOf(x)+2][Integer.valueOf(y)])
 				g.drawImage(Assets.box, 650 + (Integer.valueOf(x) * 100), 55 + (Integer.valueOf(y) * 100), null);
 		}
 
 		for (int i = 0; i < 50; i++) {
-			if (bomb[i] != null) {
+			if (bomb[i] != null ) {
+				
+				if (fourth[i])	{
+					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = true;
+					
+				}
 				bomb[i].setB_duration();
-				if (bomb[i].getB_duration() <= 1) {// put bomb
-					g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65, bomb[i].getSize(),bomb[i].getSize(), null);
+				if (bomb[i].getB_duration() <= 1 && !Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()] ) {// put bomb
+					if(Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()])	g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65, bomb[i].getSize(),bomb[i].getSize(), null);
 					bomb[i].setSize();
-				} else {
+					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = false;
+				} else {//start fire
+					fourth[i] = false;
+					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = false;
+					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = true;
 					if (bomb[i].isFirst()) {// bomb's range now
 						bomb[i].setFirst(false);
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// right(1)
 							if (bomb[i].getB_x() + j >= 0 && bomb[i].getB_x() + j < 11) { // set the positions of the
 																							// walls(2)
-								if (!Game.go[bomb[i].getB_x() + j][bomb[i].getB_y()]) { // detect the obstacles exist or
+								if (!Game.go[bomb[i].getB_x() + j][bomb[i].getB_y()] && !Game.bomb_exist[bomb[i].getB_x() + j][bomb[i].getB_y()]) { // detect the obstacles exist or
 																						// not(3)
 									if (Game.box_exist[bomb[i].getB_x() + j][bomb[i].getB_y()]) {// detect boxes(4)
 										Game.box_exist[bomb[i].getB_x() + j][bomb[i].getB_y()] = false;
@@ -63,7 +76,7 @@ public class GameState extends State implements GameStateDefault {
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// left
 							if (bomb[i].getB_x() - j >= 0 && bomb[i].getB_x() - j < 11) {// set the positions of the
 																							// walls(2)
-								if (!Game.go[bomb[i].getB_x() - j][bomb[i].getB_y()]) {// detect the obstacles exist or
+								if (!Game.go[bomb[i].getB_x() - j][bomb[i].getB_y()] && !Game.bomb_exist[bomb[i].getB_x() - j][bomb[i].getB_y()]) {// detect the obstacles exist or
 																						// not(3)
 									if (Game.box_exist[bomb[i].getB_x() - j][bomb[i].getB_y()]) {// detect boxes(4)
 										Game.box_exist[bomb[i].getB_x() - j][bomb[i].getB_y()] = false;
@@ -88,7 +101,7 @@ public class GameState extends State implements GameStateDefault {
 						} // (1)
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// up
 							if (bomb[i].getB_y() - j >= 0 && bomb[i].getB_y() - j < 9) {
-								if (!Game.go[bomb[i].getB_x()][bomb[i].getB_y() - j]) {
+								if (!Game.go[bomb[i].getB_x()][bomb[i].getB_y() - j] && !Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()-j ] ) {
 
 									if (Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() - j]) {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() - j] = false;
@@ -111,7 +124,7 @@ public class GameState extends State implements GameStateDefault {
 						}
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// bottom
 							if (bomb[i].getB_y() + j >= 0 && bomb[i].getB_y() + j < 9) {
-								if (!Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j]) {
+								if (!Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j] && !Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y() + j]) {
 									if (Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() + j]) {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() + j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j] = true;
@@ -132,7 +145,11 @@ public class GameState extends State implements GameStateDefault {
 							bomb[i].setDown(j);
 						}
 					}
-					if (bomb[i].getF_duration() == 2) {
+					if (bomb[i].getF_duration() == 2 && second[i]) {//normal 
+						for(int hi = 0; hi <= bomb[i].getRight(); hi++) 	Game.fire_exist[bomb[i].getB_x()+hi][bomb[i].getB_y()] = true;
+						for(int hi = 0; hi <= bomb[i].getLeft(); hi++) 	Game.fire_exist[bomb[i].getB_x()-hi][bomb[i].getB_y()] = true;
+						for(int hi = 0; hi <= bomb[i].getUp(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()-hi] = true;
+						for(int hi = 0; hi <= bomb[i].getDown(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()+hi] = true;
 						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,
 								null);
 						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,
@@ -143,11 +160,54 @@ public class GameState extends State implements GameStateDefault {
 								-bomb[i].getUp() * 100 - 17, null);// up
 						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,
 								bomb[i].getDown() * 100 + 17, null);// down
+						third[i] = false;
+						System.out.println("draw1      " + i);
+					}
+					else if(!Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] && third[i]){//bomb together
+						second[i] = false;
+						if (first[i])	{
+							start_time[i] = System.nanoTime();
+							first[i] = false;
+						}
+						bomb[i].setE_duration(i);
+						if(bomb[i].getE_duration() >= 1 ) {
+							for(int hi = 0; hi <= bomb[i].getRight(); hi++) 	Game.fire_exist[bomb[i].getB_x()+hi][bomb[i].getB_y()] = false;
+							for(int hi = 0; hi <= bomb[i].getLeft(); hi++) 	Game.fire_exist[bomb[i].getB_x()-hi][bomb[i].getB_y()] = false;
+							for(int hi = 0; hi <= bomb[i].getUp(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()-hi] = false;
+							for(int hi = 0; hi <= bomb[i].getDown(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()+hi] = false;
+							bomb[i] = null;
+						}
+						else {
+						for(int hi = 0; hi <= bomb[i].getRight(); hi++) 	Game.fire_exist[bomb[i].getB_x()+hi][bomb[i].getB_y()] = true;
+						for(int hi = 0; hi <= bomb[i].getLeft(); hi++) 	Game.fire_exist[bomb[i].getB_x()-hi][bomb[i].getB_y()] = true;
+						for(int hi = 0; hi <= bomb[i].getUp(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()-hi] = true;
+						for(int hi = 0; hi <= bomb[i].getDown(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()+hi] = true;
+						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,
+								null);
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,
+								bomb[i].getRight() * 100 + 20, 90, null);// right
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,
+								-bomb[i].getLeft() * 100 - 17, 90, null);// left
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,
+								-bomb[i].getUp() * 100 - 17, null);// up
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,
+								bomb[i].getDown() * 100 + 17, null);// down
+						System.out.println("draw2"+ "EDURTION" + bomb[i].getE_duration()+"         "+i);
+						}
+					}
+					else {
+						for(int hi = 0; hi <= bomb[i].getRight(); hi++) 	Game.fire_exist[bomb[i].getB_x()+hi][bomb[i].getB_y()] = false;
+						for(int hi = 0; hi <= bomb[i].getLeft(); hi++) 	Game.fire_exist[bomb[i].getB_x()-hi][bomb[i].getB_y()] = false;
+						for(int hi = 0; hi <= bomb[i].getUp(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()-hi] = false;
+						for(int hi = 0; hi <= bomb[i].getDown(); hi++) 	Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()+hi] = false;
 					}
 				}
 
-			} else
+			} else {
+				
 				bomb[i] = null;
+			}
+				
 		}
 
 		for (int i = 0; i < 11; i++) {

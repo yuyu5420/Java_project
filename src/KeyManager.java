@@ -7,13 +7,14 @@ public class KeyManager extends KeyAdapter {
 	public boolean up, down, left, right;
 	protected boolean temp_up, temp_down, temp_right, temp_left;
 	private int moveUp, moveDown, moveRight, moveLeft , put;
-	int k =0;
+	int k = 0;
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
 		put = KeyEvent.VK_SPACE;
+	
 	}
 
 	@Override
@@ -46,11 +47,16 @@ public class KeyManager extends KeyAdapter {
 			left = true;
 			right = false;
 		}
-		if(e.getKeyCode() == put) {
+		if(e.getKeyCode() == put && !Game.bomb_exist[(Character.Xcoordinate-445)/100][(Character.Ycoordinate-5)/100]) {
 			if (k == 50)	k = 0;
-			GameState.bomb[k] = new Bomb(0,0,6);
+			GameState.bomb[k] = new Bomb((Character.Xcoordinate-445)/100,(Character.Ycoordinate-5)/100,6);
+			GameState.first[k] = true;
+			GameState.second[k] = true;
+			GameState.third[k] = true;
+			GameState.fourth[k] = true;
 			k++;
 		}
+	
 	}
 
 	/*

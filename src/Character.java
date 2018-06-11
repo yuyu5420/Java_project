@@ -5,7 +5,9 @@ import javax.swing.JComponent;
 public abstract class Character implements GameStateDefault {
 
 	private Game game;
-	protected int Xcoordinate, Ycoordinate;
+	public static int Xcoordinate, Ycoordinate;
+
+
 	protected boolean left_movable = true, right_movable = true, up_movable = true, down_movable = true;
 	protected int pace;
 	protected int[] ideal_up = new int[2];
