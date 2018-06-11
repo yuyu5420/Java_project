@@ -9,7 +9,8 @@ public class Bomb {
 	private short f_duration = 0;
 	private long b_timer = 0;
 	private boolean first = true;
-
+	private int size = 80;
+	private boolean change = false;
 	public Bomb(int i, int j, int range) {
 		this.setB_x(i);
 		this.setB_y(j);
@@ -111,6 +112,21 @@ public class Bomb {
 
 	public void setRight(int right) {
 		this.right = right;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize() {
+		if(this.size == 80 || !change) {
+			this.size++;
+			this.change = false;
+		}
+		 if (this.size == 90 || change) {
+			this.size--;
+			this.change = true;
+		}
 	}
 
 }

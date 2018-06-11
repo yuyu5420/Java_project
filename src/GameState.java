@@ -31,7 +31,8 @@ public class GameState extends State implements GameStateDefault {
 			if (bomb[i] != null) {
 				bomb[i].setB_duration();
 				if (bomb[i].getB_duration() <= 1) {// put bomb
-					g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65, 80, 80, null);
+					g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65, bomb[i].getSize(),bomb[i].getSize(), null);
+					bomb[i].setSize();
 				} else {
 					if (bomb[i].isFirst()) {// bomb's range now
 						bomb[i].setFirst(false);
@@ -166,6 +167,7 @@ public class GameState extends State implements GameStateDefault {
 						break;
 					}
 					default: {
+						Game.props[i][j] = null;
 						break;
 					}
 
