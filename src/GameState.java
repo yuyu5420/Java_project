@@ -4,15 +4,16 @@ import javax.swing.JComponent;
 public class GameState extends State implements GameStateDefault{
 
 	private Character player1;
+	private Character ai1;
 	
 	public GameState(Game game){
 		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
-	
+		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
 	}
 	
 	public void tick() {
-		player1.movable();
 		player1.tick();
+		ai1.tick();
 	}
 
 	public void render(Graphics g) {
@@ -42,6 +43,7 @@ public class GameState extends State implements GameStateDefault{
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x) , Integer.valueOf(y), null);	
 		}
 		player1.render(g);
+		ai1.render(g);
 
 	}
 

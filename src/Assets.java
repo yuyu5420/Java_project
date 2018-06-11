@@ -2,7 +2,7 @@ import java.awt.image.BufferedImage;
 
 public class Assets{
 
-	public static BufferedImage background, obstacle1, obstacle2, box, cowboy, cowboy_left, cowboy_right;
+	public static BufferedImage background, obstacle1, obstacle2, box, cowboy, cowboy_left, cowboy_right, jin;
 	public static BufferedImage[] cowboys = new BufferedImage[3];
 	
 	public static void init() {
@@ -16,6 +16,7 @@ public class Assets{
 		cowboys[0] = ImageLoader.loadImage("/images/cowboy_left.png");
 		cowboys[1] = ImageLoader.loadImage("/images/cowboy_right.png");
 		cowboys[2] = ImageLoader.loadImage("/images/cowboy.png");
+		jin = ImageLoader.loadImage("/images/jin.png");
 	}
 	
 }
