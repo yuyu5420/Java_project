@@ -7,7 +7,7 @@ public class Assets {
 	
 	public static BufferedImage one, two , three , four , five , six , seven , eight , nine , zero , t , i , m ,e , colon, stick ;
 	public static BufferedImage[] cowboys;
-	public static BufferedImage[] p1 = new BufferedImage[8];
+	public static BufferedImage[] p1= new BufferedImage[8], p2= new BufferedImage[8], p3= new BufferedImage[8], p4= new BufferedImage[8];
 	public static void init() {
 		//game's objects
 		background = ImageLoader.loadImage("/images/last_map.png");
@@ -50,6 +50,36 @@ public class Assets {
 		p1[5] = ImageLoader.loadImage("/images/p1l2.png");
 		p1[6] = ImageLoader.loadImage("/images/p1r1.png");
 		p1[7] = ImageLoader.loadImage("/images/p1r2.png");
+		
+		
+		p4[0] = ImageLoader.loadImage("/images/p4_7.png");
+		p4[1] = ImageLoader.loadImage("/images/p4_8.png");
+		p4[2] = ImageLoader.loadImage("/images/p4_1.png");
+		p4[3] = ImageLoader.loadImage("/images/p4_2.png");
+		p4[4] = ImageLoader.loadImage("/images/p4_6.png");
+		p4[5] = ImageLoader.loadImage("/images/p4_5.png");
+		p4[6] = ImageLoader.loadImage("/images/p4_4.png");
+		p4[7] = ImageLoader.loadImage("/images/p4_3.png");
+		
+		
+		p3[0] = ImageLoader.loadImage("/images/p3_7.png");
+		p3[1] = ImageLoader.loadImage("/images/p3_8.png");
+		p3[2] = ImageLoader.loadImage("/images/p3_1.png");
+		p3[3] = ImageLoader.loadImage("/images/p3_2.png");
+		p3[4] = ImageLoader.loadImage("/images/p3_6.png");
+		p3[5] = ImageLoader.loadImage("/images/p3_5.png");
+		p3[6] = ImageLoader.loadImage("/images/p3_4.png");
+		p3[7] = ImageLoader.loadImage("/images/p3_3.png");
+		
+		
+		p2[0] = ImageLoader.loadImage("/images/p2_7.png");
+		p2[1] = ImageLoader.loadImage("/images/p2_8.png");
+		p2[2] = ImageLoader.loadImage("/images/p2_1.png");
+		p2[3] = ImageLoader.loadImage("/images/p2_2.png");
+		p2[4] = ImageLoader.loadImage("/images/p2_6.png");
+		p2[5] = ImageLoader.loadImage("/images/p2_5.png");
+		p2[6] = ImageLoader.loadImage("/images/p2_4.png");
+		p2[7] = ImageLoader.loadImage("/images/p2_3.png");
 	}
 
 }

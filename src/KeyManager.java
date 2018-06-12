@@ -48,9 +48,9 @@ public class KeyManager extends KeyAdapter {
 			left = true;System.out.println("11111finish:"+finish + "   left:" +left);
 			right = false;
 		}
-		if(e.getKeyCode() == put && !Game.bomb_exist[(Character.Xcoordinate-445)/100][(Character.Ycoordinate-5)/100]) {
+		if(e.getKeyCode() == put && !Game.bomb_exist[(Character.Xcoordinate[0]-445)/100][(Character.Ycoordinate[0]-5)/100]) {
 			if (k == 50)	k = 0;
-			GameState.bomb[k] = new Bomb((Character.Xcoordinate-400)/100,(Character.Ycoordinate)/100,6);
+			GameState.bomb[k] = new Bomb((Character.Xcoordinate[0]-400)/100,(Character.Ycoordinate[0])/100,6);
 			GameState.first[k] = true;
 			GameState.second[k] = true;
 			GameState.third[k] = true;

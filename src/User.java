@@ -6,10 +6,11 @@ public abstract class User extends Character {
 
 	protected Game game;
 	private double time = 100; // 100 milli second
-
-	public User(Game game, int Xcoordinate, int Ycoordinate) {
-		super(game, Xcoordinate, Ycoordinate);
+	public int i;
+	public User(Game game, int Xcoordinate, int Ycoordinate, int i) {
+		super(game, Xcoordinate, Ycoordinate,i);
 		this.game = game;
+		this.i = i;
 	}
 
 	@Override
@@ -22,33 +23,33 @@ public abstract class User extends Character {
 		if(game.getKeyManager().down && !this.down_movable)game.getKeyManager().finish = true;
 		if(game.getKeyManager().right && !this.right_movable)game.getKeyManager().finish = true;
 		if(game.getKeyManager().left && !this.left_movable)game.getKeyManager().finish = true;
-		if(game.getKeyManager().finish && game.getKeyManager().up && this.up_movable) 	Character.Ycoordinate -= DEFAULT_PACE;
+		if(game.getKeyManager().finish && game.getKeyManager().up && this.up_movable) 	Character.Ycoordinate[i] -= DEFAULT_PACE;
 		else if (game.getKeyManager().up && this.up_movable) {
 			if (!game.getKeyManager().finish ) {
-				if( Character.Ycoordinate % 100 == 5 )	game.getKeyManager().finish = true;
-				else	Character.Ycoordinate -= DEFAULT_PACE;
+				if( Character.Ycoordinate[i] % 100 == 5 )	game.getKeyManager().finish = true;
+				else	Character.Ycoordinate[i] -= DEFAULT_PACE;
 				System.out.println("ufinish:"+game.getKeyManager().finish );
 			}
 			
 			
 			
 		
-		} else if(game.getKeyManager().finish && game.getKeyManager().down && this.down_movable)	Character.Ycoordinate += DEFAULT_PACE;
+		} else if(game.getKeyManager().finish && game.getKeyManager().down && this.down_movable)	Character.Ycoordinate[i] += DEFAULT_PACE;
 			else if (game.getKeyManager().down && this.down_movable) {
 			 if (!game.getKeyManager().finish ) {
-				if( Character.Ycoordinate % 100 == 5)
+				if( Character.Ycoordinate[i] % 100 == 5)
 				game.getKeyManager().finish = true;
-				else	Character.Ycoordinate += DEFAULT_PACE;
+				else	Character.Ycoordinate[i] += DEFAULT_PACE;
 				System.out.println("dfinish:"+game.getKeyManager().finish );
 			}
 			}
 	
 			
-		 else if (game.getKeyManager().finish && game.getKeyManager().left && this.left_movable) Character.Xcoordinate -= DEFAULT_PACE;
+		 else if (game.getKeyManager().finish && game.getKeyManager().left && this.left_movable) Character.Xcoordinate[i] -= DEFAULT_PACE;
 		 else if( game.getKeyManager().left && this.left_movable)	{
 			 if (!game.getKeyManager().finish ) {
-				if( Character.Xcoordinate % 100 == 45)game.getKeyManager().finish = true;
-				else	Character.Xcoordinate -= DEFAULT_PACE;
+				if( Character.Xcoordinate[i] % 100 == 45)game.getKeyManager().finish = true;
+				else	Character.Xcoordinate[i] -= DEFAULT_PACE;
 				System.out.println("lfinish:"+game.getKeyManager().finish );
 			}
 				
@@ -56,13 +57,13 @@ public abstract class User extends Character {
 				// game.getKeyManager().left = false;
 				
 			
-		} else if (game.getKeyManager().finish && game.getKeyManager().right && this.right_movable) Character.Xcoordinate += DEFAULT_PACE;
+		} else if (game.getKeyManager().finish && game.getKeyManager().right && this.right_movable) Character.Xcoordinate[i] += DEFAULT_PACE;
 		else if( game.getKeyManager().right && this.right_movable)	{
 			 if (!game.getKeyManager().finish) {
-				if( Character.Xcoordinate % 100 == 45)game.getKeyManager().finish = true;
+				if( Character.Xcoordinate[i] % 100 == 45)game.getKeyManager().finish = true;
 				// game.getKeyManager().right = false;
 				
-				else	Character.Xcoordinate += DEFAULT_PACE;
+				else	Character.Xcoordinate[i] += DEFAULT_PACE;
 				System.out.println("rfinish:"+game.getKeyManager().finish );
 			}
 		

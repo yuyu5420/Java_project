@@ -5,8 +5,8 @@ import java.awt.Graphics;
 public abstract class Character implements GameStateDefault {
 
 	private Game game;
-	public static int Xcoordinate, Ycoordinate;
-
+	public static int[] Xcoordinate = new int[2], Ycoordinate = new int[2];
+	public int i;
 
 	protected boolean left_movable = true, right_movable = true, up_movable = true, down_movable = true;
 	protected int pace;
@@ -15,10 +15,10 @@ public abstract class Character implements GameStateDefault {
 	protected int[] ideal_left = new int[2];
 	protected int[] ideal_right = new int[2];
 
-	public Character(Game game, int Xcoordinate, int Ycoordinate) {
+	public Character(Game game, int Xcoordinate, int Ycoordinate, int i) {
 		this.game = game;
-		Character.Xcoordinate = Xcoordinate;
-		Character.Ycoordinate = Ycoordinate;
+		Character.Xcoordinate[i] = Xcoordinate;
+		Character.Ycoordinate[i] = Ycoordinate;
 		this.pace = DEFAULT_PACE;
 		ideal_up[0] = Xcoordinate;
 		ideal_up[1] = Ycoordinate - 100;
@@ -28,6 +28,7 @@ public abstract class Character implements GameStateDefault {
 		ideal_left[1] = Ycoordinate;
 		ideal_right[0] = Xcoordinate + 100;
 		ideal_right[1] = Ycoordinate;
+		this.i =i;
 	}
 
 	public abstract void render(Graphics g);
@@ -74,14 +75,14 @@ public abstract class Character implements GameStateDefault {
 	}
 
 	public void setIdealLocation() {
-		if(Character.Xcoordinate % 100 == 45)	ideal_up[0] = Character.Xcoordinate;
-		if(Character.Ycoordinate % 100 == 5)	ideal_up[1] = Character.Ycoordinate - 100;
-		if(Character.Xcoordinate % 100 == 45)	ideal_down[0] = Character.Xcoordinate;
-		if(Character.Ycoordinate % 100 == 5)	ideal_down[1] = Character.Ycoordinate + 100;
-		if(Character.Xcoordinate % 100 == 45)	ideal_left[0] = Character.Xcoordinate - 100;
-		if(Character.Ycoordinate % 100 == 5)	ideal_left[1] = Character.Ycoordinate;
-		if(Character.Xcoordinate % 100 == 45)	ideal_right[0] = Character.Xcoordinate + 100;
-		if(Character.Ycoordinate % 100 == 5)	ideal_right[1] = Character.Ycoordinate;
+		if(Character.Xcoordinate[i] % 100 == 45)	ideal_up[0] = Character.Xcoordinate[i];
+		if(Character.Ycoordinate[i] % 100 == 5)	ideal_up[1] = Character.Ycoordinate[i] - 100;
+		if(Character.Xcoordinate[i] % 100 == 45)	ideal_down[0] = Character.Xcoordinate[i];
+		if(Character.Ycoordinate[i] % 100 == 5)	ideal_down[1] = Character.Ycoordinate[i] + 100;
+		if(Character.Xcoordinate[i] % 100 == 45)	ideal_left[0] = Character.Xcoordinate[i] - 100;
+		if(Character.Ycoordinate[i] % 100 == 5)	ideal_left[1] = Character.Ycoordinate[i];
+		if(Character.Xcoordinate[i] % 100 == 45)	ideal_right[0] = Character.Xcoordinate[i] + 100;
+		if(Character.Ycoordinate[i] % 100 == 5)	ideal_right[1] = Character.Ycoordinate[i];
 		this.movable();
 	}
 

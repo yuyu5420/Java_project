@@ -1,8 +1,14 @@
+import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class GameState extends State implements GameStateDefault {
 
-	private Player player1;
+	private Player player1, player2;
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first = new boolean[50];
@@ -10,16 +16,23 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] third = new boolean[50];
 	public static boolean[] fourth = new boolean[50];
 
+	ImageIcon icon=new ImageIcon("/images/p1d1.png");
+	JButton b1=new JButton();
+	    
 	public GameState(Game game) {
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y,0);
+		player2 = new Player(game, DEFAULT_MAX_X, DEFAULT_MAX_Y,1);
 	}
 
 	public void tick() {
 		player1.movable();
 		player1.tick();
+		player2.movable();
+		player2.tick();
 	}
 
 	public void render(Graphics g) {
+		
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
@@ -400,5 +413,9 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
+		player2.render(g);
+		b1.setIcon(icon);
+	    b1.setBounds(20,20,50,50);
+		Map.getFrame().getContentPane().add(b1, BorderLayout.WEST);
 	}
 }

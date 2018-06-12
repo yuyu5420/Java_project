@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.Canvas;
 
 public class Map {
-	private JFrame frame;
+	private static JFrame frame;
 
 	private String title;
 	private int width, height;
@@ -39,7 +39,7 @@ public class Map {
 		return canvas;
 	}
 
-	public JFrame getFrame() {
+	public static JFrame getFrame() {
 		return frame;
 	}
 
