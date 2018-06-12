@@ -7,9 +7,13 @@ public class Assets {
 	
 	public static BufferedImage one, two , three , four , five , six , seven , eight , nine , zero , t , i , m ,e , colon, stick ;
 	public static BufferedImage[] cowboys;
+	public static BufferedImage[] btn = new BufferedImage[2];
 	public static BufferedImage[] p1= new BufferedImage[8], p2= new BufferedImage[8], p3= new BufferedImage[8], p4= new BufferedImage[8];
 	public static void init() {
 		//game's objects
+
+		btn[0] = ImageLoader.loadImage("/images/pause.png");
+		btn[1] = ImageLoader.loadImage("/images/resume.png");
 		background = ImageLoader.loadImage("/images/last_map.png");
 		obstacle1 = ImageLoader.loadImage("/images/obstacle1.png");
 		obstacle2 = ImageLoader.loadImage("/images/obstacle2.png");

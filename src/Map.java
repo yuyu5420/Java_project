@@ -1,15 +1,17 @@
 import java.awt.Dimension;
-import javax.swing.*;
+import java.awt.Image;
 
+import javax.swing.*;
 import java.awt.Canvas;
+import java.awt.Color;
 
 public class Map {
-	private static JFrame frame;
-
+	private JFrame frame;
+	public static JButton yoyoyo = new JButton();
 	private String title;
 	private int width, height;
 	private Canvas canvas;
-
+	
 	public Map(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
@@ -24,7 +26,25 @@ public class Map {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-
+		
+		
+		
+		yoyoyo.setBorder(null);
+		yoyoyo.setFocusPainted(false);
+		yoyoyo.setFocusable(false);
+		//yoyoyo.setOpaque(true);
+	//	yoyoyo.setContentAreaFilled(false);
+		
+		yoyoyo.setIcon(new ImageIcon(new ImageIcon("./res/images/pause.png").getImage().getScaledInstance(300, 150, Image.SCALE_DEFAULT)));
+		yoyoyo.setVisible(true);
+		ButtonListener mblistener = new ButtonListener();
+		yoyoyo.addActionListener(mblistener);
+		yoyoyo.setLocation(70, 620);
+		yoyoyo.setSize(300, 150);
+		Color color= new Color(122, 113, 106);
+		yoyoyo.setBackground(color);
+		frame.add(yoyoyo);
+		yoyoyo.setPreferredSize(null);
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
@@ -33,14 +53,16 @@ public class Map {
 
 		frame.add(canvas);
 		frame.pack();
+		
 	}
 
 	public Canvas getCanvas() {
 		return canvas;
 	}
 
-	public static JFrame getFrame() {
+	public JFrame getFrame() {
 		return frame;
 	}
+
 
 }

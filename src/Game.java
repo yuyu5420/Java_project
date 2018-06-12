@@ -88,7 +88,7 @@ public class Game implements Runnable {
 
 		if (State.getState() != null)
 			State.getState().render(g);
-
+		
 		// End Drawing!
 		bs.show();
 		g.dispose();
@@ -104,12 +104,13 @@ public class Game implements Runnable {
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		//int time = 180;
 
 		while (running) {
-			/*
-			 * while (KeyManager.pause) {// fucking pause the game System.out.print(""); }
-			 */
+			
+			  while (ButtonListener.jjjjjj) {  
+				  System.out.print(""); 
+				  }
+			  
 			now = System.nanoTime();
 			delta += (now - lastTime) / timepPerTick;
 			timer += now - lastTime;
