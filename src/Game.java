@@ -11,6 +11,9 @@ public class Game implements Runnable {
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
+	private static int time = 180;
+	public static int minute = time / 60;
+	public static int second = time % 60;
 	private State gameState;
 	public static boolean box_exist[][] = new boolean[11][9];
 	public static boolean bomb_exist[][] = new boolean[11][9];
@@ -101,9 +104,7 @@ public class Game implements Runnable {
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int time = 180;
-		int minute = time / 60;
-		int second = time % 60;
+		//int time = 180;
 
 		while (running) {
 			/*
@@ -125,7 +126,7 @@ public class Game implements Runnable {
 				timer = 0;
 				minute = time / 60;
 				second = time % 60;
-				System.out.println("current time:" + minute + " : " + second);
+				
 			}
 
 		}

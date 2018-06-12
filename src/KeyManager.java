@@ -59,13 +59,6 @@ public class KeyManager extends KeyAdapter {
 	
 	}
 
-	/*
-	 * @Override public void keyReleased(KeyEvent e) { super.keyReleased(e);
-	 * if(!finish) { return; } if(e.getKeyCode() == moveUp) { temp_up = false; }
-	 * if(e.getKeyCode() == moveDown) { temp_down = false; } if(e.getKeyCode() ==
-	 * moveRight) { temp_right = false; } if(e.getKeyCode() == moveLeft) { temp_left
-	 * = false; } }
-	 */
 	public int getMoveUp() {
 		return moveUp;
 	}

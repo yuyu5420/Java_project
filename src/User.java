@@ -28,8 +28,8 @@ public abstract class User extends Character {
 			}
 		} else if (game.getKeyManager().down && this.down_movable) {
 			game.getKeyManager().finish = false;
-			System.out.println("User");
-			System.out.println(game.getKeyManager().down);
+			//System.out.println("User");
+			//System.out.println(game.getKeyManager().down);
 			this.Ycoordinate += DEFAULT_PACE;
 			if (this.Xcoordinate == this.ideal_down[0] && this.Ycoordinate == this.ideal_down[1]) {
 				game.getKeyManager().finish = true;
@@ -47,7 +47,7 @@ public abstract class User extends Character {
 		} else if (game.getKeyManager().right && this.right_movable) {
 			game.getKeyManager().finish = false;
 			this.Xcoordinate += DEFAULT_PACE;
-			System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
+			//System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
 			if (this.Xcoordinate == this.ideal_right[0] && this.Ycoordinate == this.ideal_right[1]) {
 				game.getKeyManager().finish = true;
 				// game.getKeyManager().right = false;
