@@ -7,7 +7,7 @@ public class Assets {
 	
 	public static BufferedImage one, two , three , four , five , six , seven , eight , nine , zero , t , i , m ,e , colon, stick ;
 	public static BufferedImage[] cowboys;
-
+	public static BufferedImage[] p1 = new BufferedImage[8];
 	public static void init() {
 		//game's objects
 		background = ImageLoader.loadImage("/images/last_map.png");
@@ -42,6 +42,14 @@ public class Assets {
 		m = ImageLoader.loadImage("/images/M.png");
 		e = ImageLoader.loadImage("/images/E.png");
 		colon = ImageLoader.loadImage("/images/colon.png");
+		p1[0] = ImageLoader.loadImage("/images/p1u1.png");
+		p1[1] = ImageLoader.loadImage("/images/p1u2.png");
+		p1[2] = ImageLoader.loadImage("/images/p1d1.png");
+		p1[3] = ImageLoader.loadImage("/images/p1d2.png");
+		p1[4] = ImageLoader.loadImage("/images/p1l1.png");
+		p1[5] = ImageLoader.loadImage("/images/p1l2.png");
+		p1[6] = ImageLoader.loadImage("/images/p1r1.png");
+		p1[7] = ImageLoader.loadImage("/images/p1r2.png");
 	}
 
 }

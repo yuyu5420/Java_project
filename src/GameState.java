@@ -1,7 +1,5 @@
 import java.awt.Graphics;
 
-import javax.swing.JLabel;
-
 public class GameState extends State implements GameStateDefault {
 
 	private Player player1;

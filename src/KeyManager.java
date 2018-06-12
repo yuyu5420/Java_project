@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	public boolean finish = true;
-	public boolean up, down, left, right;
+	public boolean up = false, down = false, left= false, right = false;
 	protected boolean temp_up, temp_down, temp_right, temp_left;
 	private int moveUp, moveDown, moveRight, moveLeft , put;
 	int k = 0;
@@ -28,28 +28,29 @@ public class KeyManager extends KeyAdapter {
 			down = false;
 			left = false;
 			right = false;
+			System.out.println("1111finish:"+finish + "   up:" +up);
 		}
-		if (e.getKeyCode() == moveDown) {
+		else if (e.getKeyCode() == moveDown) {
 			up = false;
 			down = true;
 			left = false;
-			right = false;
+			right = false;System.out.println("111111111finish:"+finish + "   down:" +down);
 		}
-		if (e.getKeyCode() == moveRight) {
+		else if (e.getKeyCode() == moveRight) {
 			up = false;
 			down = false;
 			left = false;
-			right = true;
+			right = true;System.out.println("1111111finish:"+finish + "   rght:" +right);
 		}
-		if (e.getKeyCode() == moveLeft) {
+		else if (e.getKeyCode() == moveLeft) {
 			up = false;
 			down = false;
-			left = true;
+			left = true;System.out.println("11111finish:"+finish + "   left:" +left);
 			right = false;
 		}
 		if(e.getKeyCode() == put && !Game.bomb_exist[(Character.Xcoordinate-445)/100][(Character.Ycoordinate-5)/100]) {
 			if (k == 50)	k = 0;
-			GameState.bomb[k] = new Bomb((Character.Xcoordinate-445)/100,(Character.Ycoordinate-5)/100,6);
+			GameState.bomb[k] = new Bomb((Character.Xcoordinate-400)/100,(Character.Ycoordinate)/100,6);
 			GameState.first[k] = true;
 			GameState.second[k] = true;
 			GameState.third[k] = true;
@@ -58,7 +59,44 @@ public class KeyManager extends KeyAdapter {
 		}
 	
 	}
+	public void keyReleased(KeyEvent e) {
+		super.keyReleased(e);
+		if (e.getKeyCode() == moveUp ) {
+			
+			up = true;
+			down = false;
+			left = false;
+			right = false;
+			finish = false;
+			System.out.println("finish:"+finish + "   up:" +up);
+		}
+		else if (e.getKeyCode() == moveDown ) {
+			up = false;
+			down = true;
+			left = false;
+			right = false;
+			finish = false;
 
+			System.out.println("finish:"+finish + "   down:" +down);
+			
+		}
+		else if (e.getKeyCode() == moveRight ) {
+			up = false;
+			down = false;
+			left = false;
+			right = true;
+			finish = false;
+			System.out.println("finish:"+finish + "   rrrrr:" +right);
+		}
+		else if (e.getKeyCode() == moveLeft ) {
+			up = false;
+			down = false;
+			left = true;
+			right = false;
+			finish = false;
+			System.out.println("finish:"+finish + "   down:" +down);
+		}
+	}
 	public int getMoveUp() {
 		return moveUp;
 	}

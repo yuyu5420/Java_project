@@ -1,4 +1,4 @@
-import java.awt.event.KeyEvent;
+
 
 public interface GameStateDefault {
 
@@ -14,6 +14,7 @@ public interface GameStateDefault {
 	static final int DEFAULT_MAX_X = 1445;
 	static final int DEFAULT_MIN_Y = 5;
 	static final int DEFAULT_MAX_Y = 805;
-	static final int DEFAULT_PACE = 10;
+	static final int DEFAULT_PACE = 20;
+
 
 }

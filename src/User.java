@@ -1,10 +1,10 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
+
 
 public abstract class User extends Character {
 
-	private Game game;
+	protected Game game;
 	private double time = 100; // 100 milli second
 
 	public User(Game game, int Xcoordinate, int Ycoordinate) {
@@ -17,46 +17,62 @@ public abstract class User extends Character {
 
 	@Override
 	public void tick() {
-
-		if (game.getKeyManager().up && this.up_movable) {
-			game.getKeyManager().finish = false;
-			this.Ycoordinate -= DEFAULT_PACE;
-			if (this.Xcoordinate == this.ideal_up[0] && this.Ycoordinate == this.ideal_up[1]) {
-				game.getKeyManager().finish = true;
-				// game.getKeyManager().up = false;
-				this.setIdealLocation();
+		this.setIdealLocation();
+		if(game.getKeyManager().up && !this.up_movable)game.getKeyManager().finish = true;
+		if(game.getKeyManager().down && !this.down_movable)game.getKeyManager().finish = true;
+		if(game.getKeyManager().right && !this.right_movable)game.getKeyManager().finish = true;
+		if(game.getKeyManager().left && !this.left_movable)game.getKeyManager().finish = true;
+		if(game.getKeyManager().finish && game.getKeyManager().up && this.up_movable) 	Character.Ycoordinate -= DEFAULT_PACE;
+		else if (game.getKeyManager().up && this.up_movable) {
+			if (!game.getKeyManager().finish ) {
+				if( Character.Ycoordinate % 100 == 5 )	game.getKeyManager().finish = true;
+				else	Character.Ycoordinate -= DEFAULT_PACE;
+				System.out.println("ufinish:"+game.getKeyManager().finish );
 			}
-		} else if (game.getKeyManager().down && this.down_movable) {
-			game.getKeyManager().finish = false;
-			//System.out.println("User");
-			//System.out.println(game.getKeyManager().down);
-			this.Ycoordinate += DEFAULT_PACE;
-			if (this.Xcoordinate == this.ideal_down[0] && this.Ycoordinate == this.ideal_down[1]) {
+			
+			
+			
+		
+		} else if(game.getKeyManager().finish && game.getKeyManager().down && this.down_movable)	Character.Ycoordinate += DEFAULT_PACE;
+			else if (game.getKeyManager().down && this.down_movable) {
+			 if (!game.getKeyManager().finish ) {
+				if( Character.Ycoordinate % 100 == 5)
 				game.getKeyManager().finish = true;
-				// game.getKeyManager().down = false;
-				this.setIdealLocation();
+				else	Character.Ycoordinate += DEFAULT_PACE;
+				System.out.println("dfinish:"+game.getKeyManager().finish );
 			}
-		} else if (game.getKeyManager().left && this.left_movable) {
-			game.getKeyManager().finish = false;
-			this.Xcoordinate -= DEFAULT_PACE;
-			if (this.Xcoordinate == this.ideal_left[0] && this.Ycoordinate == this.ideal_left[1]) {
-				game.getKeyManager().finish = true;
+			}
+	
+			
+		 else if (game.getKeyManager().finish && game.getKeyManager().left && this.left_movable) Character.Xcoordinate -= DEFAULT_PACE;
+		 else if( game.getKeyManager().left && this.left_movable)	{
+			 if (!game.getKeyManager().finish ) {
+				if( Character.Xcoordinate % 100 == 45)game.getKeyManager().finish = true;
+				else	Character.Xcoordinate -= DEFAULT_PACE;
+				System.out.println("lfinish:"+game.getKeyManager().finish );
+			}
+				
+	
 				// game.getKeyManager().left = false;
-				this.setIdealLocation();
-			}
-		} else if (game.getKeyManager().right && this.right_movable) {
-			game.getKeyManager().finish = false;
-			this.Xcoordinate += DEFAULT_PACE;
-			//System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
-			if (this.Xcoordinate == this.ideal_right[0] && this.Ycoordinate == this.ideal_right[1]) {
-				game.getKeyManager().finish = true;
+				
+			
+		} else if (game.getKeyManager().finish && game.getKeyManager().right && this.right_movable) Character.Xcoordinate += DEFAULT_PACE;
+		else if( game.getKeyManager().right && this.right_movable)	{
+			 if (!game.getKeyManager().finish) {
+				if( Character.Xcoordinate % 100 == 45)game.getKeyManager().finish = true;
 				// game.getKeyManager().right = false;
-				this.setIdealLocation();
-
+				
+				else	Character.Xcoordinate += DEFAULT_PACE;
+				System.out.println("rfinish:"+game.getKeyManager().finish );
 			}
+		
+			//System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
+			
 		}
 		this.checkfinish(game.getKeyManager().finish);
 	}
+
+
 
 	protected void checkfinish(boolean finish) {
 		if (finish) {
