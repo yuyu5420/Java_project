@@ -1,11 +1,8 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 
 public class Player extends User {
-	
 	private Game game;
 	
 	public Player(Game game, int Xcoordinate, int Ycoordinate) {
@@ -29,9 +26,8 @@ public class Player extends User {
 			}
 		}
 
-		
-	}
 
+	}
 
 
 

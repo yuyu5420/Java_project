@@ -1,5 +1,6 @@
 
 import java.awt.Graphics;
+
 import java.awt.event.KeyEvent;
 
 
@@ -24,13 +25,12 @@ public abstract class Character implements GameStateDefault {
 		ideal_Y = Ycoordinate;
 	}
 	
-
 	
 	public abstract void render(Graphics g) ;
 	
 	public abstract void tick() ;
 
-	
+
 	public void movable() {
 
 		this.up_movable = true;
@@ -67,11 +67,12 @@ public abstract class Character implements GameStateDefault {
 		}
 		if(this.right_movable) {
 			if(!Game.go[(this.ideal_right[0]-400)/100][(this.ideal_right[1])/100])
+
 				this.right_movable = false;
 		}
 		
 	}
-	
+
 	public void testIdealLocation(int state) {
 		if(ideal_X==this.Xcoordinate && ideal_Y==this.Ycoordinate) {
 			ideal_up[0] = ideal_X;

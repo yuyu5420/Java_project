@@ -15,6 +15,7 @@ public abstract class User extends Character {
 	public abstract void render(Graphics g);
 
 	@Override
+
 	public void tick() {	
 		
 		testIdealLocation(game.getKeyManager().state_now);
@@ -55,8 +56,21 @@ public abstract class User extends Character {
 				return;
 			}
 		} 
-		
+
+			
+		}
+		this.checkfinish(game.getKeyManager().finish);
 	}
-	
-	
+
+
+
+	protected void checkfinish(boolean finish) {
+		if (finish) {
+			this.game.getKeyManager().up = false;
+			this.game.getKeyManager().down = false;
+			this.game.getKeyManager().left = false;
+			this.game.getKeyManager().right = false;
+		}
+	}
+
 }

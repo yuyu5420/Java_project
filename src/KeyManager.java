@@ -3,20 +3,25 @@ import java.awt.event.KeyEvent;
 
 public class KeyManager extends KeyAdapter {
 
+
 	protected boolean up, down, left, right;
 	protected int state_now=0, state_next, state;
-	private int moveUp, moveDown, moveRight, moveLeft;
-	
+	private int moveUp, moveDown, moveRight, moveLeft, put;
+	int k = 0;
+
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
-	}
+		put = KeyEvent.VK_SPACE;
 	
+	}
+
 	@Override
-	public void keyPressed(KeyEvent e) {	
+	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
+
 		if(e.getKeyCode() == moveUp) {
 				up = true;
 				state_next = this.moveUp;
@@ -59,8 +64,19 @@ public class KeyManager extends KeyAdapter {
 		if(e.getKeyCode() == moveLeft) {
 			left = false;
 		}		
-	}
 
+		if(e.getKeyCode() == put && !Game.bomb_exist[(Character.Xcoordinate[0]-445)/100][(Character.Ycoordinate[0]-5)/100]) {
+			if (k == 50)	k = 0;
+			GameState.bomb[k] = new Bomb((Character.Xcoordinate[0]-400)/100,(Character.Ycoordinate[0])/100,6);
+			GameState.first[k] = true;
+			GameState.second[k] = true;
+			GameState.third[k] = true;
+			GameState.fourth[k] = true;
+			k++;
+		}
+	
+	
+	}
 	public int getMoveUp() {
 		return moveUp;
 	}
@@ -81,8 +97,4 @@ public class KeyManager extends KeyAdapter {
 		this.moveLeft = moveLeft;
 	}
 
-	
-	
-	
-	
 }
