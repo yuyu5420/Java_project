@@ -3,14 +3,8 @@ import java.awt.Graphics;
 
 public class GameState extends State implements GameStateDefault {
 
-
 	private Character player1;
 	private Character ai1;
-	
-	public GameState(Game game){
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
-		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
-
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first = new boolean[50];
@@ -18,29 +12,31 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] third = new boolean[50];
 	public static boolean[] fourth = new boolean[50];
 
+	public GameState(Game game) {
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+
 	}
 
 	public void tick() {
-		player1.movable();
 		player1.tick();
-
 		ai1.tick();
 
 	}
 
 	public void render(Graphics g) {
-		
+
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
-		
+
 		g.drawImage(Assets.t, 60, 779, 100, 100, null);
 		g.drawImage(Assets.i, 130, 780, 100, 100, null);
 		g.drawImage(Assets.m, 200, 780, 100, 100, null);
 		g.drawImage(Assets.e, 280, 785, 100, 100, null);
 		g.drawImage(Assets.colon, 140, 880, 60, 90, null);
 		switch (Game.minute) {// 1
-	
+
 		case 1: {
 			g.drawImage(Assets.one, 50, 880, 80, 100, null);
 			break;
@@ -411,10 +407,5 @@ public class GameState extends State implements GameStateDefault {
 		player1.render(g);
 		ai1.render(g);
 
-
-		player1.render(g);
-		
-		
-		
 	}
 }

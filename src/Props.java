@@ -12,15 +12,15 @@ public class Props {
 		case 1: {
 			id = 1;
 			break;
-		} 
+		}
 		case 2: {
 			id = 2;
 			break;
-		} 
+		}
 		case 3: {
 			id = 3;
 			break;
-		} 
+		}
 		default: {
 			break;
 		}

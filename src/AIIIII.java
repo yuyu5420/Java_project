@@ -4,7 +4,7 @@ public class AIIIII extends AI {
 
 	public AIIIII(Game game, int Xcoordinate, int Ycoordinate) {
 		super(game, Xcoordinate, Ycoordinate);
-		
+
 	}
 
 	@Override
@@ -17,6 +17,4 @@ public class AIIIII extends AI {
 		super.tick();
 	}
 
-	
-	
 }

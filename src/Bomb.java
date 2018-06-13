@@ -13,6 +13,7 @@ public class Bomb {
 	private int size = 80;
 	private int e_duration = 0;
 	private boolean change = false;
+
 	public Bomb(int i, int j, int range) {
 		this.setB_x(i);
 		this.setB_y(j);
@@ -121,11 +122,11 @@ public class Bomb {
 	}
 
 	public void setSize() {
-		if(this.size == 80 || !change) {
+		if (this.size == 80 || !change) {
 			this.size++;
 			this.change = false;
 		}
-		 if (this.size == 90 || change) {
+		if (this.size == 90 || change) {
 			this.size--;
 			this.change = true;
 		}
