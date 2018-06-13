@@ -146,6 +146,7 @@ public class Game implements Runnable {
 				play = false;
 			}
 			
+			 
 			if(GameState.explosion_sound) {
 				clip2.play();
 				GameState.explosion_sound = false;

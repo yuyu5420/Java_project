@@ -8,6 +8,10 @@ public class Assets {
 	public static BufferedImage[] blue_up = new BufferedImage[2];
 	public static BufferedImage[] blue_left = new BufferedImage[2];
 	public static BufferedImage[] blue_right = new BufferedImage[2];
+	public static BufferedImage[] black_down = new BufferedImage[2];
+	public static BufferedImage[] black_up = new BufferedImage[2];
+	public static BufferedImage[] black_left = new BufferedImage[2];
+	public static BufferedImage[] black_right = new BufferedImage[2];
 	public static BufferedImage[] cowboys = new BufferedImage[3];
 
 	public static BufferedImage one, two, three, four, five, six, seven, eight, nine, zero, t, i, m, e, colon, stick,
@@ -44,6 +48,17 @@ public class Assets {
 		blue_up[0] = ImageLoader.loadImage("images/blue_up_0.png");
 		blue_up[1] = ImageLoader.loadImage("images/blue_up_1.png");
 
+		
+		black_down[0] = ImageLoader.loadImage("/images/p4_1.png");
+		black_down[1] = ImageLoader.loadImage("/images/p4_2.png");
+		black_left[0] = ImageLoader.loadImage("/images/p4_3.png");
+		black_left[1] = ImageLoader.loadImage("/images/p4_4.png");
+		black_right[0] = ImageLoader.loadImage("/images/p4_5.png");
+		black_right[1] = ImageLoader.loadImage("/images/p4_6.png");
+		black_up[0] = ImageLoader.loadImage("/images/p4_7.png");
+		black_up[1] = ImageLoader.loadImage("/images/p4_8.png");
+		
+		
 		bomb = ImageLoader.loadImage("images/player_bomb.png");
 		fire = ImageLoader.loadImage("images/fire.png");
 		player1 = ImageLoader.loadImage("/images/player1.png");

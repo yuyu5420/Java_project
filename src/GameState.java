@@ -4,7 +4,7 @@ import java.awt.Graphics;
 public class GameState extends State implements GameStateDefault {
 
 	private Character player1;
-	private Character ai1;
+	private Player2 player;
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first_bb = new boolean[50];
@@ -14,13 +14,13 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean explosion_sound = false;
 	public GameState(Game game) {
 		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
-		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+		player = new Player2(game, 1445, 805);
 
 	}
 
 	public void tick() {
 		player1.tick();
-		ai1.tick();
+		player.tick();
 
 	}
 
@@ -29,7 +29,7 @@ public class GameState extends State implements GameStateDefault {
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
-
+		
 		g.drawImage(Assets.t, 60, 779, 100, 100, null);
 		g.drawImage(Assets.i, 130, 780, 100, 100, null);
 		g.drawImage(Assets.m, 200, 780, 100, 100, null);
@@ -400,7 +400,7 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
-		ai1.render(g);
+		player.render(g);
 
 	}
 }

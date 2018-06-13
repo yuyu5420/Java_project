@@ -1,18 +1,31 @@
 
 import java.awt.Graphics;
 
-public abstract class AI extends Character {
-
-	public AI(Game game, int Xcoordinate, int Ycoordinate) {
-		super(game, Xcoordinate, Ycoordinate);
-
+public class AI  {
+	
+	int x, y, bomb_number = 1, fire_range = 1, speed = 5;
+	
+	double addspeed[] = {10,12.5,20,25,25,25,50};
+	
+	
+	public AI(int xcoordinate, int ycoordinate){
+		this.x = xcoordinate;
+		this.y = ycoordinate;
 	}
-
-	public abstract void render(Graphics g);
-
-	@Override
+	
+	
+	
 	public void tick() {
-
+		
+	}
+	
+	public void render() {
+		
 	}
 
+	
+	
+	
 }
+
+

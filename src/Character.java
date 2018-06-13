@@ -5,7 +5,24 @@ import java.awt.event.KeyEvent;
 public abstract class Character implements GameStateDefault {
 
 	private Game game;
-	protected int Xcoordinate, Ycoordinate;
+	protected  int Xcoordinate, Ycoordinate;
+	public static int X,Y;
+	public static int getX() {
+		return X;
+	}
+
+	public static void setX(int x) {
+		Character.X = x;
+	}
+
+	public static int getY() {
+		return Y;
+	}
+
+	public static void setY(int y) {
+		Character.Y = y;
+	}
+
 	protected boolean left_movable, right_movable, up_movable, down_movable;
 	protected int pace, pace_cnt = 0;
 	protected int[] ideal_up = new int[2];
@@ -28,7 +45,8 @@ public abstract class Character implements GameStateDefault {
 	public abstract void tick();
 
 	public void movable() {
-
+		setX(Xcoordinate);
+		setY(Ycoordinate);
 		this.up_movable = true;
 		this.down_movable = true;
 		this.left_movable = true;
