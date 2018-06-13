@@ -16,12 +16,12 @@ public class KeyManager extends KeyAdapter {
 		moveDown = KeyEvent.VK_DOWN;
 		moveLeft = KeyEvent.VK_LEFT;
 		moveRight = KeyEvent.VK_RIGHT;
-		put = KeyEvent.VK_SPACE;
+		put = KeyEvent.VK_ENTER;
 		moveUp2 = KeyEvent.VK_W;
 		moveDown2 = KeyEvent.VK_S;
 		moveLeft2 = KeyEvent.VK_A;
 		moveRight2 = KeyEvent.VK_D;
-		put2 = KeyEvent.VK_ENTER;
+		put2 = KeyEvent.VK_SPACE;
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class KeyManager extends KeyAdapter {
 			down2 = false;
 		}
 		if (e.getKeyCode() == moveRight2) {
-			right = false;
+			right2 = false;
 		}
 		if (e.getKeyCode() == moveLeft2) {
 			left2 = false;
