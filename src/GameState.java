@@ -25,7 +25,7 @@ public class GameState extends State implements GameStateDefault {
 	}
 
 	public void render(Graphics g) {
-
+		
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
@@ -165,13 +165,11 @@ public class GameState extends State implements GameStateDefault {
 
 				if (fourth_bb[i]) {
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = true;
-
 				}
 				bomb[i].setB_duration();
 				if (bomb[i].getB_duration() <= 1 && !Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()]) {// put bomb
 					if (Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()])
-						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,
-								bomb[i].getSize(), bomb[i].getSize(), null);
+						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,bomb[i].getSize(), bomb[i].getSize(), null);
 					bomb[i].setSize();
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = false;
 				} else {// start fire
@@ -219,8 +217,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x() - j][bomb[i].getB_y()] = false;
 										Game.go[bomb[i].getB_x() - j][bomb[i].getB_y()] = true;
 										Game.props[bomb[i].getB_x() - j][bomb[i].getB_y()] = new Props();
-										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
+										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
 										bomb[i].setLeft(j);
 										break;
 									} // (4)
@@ -245,8 +242,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() - j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() - j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() - j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
 										bomb[i].setUp(j);
 										break;
 									} else {
@@ -268,8 +264,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() + j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() + j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
 										bomb[i].setDown(j);
 										break;
 									} else {
@@ -293,16 +288,11 @@ public class GameState extends State implements GameStateDefault {
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() - hi] = true;
 						for (int hi = 0; hi <= bomb[i].getDown(); hi++)
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() + hi] = true;
-						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,
-								null);
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,
-								bomb[i].getRight() * 100 + 20, 90, null);// right
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,
-								-bomb[i].getLeft() * 100 - 17, 90, null);// left
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,
-								-bomb[i].getUp() * 100 - 17, null);// up
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,
-								bomb[i].getDown() * 100 + 17, null);// down
+						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,null);
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,bomb[i].getRight() * 100 + 20, 90, null);// right
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,-bomb[i].getLeft() * 100 - 17, 90, null);// left
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,-bomb[i].getUp() * 100 - 17, null);// up
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,bomb[i].getDown() * 100 + 17, null);// down
 						third_bb[i] = false;
 
 					} else if (!Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] && third_bb[i]) {// bomb together

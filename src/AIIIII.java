@@ -9,7 +9,7 @@ public class AIIIII extends AI {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.jin, this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+		//g.drawImage(Assets.jin, this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
 	}
 
 	@Override

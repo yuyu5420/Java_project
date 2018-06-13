@@ -33,7 +33,7 @@ public class Assets {
 		cowboys[0] = ImageLoader.loadImage("/images/cowboy_left.png");
 		cowboys[1] = ImageLoader.loadImage("/images/cowboy_right.png");
 		cowboys[2] = ImageLoader.loadImage("/images/cowboy.png");
-		jin = ImageLoader.loadImage("/images/jin.png");
+		//jin = ImageLoader.loadImage("/images/jin.png");
 		//
 		blue_down[0] = ImageLoader.loadImage("images/blue_down_0.png");
 		blue_down[1] = ImageLoader.loadImage("images/blue_down_1.png");

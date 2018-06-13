@@ -1,5 +1,8 @@
 import java.awt.Graphics;
 import java.awt.image.*;
+import java.applet.*;
+
+
 
 public class Game implements Runnable {
 
@@ -7,7 +10,7 @@ public class Game implements Runnable {
 	private Map map;
 	public int width, height;
 	public String title;
-	public static boolean running = false;
+	public static boolean running = false , play = true;;
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -15,6 +18,11 @@ public class Game implements Runnable {
 	public static int minute = time / 60;
 	public static int second = time % 60;
 	private State gameState;
+
+	
+	String music = "./musics/background_music.wav";
+	public AudioClip clip = Applet.newAudioClip(getClass().getResource(music));
+	
 
 	public static boolean box_exist[][] = new boolean[11][9];
 	public static boolean bomb_exist[][] = new boolean[11][9];
@@ -99,15 +107,16 @@ public class Game implements Runnable {
 
 	public void run() {
 
+		
 		init();
-
+		
 		int fps = 100;
 		double timepPerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-
+		
 		while (running) {
 
 			while (ButtonListener.jjjjjj) {
@@ -133,7 +142,10 @@ public class Game implements Runnable {
 				second = time % 60;
 
 			}
-
+			if(time == 179 && play) {
+				clip.loop();
+				play = false;
+			}
 		}
 	}
 
