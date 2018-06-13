@@ -1,13 +1,10 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-
-
+import java.awt.event.KeyEvent;
 
 public abstract class User extends Character {
 
 	private Game game;
-	private double time = 100;		// 100 milli second 
 	
 	public User(Game game, int Xcoordinate, int Ycoordinate) {
 		super(game, Xcoordinate, Ycoordinate);
@@ -20,54 +17,101 @@ public abstract class User extends Character {
 	@Override
 	public void tick() {	
 		
-		if(game.getKeyManager().up && this.up_movable) {
-			game.getKeyManager().finish = false;
-			this.Ycoordinate -= this.pace;
-			this.pace_cnt++;
-			if(this.Xcoordinate == this.ideal_up[0] && this.Ycoordinate == this.ideal_up[1]) {	
-				game.getKeyManager().finish = true;
-				this.setIdealLocation();	
+		testIdealLocation(game.getKeyManager().state_now);
+		if(game.getKeyManager().state_now==KeyEvent.VK_UP && up_movable) {
+			if(game.getKeyManager().up) {
+				this.Ycoordinate -= pace;
+				this.pace_cnt++;
+				return;
+			} else {		//button release
+				check(game.getKeyManager().state_now);
+				return;
 			}
-		} else if(game.getKeyManager().down && this.down_movable) {
-			game.getKeyManager().finish = false;
-			this.Ycoordinate += this.pace;
-			this.pace_cnt++;
-			if(this.Xcoordinate == this.ideal_down[0] && this.Ycoordinate == this.ideal_down[1]) {
-				game.getKeyManager().finish = true;
-				this.setIdealLocation();
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_DOWN && down_movable) {
+			if(game.getKeyManager().down) {
+				this.Ycoordinate += pace;
+				this.pace_cnt++;
+				return;
+			} else {
+				check(game.getKeyManager().state_now);
+				return;
 			}
-		} else if(game.getKeyManager().left && this.left_movable) {
-			game.getKeyManager().finish = false;
-			this.Xcoordinate -= this.pace;
-			this.pace_cnt++;
-			if(this.Xcoordinate == this.ideal_left[0] && this.Ycoordinate == this.ideal_left[1]) {
-				game.getKeyManager().finish = true;
-				this.setIdealLocation();
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_LEFT && left_movable) {
+			if(game.getKeyManager().left) {
+				this.Xcoordinate -= pace;
+				this.pace_cnt++;
+				return;
+			} else  {
+				check(game.getKeyManager().state_now);
+				return;
 			}
-		} else if(game.getKeyManager().right && this.right_movable) {
-			game.getKeyManager().finish = false;
-			this.Xcoordinate += this.pace;
-			this.pace_cnt++;
-			if(this.Xcoordinate == this.ideal_right[0] && this.Ycoordinate == this.ideal_right[1]) {
-				game.getKeyManager().finish = true;
-				this.setIdealLocation();
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_RIGHT && right_movable) {
+			if(game.getKeyManager().right) {
+				this.Xcoordinate += pace;
+				this.pace_cnt++;
+				return;
+			} else {
+				check(game.getKeyManager().state_now);
+				return;
+			}
+		} 
+		
+	}
 
+	private void check(int state_now) {
+		
+		if(ideal_X==this.Xcoordinate && ideal_Y==this.Ycoordinate) {
+			game.getKeyManager().state_now = game.getKeyManager().state_next;
+			if(game.getKeyManager().state_now!=0) {
+				game.getKeyManager().state = game.getKeyManager().state_now;
+			}
+			return;
+		} else {
+			if(state_now == KeyEvent.VK_UP || state_now == KeyEvent.VK_DOWN) {
+				if(Math.abs((ideal_Y-this.Ycoordinate))==this.pace) {
+					if(state_now == KeyEvent.VK_UP) {
+						this.Ycoordinate -= this.pace;
+					} else {
+						this.Ycoordinate += this.pace;
+					}
+					this.pace_cnt++;
+					game.getKeyManager().state_now = game.getKeyManager().state_next;
+					if(game.getKeyManager().state_now!=0) {
+						game.getKeyManager().state = game.getKeyManager().state_now;
+					}
+				} else {
+					if(state_now == KeyEvent.VK_UP) {
+						this.Ycoordinate -= this.pace;
+					} else {
+						this.Ycoordinate += this.pace;
+					}
+					this.pace_cnt++;
+				}
+			} else {
+				if(Math.abs((ideal_X-this.Xcoordinate))==this.pace) {
+					if(state_now == KeyEvent.VK_LEFT) {
+						this.Xcoordinate -= this.pace;
+					} else {
+						this.Xcoordinate += this.pace;
+					}
+					this.pace_cnt++;
+					game.getKeyManager().state_now = game.getKeyManager().state_next;
+					if(game.getKeyManager().state_now!=0) {
+						game.getKeyManager().state = game.getKeyManager().state_now;
+					}
+				} else {
+					if(state_now == KeyEvent.VK_LEFT) {
+						this.Xcoordinate -= this.pace;
+					} else {
+						this.Xcoordinate += this.pace;
+					}
+					this.pace_cnt++;
+				}
 			}
 		}
-		this.checkfinish(game.getKeyManager().finish);
+		
+
 	}
 	
-	protected void checkfinish(boolean finish) {
-		if(finish) {
-			this.game.getKeyManager().up = false;
-			this.game.getKeyManager().down = false;
-			this.game.getKeyManager().left = false;
-			this.game.getKeyManager().right = false;
-		}
-	}
 	
-
-
-	
-
 }

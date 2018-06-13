@@ -1,31 +1,27 @@
 
 import java.awt.Graphics;
-import javax.swing.JComponent;
+import java.awt.event.KeyEvent;
+
 
 public abstract class Character implements GameStateDefault {
 
 	private Game game;
 	protected int Xcoordinate, Ycoordinate;
-	protected boolean left_movable=true, right_movable=true, up_movable=true, down_movable=true;
-	protected int pace, pace_cnt=2;
+	protected boolean left_movable, right_movable, up_movable, down_movable;
+	protected int pace, pace_cnt=0;
 	protected int[] ideal_up = new int[2];
 	protected int[] ideal_down = new int[2]; 
 	protected int[] ideal_left = new int[2]; 
 	protected int[] ideal_right = new int[2];
+	protected int ideal_X, ideal_Y;
 	
 	public Character(Game game, int Xcoordinate, int Ycoordinate) {
-		this.game = game;		
+		this.game = game;
 		this.Xcoordinate = Xcoordinate;
 		this.Ycoordinate = Ycoordinate;
 		this.pace = DEFAULT_PACE;
-		ideal_up[0] = Xcoordinate;
-		ideal_up[1] = Ycoordinate-100;
-		ideal_down[0] = Xcoordinate;
-		ideal_down[1] = Ycoordinate+100;
-		ideal_left[0] = Xcoordinate-100;
-		ideal_left[1] = Ycoordinate;
-		ideal_right[0] = Xcoordinate+100;
-		ideal_right[1] = Ycoordinate;
+		ideal_X = Xcoordinate;
+		ideal_Y = Ycoordinate;
 	}
 	
 
@@ -73,19 +69,42 @@ public abstract class Character implements GameStateDefault {
 			if(!Game.go[(this.ideal_right[0]-400)/100][(this.ideal_right[1])/100])
 				this.right_movable = false;
 		}
+		
 	}
 	
-	public void setIdealLocation() {
-		ideal_up[0] = this.Xcoordinate;
-		ideal_up[1] = this.Ycoordinate - 100;
-		ideal_down[0] = this.Xcoordinate;
-		ideal_down[1] = this.Ycoordinate + 100;
-		ideal_left[0] = this.Xcoordinate - 100;
-		ideal_left[1] = this.Ycoordinate;
-		ideal_right[0] = this.Xcoordinate + 100;
-		ideal_right[1] = this.Ycoordinate;
-		this.movable();
+	public void testIdealLocation(int state) {
+		if(ideal_X==this.Xcoordinate && ideal_Y==this.Ycoordinate) {
+			ideal_up[0] = ideal_X;
+			ideal_up[1] = ideal_Y - 100;
+			ideal_down[0] = ideal_X;
+			ideal_down[1] = ideal_Y + 100;
+			ideal_left[0] = ideal_X - 100;
+			ideal_left[1] = ideal_Y;
+			ideal_right[0] = ideal_X + 100;
+			ideal_right[1] = ideal_Y;
+			this.movable();
+		}
+		this.setIdealLocation(state);
+	}
+	
+	public void setIdealLocation(int direction) {
+		if(direction == KeyEvent.VK_UP && this.up_movable) {
+			ideal_X = ideal_up[0];
+			ideal_Y = ideal_up[1];
+		} else if(direction == KeyEvent.VK_DOWN && this.down_movable) {
+			ideal_X = ideal_down[0];
+			ideal_Y = ideal_down[1];
+		} else if(direction == KeyEvent.VK_RIGHT && this.right_movable) {
+			ideal_X = ideal_right[0];
+			ideal_Y = ideal_right[1];
+		} else if(direction == KeyEvent.VK_LEFT && this.left_movable) {
+			ideal_X = ideal_left[0];
+			ideal_Y = ideal_left[1];
+		} else {
+			this.game.getKeyManager().state_now = 0;
+		}
 	}
 
+	
 
 }

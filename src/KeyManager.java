@@ -3,9 +3,8 @@ import java.awt.event.KeyEvent;
 
 public class KeyManager extends KeyAdapter {
 
-	public boolean finish = true;
-	public boolean up, down, left, right;
-	protected boolean temp_up, temp_down, temp_right, temp_left;
+	protected boolean up, down, left, right;
+	protected int state_now=0, state_next, state;
 	private int moveUp, moveDown, moveRight, moveLeft;
 	
 	public KeyManager() {
@@ -18,56 +17,50 @@ public class KeyManager extends KeyAdapter {
 	@Override
 	public void keyPressed(KeyEvent e) {	
 		super.keyPressed(e);
-		if(!finish) {
-			return;
-		}
 		if(e.getKeyCode() == moveUp) {
 				up = true;
-				down = false;
-				left = false;
-				right = false;
+				state_next = this.moveUp;
 		} 
 		if(e.getKeyCode() == moveDown) {
-				up = false;
 				down = true;
-				left = false;
-				right = false;
+				state_next = this.moveDown;
 		} 
 		if(e.getKeyCode() == moveRight) {
-				up = false;
-				down = false;
-				left = false;
 				right = true;
+				state_next = this.moveRight;
 		} 
 		if(e.getKeyCode() == moveLeft) {
-				up = false;
-				down = false;
 				left = true;
-				right = false;
+				state_next = moveLeft;
 		} 
+		if(state_now == 0) {
+			state_now = state_next;
+			if(state_next!=0) {
+				state = state_now;
+			}
+		} 
+		
 	}
 
 
-/*	@Override
+	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
-		if(!finish) {
-			return;
-		}
+		state_next = 0;
 		if(e.getKeyCode() == moveUp) {
-			temp_up = false;
+			up = false;
 		} 
 		if(e.getKeyCode() == moveDown) {
-			temp_down = false;
+			down = false;
 		} 
 		if(e.getKeyCode() == moveRight) {
-			temp_right = false;
+			right = false;
 		} 
 		if(e.getKeyCode() == moveLeft) {
-			temp_left = false;
+			left = false;
 		}		
 	}
-*/
+
 	public int getMoveUp() {
 		return moveUp;
 	}
