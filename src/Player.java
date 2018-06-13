@@ -1,40 +1,37 @@
-import java.util.Random;
+
 import java.awt.Graphics;
 
 
 public class Player extends User {
-	int i;
-	private Random random_num = new Random();
-	int temp;
-	int yo = 2;
+	private Game game;
 	
-	public Player(Game game, int Xcoordinate, int Ycoordinate, int i) {
-		super(game, Xcoordinate, Ycoordinate,i);
-		this.i = i;
+	public Player(Game game, int Xcoordinate, int Ycoordinate) {
+		super(game, Xcoordinate, Ycoordinate);
+		this.game = game;
 	}
 
 	@Override
-	public void render(Graphics g) { // draw
-		temp = random_num.nextInt(2);
-		if(game.getKeyManager().up) {
-			yo = temp;
-			g.drawImage(Assets.p1[temp], Character.Xcoordinate[i], Character.Ycoordinate[i], DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+	public void render(Graphics g) {		//draw
+		if(this.pace_cnt==0) {
+			g.drawImage(Assets.blue_down[0], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+		} else {
+			if(game.getKeyManager().state==KeyEvent.VK_UP) {
+				g.drawImage(Assets.blue_up[pace_cnt%2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+			} else if(game.getKeyManager().state==KeyEvent.VK_DOWN) {
+				g.drawImage(Assets.blue_down[pace_cnt%2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+			} else if(game.getKeyManager().state==KeyEvent.VK_LEFT) {
+				g.drawImage(Assets.blue_left[pace_cnt%2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+			} else if(game.getKeyManager().state==KeyEvent.VK_RIGHT) {
+				g.drawImage(Assets.blue_right[pace_cnt%2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+			}
 		}
-		else if(game.getKeyManager().down)	{
-			yo = 2+temp;
-			g.drawImage(Assets.p1[2+temp], Character.Xcoordinate[i], Character.Ycoordinate[i], DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-		}
-		else if(game.getKeyManager().left)	{
-			yo = 4+temp;
-			g.drawImage(Assets.p1[4+temp], Character.Xcoordinate[i], Character.Ycoordinate[i], DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-		}
-		else if(game.getKeyManager().right)	{
-			yo = 6+temp;
-			g.drawImage(Assets.p1[6+temp], Character.Xcoordinate[i], Character.Ycoordinate[i], DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-		}
-		else g.drawImage(Assets.p1[yo], Character.Xcoordinate[i], Character.Ycoordinate[i], DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-		
+
 
 	}
+
+
+
+
+	
 
 }

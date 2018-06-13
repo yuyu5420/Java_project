@@ -1,73 +1,62 @@
 
 import java.awt.Graphics;
-
+import java.awt.event.KeyEvent;
 
 public abstract class User extends Character {
 
-	protected Game game;
-	private double time = 100; // 100 milli second
-	public int i;
-	public User(Game game, int Xcoordinate, int Ycoordinate, int i) {
-		super(game, Xcoordinate, Ycoordinate,i);
-		this.game = game;
-		this.i = i;
+	private Game game;
+	
+	public User(Game game, int Xcoordinate, int Ycoordinate) {
+		super(game, Xcoordinate, Ycoordinate);
+		this.game = game;	
 	}
 
 	@Override
 	public abstract void render(Graphics g);
 
 	@Override
-	public void tick() {
-		this.setIdealLocation();
-		if(game.getKeyManager().up && !this.up_movable)game.getKeyManager().finish = true;
-		if(game.getKeyManager().down && !this.down_movable)game.getKeyManager().finish = true;
-		if(game.getKeyManager().right && !this.right_movable)game.getKeyManager().finish = true;
-		if(game.getKeyManager().left && !this.left_movable)game.getKeyManager().finish = true;
-		if(game.getKeyManager().finish && game.getKeyManager().up && this.up_movable) 	Character.Ycoordinate[i] -= DEFAULT_PACE;
-		else if (game.getKeyManager().up && this.up_movable) {
-			if (!game.getKeyManager().finish ) {
-				if( Character.Ycoordinate[i] % 100 == 5 )	game.getKeyManager().finish = true;
-				else	Character.Ycoordinate[i] -= DEFAULT_PACE;
-				System.out.println("ufinish:"+game.getKeyManager().finish );
-			}
-			
-			
-			
+
+	public void tick() {	
 		
-		} else if(game.getKeyManager().finish && game.getKeyManager().down && this.down_movable)	Character.Ycoordinate[i] += DEFAULT_PACE;
-			else if (game.getKeyManager().down && this.down_movable) {
-			 if (!game.getKeyManager().finish ) {
-				if( Character.Ycoordinate[i] % 100 == 5)
-				game.getKeyManager().finish = true;
-				else	Character.Ycoordinate[i] += DEFAULT_PACE;
-				System.out.println("dfinish:"+game.getKeyManager().finish );
+		testIdealLocation(game.getKeyManager().state_now);
+		if(game.getKeyManager().state_now==KeyEvent.VK_UP && up_movable) {
+			if(game.getKeyManager().up) {
+				this.Ycoordinate -= pace;
+				this.pace_cnt++;
+				return;
+			} else {		//button release
+				check(game.getKeyManager().state_now);
+				return;
 			}
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_DOWN && down_movable) {
+			if(game.getKeyManager().down) {
+				this.Ycoordinate += pace;
+				this.pace_cnt++;
+				return;
+			} else {
+				check(game.getKeyManager().state_now);
+				return;
 			}
-	
-			
-		 else if (game.getKeyManager().finish && game.getKeyManager().left && this.left_movable) Character.Xcoordinate[i] -= DEFAULT_PACE;
-		 else if( game.getKeyManager().left && this.left_movable)	{
-			 if (!game.getKeyManager().finish ) {
-				if( Character.Xcoordinate[i] % 100 == 45)game.getKeyManager().finish = true;
-				else	Character.Xcoordinate[i] -= DEFAULT_PACE;
-				System.out.println("lfinish:"+game.getKeyManager().finish );
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_LEFT && left_movable) {
+			if(game.getKeyManager().left) {
+				this.Xcoordinate -= pace;
+				this.pace_cnt++;
+				return;
+			} else  {
+				check(game.getKeyManager().state_now);
+				return;
 			}
-				
-	
-				// game.getKeyManager().left = false;
-				
-			
-		} else if (game.getKeyManager().finish && game.getKeyManager().right && this.right_movable) Character.Xcoordinate[i] += DEFAULT_PACE;
-		else if( game.getKeyManager().right && this.right_movable)	{
-			 if (!game.getKeyManager().finish) {
-				if( Character.Xcoordinate[i] % 100 == 45)game.getKeyManager().finish = true;
-				// game.getKeyManager().right = false;
-				
-				else	Character.Xcoordinate[i] += DEFAULT_PACE;
-				System.out.println("rfinish:"+game.getKeyManager().finish );
+		} else if(game.getKeyManager().state_now==KeyEvent.VK_RIGHT && right_movable) {
+			if(game.getKeyManager().right) {
+				this.Xcoordinate += pace;
+				this.pace_cnt++;
+				return;
+			} else {
+				check(game.getKeyManager().state_now);
+				return;
 			}
-		
-			//System.out.println(this.Xcoordinate + " " + this.Ycoordinate);
+		} 
+
 			
 		}
 		this.checkfinish(game.getKeyManager().finish);

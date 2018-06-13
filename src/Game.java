@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.image.*;
 
+
 public class Game implements Runnable {
 
 	private KeyManager keyManager;
@@ -15,6 +16,8 @@ public class Game implements Runnable {
 	public static int minute = time / 60;
 	public static int second = time % 60;
 	private State gameState;
+
+
 	public static boolean box_exist[][] = new boolean[11][9];
 	public static boolean bomb_exist[][] = new boolean[11][9];
 	public static boolean fire_exist[][] = new boolean[11][9];
@@ -54,7 +57,7 @@ public class Game implements Runnable {
 		Assets.init();
 		gameState = new GameState(this);
 		State.setState(gameState);
-		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7";
+		String s1 = "0,0 0,1 1,0 0,6 0,7 0,8 1,6 9,0 10,0 10,1 9,8 10,8 10,7 0,2 0,3 0,4 0,5 0,6";
 		String[] tokens = s1.split(" ");
 		for (String token : tokens) {
 			String[] tokens2 = token.split(",");
@@ -68,6 +71,7 @@ public class Game implements Runnable {
 
 	public KeyManager getKeyManager() {
 		return keyManager;
+
 	}
 
 	private void tick() {
@@ -84,7 +88,9 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		// Clear Screen
 		g.clearRect(0, 0, width, height);
+
 		// Draw Here!
+
 
 		if (State.getState() != null)
 			State.getState().render(g);
@@ -116,10 +122,12 @@ public class Game implements Runnable {
 			timer += now - lastTime;
 			lastTime = now;
 
+
 			if (delta >= 1) {
 				tick();
 				render();
 				delta--;
+
 			}
 
 			if (timer >= 1000000000) {
@@ -151,5 +159,6 @@ public class Game implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
 
 }

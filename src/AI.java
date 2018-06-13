@@ -8,14 +8,15 @@ public abstract class AI extends Character {
 
 	}
 
-	@Override
-	public void render(Graphics g) {
 
-	}
+	public abstract void render(Graphics g) ;
 
 	@Override
 	public void tick() {
+		
 
 	}
+
+
 
 }

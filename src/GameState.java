@@ -3,7 +3,14 @@ import java.awt.Graphics;
 
 public class GameState extends State implements GameStateDefault {
 
-	private Player player1;
+
+	private Character player1;
+	private Character ai1;
+	
+	public GameState(Game game){
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first = new boolean[50];
@@ -11,17 +18,14 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] third = new boolean[50];
 	public static boolean[] fourth = new boolean[50];
 
-	
-	    
-	public GameState(Game game) {
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y,0);
-		
 	}
 
 	public void tick() {
 		player1.movable();
 		player1.tick();
-		
+
+		ai1.tick();
+
 	}
 
 	public void render(Graphics g) {
@@ -403,6 +407,10 @@ public class GameState extends State implements GameStateDefault {
 			String y = tokens4[1];
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x), Integer.valueOf(y), null);
 		}
+
+		player1.render(g);
+		ai1.render(g);
+
 
 		player1.render(g);
 		
