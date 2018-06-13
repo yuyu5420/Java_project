@@ -10,7 +10,7 @@ public class Game implements Runnable {
 	private Map map;
 	public int width, height;
 	public String title;
-	public static boolean running = false , play = true;;
+	public static boolean running = false ;
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -18,12 +18,11 @@ public class Game implements Runnable {
 	public static int minute = time / 60;
 	public static int second = time % 60;
 	private State gameState;
-
-	
-	String music = "./musics/background_music.wav";
+	boolean play = true;
+	String music = "./musics/background_music3.wav";
 	public AudioClip clip = Applet.newAudioClip(getClass().getResource(music));
-	
-
+	String music2 = "./musics/explosion_sound2.wav";
+	public AudioClip clip2 = Applet.newAudioClip(getClass().getResource(music2));
 	public static boolean box_exist[][] = new boolean[11][9];
 	public static boolean bomb_exist[][] = new boolean[11][9];
 	public static boolean fire_exist[][] = new boolean[11][9];
@@ -142,10 +141,18 @@ public class Game implements Runnable {
 				second = time % 60;
 
 			}
-			if(time == 179 && play) {
+			if(time == 180 && play) {//background music
 				clip.loop();
 				play = false;
 			}
+			
+			if(GameState.explosion_sound) {
+				clip2.play();
+				GameState.explosion_sound = false;
+			}
+				
+			
+			
 		}
 	}
 

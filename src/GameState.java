@@ -11,7 +11,7 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] second_bb = new boolean[50];
 	public static boolean[] third_bb = new boolean[50];
 	public static boolean[] fourth_bb = new boolean[50];
-
+	public static boolean explosion_sound = false;
 	public GameState(Game game) {
 		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
 		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
@@ -165,18 +165,23 @@ public class GameState extends State implements GameStateDefault {
 
 				if (fourth_bb[i]) {
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = true;
+					
 				}
 				bomb[i].setB_duration();
 				if (bomb[i].getB_duration() <= 1 && !Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()]) {// put bomb
+					//explosion_sound = false;
 					if (Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()])
 						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,bomb[i].getSize(), bomb[i].getSize(), null);
 					bomb[i].setSize();
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = false;
+					
 				} else {// start fire
+					
 					fourth_bb[i] = false;
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = false;
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = true;
 					if (bomb[i].isFirst()) {// bomb's range now
+						explosion_sound = true;
 						bomb[i].setFirst(false);
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// right(1)
 							if (bomb[i].getB_x() + j >= 0 && bomb[i].getB_x() + j < 11) { // set the positions of the
