@@ -3,28 +3,43 @@ import java.awt.Graphics;
 
 public class GameState extends State implements GameStateDefault {
 
-
-	private Character player1;
-	private Character ai1;
-	
-	public GameState(Game game){
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
-		ai1 = new AIIIII(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
-
+	private Game game;
+	private User player1;
+	private User player2;
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
-	public static boolean[] first = new boolean[50];
-	public static boolean[] second = new boolean[50];
-	public static boolean[] third = new boolean[50];
-	public static boolean[] fourth = new boolean[50];
-
+	public static boolean[] first_bb = new boolean[50];
+	public static boolean[] second_bb = new boolean[50];
+	public static boolean[] third_bb = new boolean[50];
+	public static boolean[] fourth_bb = new boolean[50];
+	public static boolean explosion_sound = false;
+	public GameState(Game game) {
+		this.game = game;
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(), game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
+		player1.setStateNow(game.getKeyManager().state_now);
+		player1.setID(1);
+		player2 = new Player(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+		player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(), game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
+		player2.setStateNow(game.getKeyManager().state_now2);
+		player2.setID(2);
 	}
 
 	public void tick() {
-		player1.movable();
+		player1.setStateNow(game.getKeyManager().state_now);
+		player1.setState(game.getKeyManager().state);
+		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left, game.getKeyManager().right);
 		player1.tick();
-
-		ai1.tick();
+		if(player1.getStateNow()==0) {
+			game.getKeyManager().state_now = 0;
+		}
+		player2.setStateNow(game.getKeyManager().state_now2);
+		player2.setState(game.getKeyManager().state2);
+		player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2, game.getKeyManager().right2);
+		player2.tick();
+		if(player2.getStateNow()==0) {
+			game.getKeyManager().state_now2 = 0;
+		}
 
 	}
 
@@ -40,7 +55,7 @@ public class GameState extends State implements GameStateDefault {
 		g.drawImage(Assets.e, 280, 785, 100, 100, null);
 		g.drawImage(Assets.colon, 140, 880, 60, 90, null);
 		switch (Game.minute) {// 1
-	
+
 		case 1: {
 			g.drawImage(Assets.one, 50, 880, 80, 100, null);
 			break;
@@ -167,22 +182,25 @@ public class GameState extends State implements GameStateDefault {
 		for (int i = 0; i < 50; i++) {
 			if (bomb[i] != null) {
 
-				if (fourth[i]) {
+				if (fourth_bb[i]) {
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = true;
-
+					
 				}
 				bomb[i].setB_duration();
 				if (bomb[i].getB_duration() <= 1 && !Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()]) {// put bomb
+					//explosion_sound = false;
 					if (Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()])
-						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,
-								bomb[i].getSize(), bomb[i].getSize(), null);
+						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,bomb[i].getSize(), bomb[i].getSize(), null);
 					bomb[i].setSize();
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = false;
+					
 				} else {// start fire
-					fourth[i] = false;
+					
+					fourth_bb[i] = false;
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = false;
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = true;
 					if (bomb[i].isFirst()) {// bomb's range now
+						explosion_sound = true;
 						bomb[i].setFirst(false);
 						for (int j = 1; j <= bomb[i].getRange(); j++) {// right(1)
 							if (bomb[i].getB_x() + j >= 0 && bomb[i].getB_x() + j < 11) { // set the positions of the
@@ -223,8 +241,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x() - j][bomb[i].getB_y()] = false;
 										Game.go[bomb[i].getB_x() - j][bomb[i].getB_y()] = true;
 										Game.props[bomb[i].getB_x() - j][bomb[i].getB_y()] = new Props();
-										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
+										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
 										bomb[i].setLeft(j);
 										break;
 									} // (4)
@@ -249,8 +266,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() - j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() - j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() - j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
 										bomb[i].setUp(j);
 										break;
 									} else {
@@ -272,8 +288,7 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() + j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() + j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
-												bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
 										bomb[i].setDown(j);
 										break;
 									} else {
@@ -288,7 +303,7 @@ public class GameState extends State implements GameStateDefault {
 							bomb[i].setDown(j);
 						}
 					}
-					if (bomb[i].getF_duration() == 2 && second[i]) {// normal
+					if (bomb[i].getF_duration() == 2 && second_bb[i]) {// normal
 						for (int hi = 0; hi <= bomb[i].getRight(); hi++)
 							Game.fire_exist[bomb[i].getB_x() + hi][bomb[i].getB_y()] = true;
 						for (int hi = 0; hi <= bomb[i].getLeft(); hi++)
@@ -297,23 +312,18 @@ public class GameState extends State implements GameStateDefault {
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() - hi] = true;
 						for (int hi = 0; hi <= bomb[i].getDown(); hi++)
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() + hi] = true;
-						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,
-								null);
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,
-								bomb[i].getRight() * 100 + 20, 90, null);// right
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,
-								-bomb[i].getLeft() * 100 - 17, 90, null);// left
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,
-								-bomb[i].getUp() * 100 - 17, null);// up
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,
-								bomb[i].getDown() * 100 + 17, null);// down
-						third[i] = false;
+						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,null);
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,bomb[i].getRight() * 100 + 20, 90, null);// right
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,-bomb[i].getLeft() * 100 - 17, 90, null);// left
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,-bomb[i].getUp() * 100 - 17, null);// up
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,bomb[i].getDown() * 100 + 17, null);// down
+						third_bb[i] = false;
 
-					} else if (!Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] && third[i]) {// bomb together
-						second[i] = false;
-						if (first[i]) {
+					} else if (!Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] && third_bb[i]) {// bomb together
+						second_bb[i] = false;
+						if (first_bb[i]) {
 							start_time[i] = System.nanoTime();
-							first[i] = false;
+							first_bb[i] = false;
 						}
 						bomb[i].setE_duration(i);
 						if (bomb[i].getE_duration() >= 1) {
@@ -409,12 +419,7 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
-		ai1.render(g);
+		player2.render(g);
 
-
-		player1.render(g);
-		
-		
-		
 	}
 }
