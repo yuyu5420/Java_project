@@ -3,9 +3,10 @@ import java.awt.Graphics;
 
 public class GameState extends State implements GameStateDefault {
 
-	private Character player1;
-	private Player2 player;
-	private AI ai1, ai2;
+	private Game game;
+	private User player1;
+	private User player2;
+	private AI ai1,ai2;
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first_bb = new boolean[50];
@@ -14,19 +15,36 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] fourth_bb = new boolean[50];
 	public static boolean explosion_sound = false;
 	public GameState(Game game) {
-		player1 = new Player(game, 445, 805);
-	
-		player = new Player2(game, 1445, 5);
+		this.game = game;
+		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MAX_Y);
+		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(), game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
+		player1.setStateNow(game.getKeyManager().state_now);
+		player1.setID(1);
+		player2 = new Player(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+		player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(), game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
+		player2.setStateNow(game.getKeyManager().state_now2);
+		player2.setID(2);
 		ai1 = new AI(game, 445,5);
 		ai2 = new AI(game, 1445,805);
 	}
 
 	public void tick() {
+		player1.setStateNow(game.getKeyManager().state_now);
+		player1.setState(game.getKeyManager().state);
+		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left, game.getKeyManager().right);
 		player1.tick();
-		player.tick();
+		if(player1.getStateNow()==0) {
+			game.getKeyManager().state_now = 0;
+		}
+		player2.setStateNow(game.getKeyManager().state_now2);
+		player2.setState(game.getKeyManager().state2);
+		player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2, game.getKeyManager().right2);
+		player2.tick();
+		if(player2.getStateNow()==0) {
+			game.getKeyManager().state_now2 = 0;
+		}
 		ai1.tick();
 		ai2.tick();
-
 	}
 
 	public void render(Graphics g) {
@@ -405,9 +423,9 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
-	
-		player.render(g);
+		player2.render(g);
 		ai1.render(g,1);
 		ai2.render(g,2);
+
 	}
 }

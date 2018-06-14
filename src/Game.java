@@ -11,7 +11,6 @@ public class Game implements Runnable {
 	public int width, height;
 	public String title;
 	public static boolean running = false ;
-	
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -38,6 +37,8 @@ public class Game implements Runnable {
 
 	private void init() {
 		map = new Map(title, width, height);
+		keyManager = new KeyManager(2);
+		map.getFrame().addKeyListener(keyManager);
 		for (int x = 0; x < 11; x++)
 			for (int y = 0; y < 9; y++) {
 				go[x][y] = false;
@@ -71,16 +72,12 @@ public class Game implements Runnable {
 			String y = tokens2[1];
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
-		keyManager = new KeyManager();
-		map.getFrame().addKeyListener(keyManager);
+		
 	}
 
 	public KeyManager getKeyManager() {
 		return keyManager;
 
-	}
-	public Map getMap() {
-		return map;
 	}
 
 	private void tick() {
@@ -155,11 +152,11 @@ public class Game implements Runnable {
 				clip2.play();
 				GameState.explosion_sound = false;
 			}
-				if(time == 0)	{
-					clip.stop();
-					stop();
-				}
-			
+				
+			if(time == 0 ) {
+				clip.stop();
+				stop();
+			}
 			
 		}
 	}
@@ -179,7 +176,6 @@ public class Game implements Runnable {
 		map.getFrame().dispose();
 		try {
 			thread.join();
-			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
