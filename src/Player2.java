@@ -59,19 +59,19 @@ public class Player2 {
 	
 	public void render(Graphics g) { // draw
 		if (this.pace_cnt == 0) {
-			g.drawImage(Assets.black_down[0], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2, DEFAULT_HEIGHT2, null);
+			g.drawImage(Assets.green_down[0], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2, DEFAULT_HEIGHT2, null);
 		} else {
 			if (game.getKeyManager().state2 == KeyEvent.VK_W) {
-				g.drawImage(Assets.black_up[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
+				g.drawImage(Assets.green_up[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
 						DEFAULT_HEIGHT2, null);
 			} else if (game.getKeyManager().state2 == KeyEvent.VK_S) {
-				g.drawImage(Assets.black_down[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
+				g.drawImage(Assets.green_down[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
 						DEFAULT_HEIGHT2, null);
 			} else if (game.getKeyManager().state2 == KeyEvent.VK_A) {
-				g.drawImage(Assets.black_left[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
+				g.drawImage(Assets.green_left[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
 						DEFAULT_HEIGHT2, null);
 			} else if (game.getKeyManager().state2 == KeyEvent.VK_D) {
-				g.drawImage(Assets.black_right[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
+				g.drawImage(Assets.green_right[pace_cnt % 2], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH2,
 						DEFAULT_HEIGHT2, null);
 			}
 		}

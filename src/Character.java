@@ -11,6 +11,22 @@ public abstract class Character implements GameStateDefault {
 		return X;
 	}
 
+	public int getXcoordinate() {
+		return Xcoordinate;
+	}
+
+	public void setXcoordinate(int xcoordinate) {
+		Xcoordinate = xcoordinate;
+	}
+
+	public int getYcoordinate() {
+		return Ycoordinate;
+	}
+
+	public void setYcoordinate(int ycoordinate) {
+		Ycoordinate = ycoordinate;
+	}
+
 	public static void setX(int x) {
 		Character.X = x;
 	}
@@ -45,6 +61,7 @@ public abstract class Character implements GameStateDefault {
 	public abstract void tick();
 
 	public void movable() {
+
 		setX(Xcoordinate);
 		setY(Ycoordinate);
 		this.up_movable = true;

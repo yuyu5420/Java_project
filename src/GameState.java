@@ -5,6 +5,7 @@ public class GameState extends State implements GameStateDefault {
 
 	private Character player1;
 	private Player2 player;
+	private AI ai1, ai2;
 	public static Bomb[] bomb = new Bomb[50];
 	public static long[] start_time = new long[50];
 	public static boolean[] first_bb = new boolean[50];
@@ -13,14 +14,18 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] fourth_bb = new boolean[50];
 	public static boolean explosion_sound = false;
 	public GameState(Game game) {
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
-		player = new Player2(game, 1445, 805);
-
+		player1 = new Player(game, 445, 805);
+	
+		player = new Player2(game, 1445, 5);
+		ai1 = new AI(game, 445,5);
+		ai2 = new AI(game, 1445,805);
 	}
 
 	public void tick() {
 		player1.tick();
 		player.tick();
+		ai1.tick();
+		ai2.tick();
 
 	}
 
@@ -400,7 +405,9 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
+	
 		player.render(g);
-
+		ai1.render(g,1);
+		ai2.render(g,2);
 	}
 }

@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 
 public class Player extends User {
 	private Game game;
-
+	
 	public Player(Game game, int Xcoordinate, int Ycoordinate) {
 		super(game, Xcoordinate, Ycoordinate);
 		this.game = game;
@@ -12,6 +12,7 @@ public class Player extends User {
 
 	@Override
 	public void render(Graphics g) { // draw
+		
 		if (this.pace_cnt == 0) {
 			g.drawImage(Assets.blue_down[0], this.Xcoordinate, this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
 		} else {

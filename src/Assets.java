@@ -12,8 +12,16 @@ public class Assets {
 	public static BufferedImage[] black_up = new BufferedImage[2];
 	public static BufferedImage[] black_left = new BufferedImage[2];
 	public static BufferedImage[] black_right = new BufferedImage[2];
+	public static BufferedImage[] green_down = new BufferedImage[2];
+	public static BufferedImage[] green_up = new BufferedImage[2];
+	public static BufferedImage[] green_left = new BufferedImage[2];
+	public static BufferedImage[] green_right = new BufferedImage[2];
+	public static BufferedImage[] purple_down = new BufferedImage[2];
+	public static BufferedImage[] purple_up = new BufferedImage[2];
+	public static BufferedImage[] purple_left = new BufferedImage[2];
+	public static BufferedImage[] purple_right = new BufferedImage[2];
 	public static BufferedImage[] cowboys = new BufferedImage[3];
-
+	
 	public static BufferedImage one, two, three, four, five, six, seven, eight, nine, zero, t, i, m, e, colon, stick,
 			jin;
 	public static BufferedImage[] btn = new BufferedImage[2];
@@ -47,7 +55,24 @@ public class Assets {
 		blue_right[1] = ImageLoader.loadImage("images/blue_right_1.png");
 		blue_up[0] = ImageLoader.loadImage("images/blue_up_0.png");
 		blue_up[1] = ImageLoader.loadImage("images/blue_up_1.png");
-
+		
+		green_down[0] = ImageLoader.loadImage("/images/p2_1.png");
+		green_down[1] = ImageLoader.loadImage("/images/p2_2.png");
+		green_left[0] = ImageLoader.loadImage("/images/p2_3.png");
+		green_left[1] = ImageLoader.loadImage("/images/p2_4.png");
+		green_right[0] = ImageLoader.loadImage("/images/p2_5.png");
+		green_right[1] = ImageLoader.loadImage("/images/p2_6.png");
+		green_up[0] = ImageLoader.loadImage("/images/p2_7.png");
+		green_up[1] = ImageLoader.loadImage("/images/p2_8.png");
+		
+		purple_down[0] = ImageLoader.loadImage("/images/p3_1.png");
+		purple_down[1] = ImageLoader.loadImage("/images/p3_2.png");
+		purple_left[0] = ImageLoader.loadImage("/images/p3_3.png");
+		purple_left[1] = ImageLoader.loadImage("/images/p3_4.png");
+		purple_right[0] = ImageLoader.loadImage("/images/p3_5.png");
+		purple_right[1] = ImageLoader.loadImage("/images/p3_6.png");
+		purple_up[0] = ImageLoader.loadImage("/images/p3_7.png");
+		purple_up[1] = ImageLoader.loadImage("/images/p3_8.png");
 		
 		black_down[0] = ImageLoader.loadImage("/images/p4_1.png");
 		black_down[1] = ImageLoader.loadImage("/images/p4_2.png");
@@ -87,41 +112,7 @@ public class Assets {
 		m = ImageLoader.loadImage("/images/M.png");
 		e = ImageLoader.loadImage("/images/E.png");
 		colon = ImageLoader.loadImage("/images/colon.png");
-		p1[0] = ImageLoader.loadImage("/images/p1u1.png");
-		p1[1] = ImageLoader.loadImage("/images/p1u2.png");
-		p1[2] = ImageLoader.loadImage("/images/p1d1.png");
-		p1[3] = ImageLoader.loadImage("/images/p1d2.png");
-		p1[4] = ImageLoader.loadImage("/images/p1l1.png");
-		p1[5] = ImageLoader.loadImage("/images/p1l2.png");
-		p1[6] = ImageLoader.loadImage("/images/p1r1.png");
-		p1[7] = ImageLoader.loadImage("/images/p1r2.png");
-
-		p4[0] = ImageLoader.loadImage("/images/p4_7.png");
-		p4[1] = ImageLoader.loadImage("/images/p4_8.png");
-		p4[2] = ImageLoader.loadImage("/images/p4_1.png");
-		p4[3] = ImageLoader.loadImage("/images/p4_2.png");
-		p4[4] = ImageLoader.loadImage("/images/p4_6.png");
-		p4[5] = ImageLoader.loadImage("/images/p4_5.png");
-		p4[6] = ImageLoader.loadImage("/images/p4_4.png");
-		p4[7] = ImageLoader.loadImage("/images/p4_3.png");
-
-		p3[0] = ImageLoader.loadImage("/images/p3_7.png");
-		p3[1] = ImageLoader.loadImage("/images/p3_8.png");
-		p3[2] = ImageLoader.loadImage("/images/p3_1.png");
-		p3[3] = ImageLoader.loadImage("/images/p3_2.png");
-		p3[4] = ImageLoader.loadImage("/images/p3_6.png");
-		p3[5] = ImageLoader.loadImage("/images/p3_5.png");
-		p3[6] = ImageLoader.loadImage("/images/p3_4.png");
-		p3[7] = ImageLoader.loadImage("/images/p3_3.png");
-
-		p2[0] = ImageLoader.loadImage("/images/p2_7.png");
-		p2[1] = ImageLoader.loadImage("/images/p2_8.png");
-		p2[2] = ImageLoader.loadImage("/images/p2_1.png");
-		p2[3] = ImageLoader.loadImage("/images/p2_2.png");
-		p2[4] = ImageLoader.loadImage("/images/p2_6.png");
-		p2[5] = ImageLoader.loadImage("/images/p2_5.png");
-		p2[6] = ImageLoader.loadImage("/images/p2_4.png");
-		p2[7] = ImageLoader.loadImage("/images/p2_3.png");
+		
 
 	}
 

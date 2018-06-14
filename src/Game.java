@@ -11,10 +11,11 @@ public class Game implements Runnable {
 	public int width, height;
 	public String title;
 	public static boolean running = false ;
+	
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
-	private static int time = 180;
+	public static int time = 180;
 	public static int minute = time / 60;
 	public static int second = time % 60;
 	private State gameState;
@@ -77,6 +78,9 @@ public class Game implements Runnable {
 	public KeyManager getKeyManager() {
 		return keyManager;
 
+	}
+	public Map getMap() {
+		return map;
 	}
 
 	private void tick() {
@@ -151,7 +155,10 @@ public class Game implements Runnable {
 				clip2.play();
 				GameState.explosion_sound = false;
 			}
-				
+				if(time == 0)	{
+					clip.stop();
+					stop();
+				}
 			
 			
 		}
@@ -169,8 +176,10 @@ public class Game implements Runnable {
 		if (!running)
 			return;
 		running = false;
+		map.getFrame().dispose();
 		try {
 			thread.join();
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

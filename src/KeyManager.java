@@ -9,7 +9,7 @@ public class KeyManager extends KeyAdapter {
 	protected boolean up2, down2, left2, right2;
 	protected int state_now2 = 0, state_next2, state2;
 	private int moveUp2, moveDown2, moveRight2, moveLeft2, put2;
-	public int bomb_counter = 0;
+	public static int bomb_counter = 0;
 
 	public KeyManager() {
 		moveUp = KeyEvent.VK_UP;
