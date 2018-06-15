@@ -4,7 +4,11 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	private int module=0;
-	protected boolean up, down, left, right, put;
+	protected Integer up = 0;
+	protected Integer down = 0;
+	protected Integer left = 0;
+	protected Integer right = 0;
+	protected Integer put = 0;
 	protected int state_now = 0, state_next, state;
 	private int moveUp = KeyEvent.VK_UP;
 	private int moveDown = KeyEvent.VK_DOWN;
@@ -20,7 +24,7 @@ public class KeyManager extends KeyAdapter {
 	private int putBomb2;
 
 	
-	public KeyManager(int module) {		
+	public KeyManager(int module) {
 		this.module = module;
 		if(module==2) {			// two-person
 			moveUp2 = KeyEvent.VK_W;
@@ -41,23 +45,23 @@ public class KeyManager extends KeyAdapter {
 		}
 			
 		if (e.getKeyCode() == moveUp) {
-			up = true;
+			up = 1;
 			state_next = this.moveUp;			
 		} 
 		if (e.getKeyCode() == moveDown) {
-			down = true;
+			down = 1;
 			state_next = this.moveDown;
 		} 
 		if (e.getKeyCode() == moveRight) {
-			right = true;
+			right = 1;
 			state_next = this.moveRight;
 		} 
 		if (e.getKeyCode() == moveLeft) {
-			left = true;
+			left = 1;
 			state_next = moveLeft;
 		}
 		if (e.getKeyCode() == putBomb) {
-			put = true;
+			put = 1;
 		}
 		if (state_now == 0) {
 			state_now = state_next;
@@ -113,19 +117,19 @@ public class KeyManager extends KeyAdapter {
 		super.keyReleased(e);
 		state_next = 0;
 		if (e.getKeyCode() == moveUp) {
-			up = false;
+			up = 0;
 		}
 		if (e.getKeyCode() == moveDown) {
-			down = false;
+			down = 0;
 		}
 		if (e.getKeyCode() == moveRight) {
-			right = false;
+			right = 0;
 		}
 		if (e.getKeyCode() == moveLeft) {
-			left = false;
+			left = 0;
 		}
 		if(e.getKeyCode() == putBomb) {
-			put = false;
+			put = 0;
 		}
 		state_next2 = 0;
 		if (e.getKeyCode() == moveUp2) {

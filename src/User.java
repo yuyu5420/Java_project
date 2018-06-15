@@ -6,12 +6,12 @@ public abstract class User extends Character {
 
 	protected int ID;
 	protected int state_now, state;
-	protected boolean up, down, left, right;
+	protected Integer up, down, left, right;
 	protected int up_key = KeyEvent.VK_UP;
 	protected int down_key = KeyEvent.VK_DOWN;
 	protected int left_key = KeyEvent.VK_LEFT;
 	protected int right_key = KeyEvent.VK_RIGHT;
-	protected boolean bombSignal;
+	protected Integer bombSignal;
 	public int bomb_counter = 0;
 	
 	public User(int Xcoordinate, int Ycoordinate) {
@@ -26,7 +26,7 @@ public abstract class User extends Character {
 
 		testIdealLocation();
 		if (state_now == up_key && up_movable) {
-			if (up) {
+			if (up==1) {
 				this.Ycoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -34,7 +34,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == down_key && down_movable) {
-			if (down) {
+			if (down==1) {
 				this.Ycoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -42,7 +42,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == left_key && left_movable) {
-			if (left) {
+			if (left==1) {
 				this.Xcoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -50,7 +50,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == right_key && right_movable) {
-			if (right) {
+			if (right==1) {
 				this.Xcoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -58,7 +58,7 @@ public abstract class User extends Character {
 				check();
 			}
 		}
-		if(bombSignal && !Game.bomb_exist[(this.Xcoordinate-445)/100][(this.Ycoordinate-5)/100]) {
+		if(bombSignal==1 && !Game.bomb_exist[(this.Xcoordinate-445)/100][(this.Ycoordinate-5)/100]) {
 			if (bomb_counter == 50)
 				bomb_counter = 0;
 			GameState.bomb[bomb_counter] = new Bomb((this.Xcoordinate-445)/100, (this.Ycoordinate-5)/100, 6);
@@ -119,7 +119,7 @@ public abstract class User extends Character {
 		this.right_key = right;
 	}
 	
-	public void setDirection(boolean up, boolean down, boolean left, boolean right) {
+	public void setDirection(Integer up, Integer down, Integer left, Integer right) {
 		this.up = up;
 		this.left = left;
 		this.right = right;
@@ -186,7 +186,7 @@ public abstract class User extends Character {
 		ID = iD;
 	}
 	
-	public void setBombSignal(boolean bombSignal) {
+	public void setBombSignal(Integer bombSignal) {
 		this.bombSignal = bombSignal;
 	}
 }
