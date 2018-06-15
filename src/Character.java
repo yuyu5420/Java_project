@@ -1,6 +1,6 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
+
 
 public abstract class Character implements GameStateDefault {
 

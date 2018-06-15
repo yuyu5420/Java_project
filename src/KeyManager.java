@@ -96,7 +96,7 @@ public class KeyManager extends KeyAdapter {
 				state2 = state_now2;
 			}
 		}
-/*		if (e.getKeyCode() == putBomb2 && !Game.bomb_exist[(Player2.getXXXX()-445)/100][(Player2.getYYYY()-5)/100]) {
+		/*if (e.getKeyCode() == putBomb2 && !Game.bomb_exist[(Player2.getXXXX()-445)/100][(Player2.getYYYY()-5)/100]) {
 			if (bomb_counter == 50)
 				bomb_counter = 0;
 			GameState.bomb[bomb_counter] = new Bomb((Player2.getXXXX()-445)/100, (Player2.getYYYY()-5)/100, 6);
