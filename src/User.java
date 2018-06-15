@@ -11,7 +11,8 @@ public abstract class User extends Character {
 	protected int down_key = KeyEvent.VK_DOWN;
 	protected int left_key = KeyEvent.VK_LEFT;
 	protected int right_key = KeyEvent.VK_RIGHT;
-	protected int put_bomb = KeyEvent.VK_SPACE;
+	protected boolean bombSignal;
+	public int bomb_counter = 0;
 	
 	public User(int Xcoordinate, int Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
@@ -24,7 +25,6 @@ public abstract class User extends Character {
 	public void tick() {
 
 		testIdealLocation();
-		setIdealLocation(state_now);
 		if (state_now == up_key && up_movable) {
 			if (up) {
 				this.Ycoordinate -= pace;
@@ -32,7 +32,6 @@ public abstract class User extends Character {
 				return;
 			} else { // button release
 				check();
-				return;
 			}
 		} else if (state_now == down_key && down_movable) {
 			if (down) {
@@ -41,7 +40,6 @@ public abstract class User extends Character {
 				return;
 			} else {
 				check();
-				return;
 			}
 		} else if (state_now == left_key && left_movable) {
 			if (left) {
@@ -50,7 +48,6 @@ public abstract class User extends Character {
 				return;
 			} else {
 				check();
-				return;
 			}
 		} else if (state_now == right_key && right_movable) {
 			if (right) {
@@ -59,8 +56,17 @@ public abstract class User extends Character {
 				return;
 			} else {
 				check();
-				return;
 			}
+		}
+		if(bombSignal && !Game.bomb_exist[(this.Xcoordinate-445)/100][(this.Ycoordinate-5)/100]) {
+			if (bomb_counter == 50)
+				bomb_counter = 0;
+			GameState.bomb[bomb_counter] = new Bomb((this.Xcoordinate-445)/100, (this.Ycoordinate-5)/100, 6);
+			GameState.first_bb[bomb_counter] = true;
+			GameState.second_bb[bomb_counter] = true;
+			GameState.third_bb[bomb_counter] = true;
+			GameState.fourth_bb[bomb_counter] = true;
+			bomb_counter++; 
 		}
 
 	}
@@ -77,7 +83,7 @@ public abstract class User extends Character {
 			ideal_right[1] = ideal_Y;
 			super.movable();
 		}
-
+		this.setIdealLocation(state_now);
 	}
 
 	public void setIdealLocation(int direction) {
@@ -111,7 +117,6 @@ public abstract class User extends Character {
 		this.down_key = down;
 		this.left_key = left;
 		this.right_key = right;
-		//this.put_bomb = put_bomb;
 	}
 	
 	public void setDirection(boolean up, boolean down, boolean left, boolean right) {
@@ -180,5 +185,8 @@ public abstract class User extends Character {
 	public void setID(int iD) {
 		ID = iD;
 	}
-
+	
+	public void setBombSignal(boolean bombSignal) {
+		this.bombSignal = bombSignal;
+	}
 }

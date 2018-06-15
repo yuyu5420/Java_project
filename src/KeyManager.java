@@ -4,21 +4,21 @@ import java.awt.event.KeyEvent;
 public class KeyManager extends KeyAdapter {
 
 	private int module=0;
-	protected boolean up, down, left, right;
+	protected boolean up, down, left, right, put;
 	protected int state_now = 0, state_next, state;
 	private int moveUp = KeyEvent.VK_UP;
 	private int moveDown = KeyEvent.VK_DOWN;
 	private int moveLeft = KeyEvent.VK_LEFT;
 	private int moveRight = KeyEvent.VK_RIGHT;
 	private int putBomb = KeyEvent.VK_SPACE;
-	protected boolean up2, down2, left2, right2;
+	protected boolean up2, down2, left2, right2, put2;
 	protected int state_now2 = 0, state_next2, state2;
 	private int moveUp2;
 	private int moveDown2;
 	private int moveRight2;
 	private int moveLeft2;
 	private int putBomb2;
-	public int bomb_counter = 0;
+
 	
 	public KeyManager(int module) {		
 		this.module = module;
@@ -56,39 +56,39 @@ public class KeyManager extends KeyAdapter {
 			left = true;
 			state_next = moveLeft;
 		}
+		if (e.getKeyCode() == putBomb) {
+			put = true;
+		}
 		if (state_now == 0) {
 			state_now = state_next;
 			if (state_now != 0) {
 				state = state_now;
 			}
 		}
-		if (e.getKeyCode() == putBomb && !Game.bomb_exist[(Character.getX()-445)/100][(Character.getY()-5)/100]) {
-			if (bomb_counter == 50)
-				bomb_counter = 0;
-			GameState.bomb[bomb_counter] = new Bomb((Character.getX()-445)/100, (Character.getY()-5)/100, 6);
-			GameState.first_bb[bomb_counter] = true;
-			GameState.second_bb[bomb_counter] = true;
-			GameState.third_bb[bomb_counter] = true;
-			GameState.fourth_bb[bomb_counter] = true;
-			bomb_counter++;
-		}
 		
 			
 			////////////////
 		if(module!=2) {
 			return;
-		} else if (e.getKeyCode() == moveUp2) {
+		} 
+		if (e.getKeyCode() == moveUp2) {
 			up2 = true;
 			state_next2 = this.moveUp2;			
-		} else if (e.getKeyCode() == moveDown2) {
+		} 
+		if (e.getKeyCode() == moveDown2) {
 			down2 = true;
 			state_next2 = this.moveDown2;
-		} else if (e.getKeyCode() == moveRight2) {
+		} 
+		if (e.getKeyCode() == moveRight2) {
 			right2 = true;
 			state_next2 = this.moveRight2;
-		} else if (e.getKeyCode() == moveLeft2) {
+		} 
+		if (e.getKeyCode() == moveLeft2) {
 			left2 = true;
 			state_next2 = moveLeft2;
+		}
+		if (e.getKeyCode() == putBomb2) {
+			put2 = true;
 		}
 		if (state_now2 == 0) {
 			state_now2 = state_next2;
@@ -124,6 +124,9 @@ public class KeyManager extends KeyAdapter {
 		if (e.getKeyCode() == moveLeft) {
 			left = false;
 		}
+		if(e.getKeyCode() == putBomb) {
+			put = false;
+		}
 		state_next2 = 0;
 		if (e.getKeyCode() == moveUp2) {
 			up2 = false;
@@ -136,6 +139,9 @@ public class KeyManager extends KeyAdapter {
 		}
 		if (e.getKeyCode() == moveLeft2) {
 			left2 = false;
+		}
+		if(e.getKeyCode() == putBomb2) {
+			put2 = false;
 		}
 	}
 
@@ -170,6 +176,14 @@ public class KeyManager extends KeyAdapter {
 
 	public int getMoveLeft2() {
 		return moveLeft2;
+	}
+
+	public int getPutBomb() {
+		return putBomb;
+	}
+
+	public int getPutBomb2() {
+		return putBomb2;
 	}
 
 	public void setMoveUp(int moveUp) {
