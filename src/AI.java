@@ -16,23 +16,23 @@ public class AI {
 	int hello = 0;
 	double putput = 4;
 	protected Random random_num = new Random();
-	int enemy_x, enemy_y;
-	public AI(Game game, int xcoordinate, int ycoordinate,int enemy_x, int enemy_y) {
+	double enemy_x, enemy_y;
+	public AI(Game game, int xcoordinate, int ycoordinate,double xcoordinate2, double ycoordinate2) {
 		this.x = xcoordinate;
 		this.y = ycoordinate;
 		this.game = game;
 		this.box_x = (int) ((x - 445) / 100);
 		this.box_y = (int) ((y-5) / 100);
-		this.enemy_x = enemy_x;
-		this.enemy_y = enemy_y;
+		this.enemy_x = xcoordinate2;
+		this.enemy_y = ycoordinate2;
 	}
 
-	public void tick(int enemy_x, int enemy_y) {
+	public void tick(double xcoordinate, double ycoordinate) {
 		if ((temp - Game.time) >= putput) {
 			bomb = true;
 		}
-		this.enemy_x = enemy_x;
-		this.enemy_y = enemy_y;
+		this.enemy_x = xcoordinate;
+		this.enemy_y = ycoordinate;
 		box_x = (int) ((x - 445) / 100);
 		box_y = (int) ((y -5) / 100);
 		if(box_x >= 11)	box_x = 10;
@@ -186,70 +186,70 @@ public class AI {
 					}
 					}
 				if (bomb) {
-					if(box_x == (enemy_x-445)/100 && box_y == (enemy_y-5)/100) {
-						if (KeyManager.bomb_counter == 50)
-							KeyManager.bomb_counter = 0;
-						GameState.bomb[KeyManager.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
-						GameState.first_bb[KeyManager.bomb_counter] = true;
-						GameState.second_bb[KeyManager.bomb_counter] = true;
-						GameState.third_bb[KeyManager.bomb_counter] = true;
-						GameState.fourth_bb[KeyManager.bomb_counter] = true;
-						KeyManager.bomb_counter++;
+					if(box_x == (int)(enemy_x-445)/100 &&(int)box_y == (enemy_y-5)/100) {
+						if (KeyManager1.bomb_counter == 50)
+							KeyManager1.bomb_counter = 0;
+						GameState.bomb[KeyManager1.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
+						GameState.first_bb[KeyManager1.bomb_counter] = true;
+						GameState.second_bb[KeyManager1.bomb_counter] = true;
+						GameState.third_bb[KeyManager1.bomb_counter] = true;
+						GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+						KeyManager1.bomb_counter++;
 						bomb = false;
 						temp = Game.time;
 					}
 					if (box_y - 1 >= 0) {
 						if (Game.box_exist[box_x][box_y - 1]) {
-							if (KeyManager.bomb_counter == 50)
-								KeyManager.bomb_counter = 0;
-							GameState.bomb[KeyManager.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
-							GameState.first_bb[KeyManager.bomb_counter] = true;
-							GameState.second_bb[KeyManager.bomb_counter] = true;
-							GameState.third_bb[KeyManager.bomb_counter] = true;
-							GameState.fourth_bb[KeyManager.bomb_counter] = true;
-							KeyManager.bomb_counter++;
+							if (KeyManager1.bomb_counter == 50)
+								KeyManager1.bomb_counter = 0;
+							GameState.bomb[KeyManager1.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
+							GameState.first_bb[KeyManager1.bomb_counter] = true;
+							GameState.second_bb[KeyManager1.bomb_counter] = true;
+							GameState.third_bb[KeyManager1.bomb_counter] = true;
+							GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+							KeyManager1.bomb_counter++;
 							bomb = false;
 							temp = Game.time;
 						}
 					}
 					if (box_y + 1 < 9) {
 						if (Game.box_exist[box_x][box_y + 1]) {
-							if (KeyManager.bomb_counter == 50)
-								KeyManager.bomb_counter = 0;
-							GameState.bomb[KeyManager.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
-							GameState.first_bb[KeyManager.bomb_counter] = true;
-							GameState.second_bb[KeyManager.bomb_counter] = true;
-							GameState.third_bb[KeyManager.bomb_counter] = true;
-							GameState.fourth_bb[KeyManager.bomb_counter] = true;
-							KeyManager.bomb_counter++;
+							if (KeyManager1.bomb_counter == 50)
+								KeyManager1.bomb_counter = 0;
+							GameState.bomb[KeyManager1.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
+							GameState.first_bb[KeyManager1.bomb_counter] = true;
+							GameState.second_bb[KeyManager1.bomb_counter] = true;
+							GameState.third_bb[KeyManager1.bomb_counter] = true;
+							GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+							KeyManager1.bomb_counter++;
 							bomb = false;
 							temp = Game.time;
 						}
 					}
 					if (box_x - 1 >= 0) {
 						if (Game.box_exist[box_x - 1][box_y]) {
-							if (KeyManager.bomb_counter == 50)
-								KeyManager.bomb_counter = 0;
-							GameState.bomb[KeyManager.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
-							GameState.first_bb[KeyManager.bomb_counter] = true;
-							GameState.second_bb[KeyManager.bomb_counter] = true;
-							GameState.third_bb[KeyManager.bomb_counter] = true;
-							GameState.fourth_bb[KeyManager.bomb_counter] = true;
-							KeyManager.bomb_counter++;
+							if (KeyManager1.bomb_counter == 50)
+								KeyManager1.bomb_counter = 0;
+							GameState.bomb[KeyManager1.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
+							GameState.first_bb[KeyManager1.bomb_counter] = true;
+							GameState.second_bb[KeyManager1.bomb_counter] = true;
+							GameState.third_bb[KeyManager1.bomb_counter] = true;
+							GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+							KeyManager1.bomb_counter++;
 							bomb = false;
 							temp = Game.time;
 						}
 					}
 					if (box_x + 1 < 11) {
 						if (Game.box_exist[box_x + 1][box_y]) {
-							if (KeyManager.bomb_counter == 50)
-								KeyManager.bomb_counter = 0;
-							GameState.bomb[KeyManager.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
-							GameState.first_bb[KeyManager.bomb_counter] = true;
-							GameState.second_bb[KeyManager.bomb_counter] = true;
-							GameState.third_bb[KeyManager.bomb_counter] = true;
-							GameState.fourth_bb[KeyManager.bomb_counter] = true;
-							KeyManager.bomb_counter++;
+							if (KeyManager1.bomb_counter == 50)
+								KeyManager1.bomb_counter = 0;
+							GameState.bomb[KeyManager1.bomb_counter] = new Bomb(box_x, box_y, (int)fire_range);
+							GameState.first_bb[KeyManager1.bomb_counter] = true;
+							GameState.second_bb[KeyManager1.bomb_counter] = true;
+							GameState.third_bb[KeyManager1.bomb_counter] = true;
+							GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+							KeyManager1.bomb_counter++;
 							bomb = false;
 							temp = Game.time;
 						}

@@ -1,10 +1,10 @@
 
 import java.awt.Graphics;
-
+import java.awt.event.KeyEvent;
 
 public abstract class Character implements GameStateDefault {
 
-	protected  int Xcoordinate, Ycoordinate;
+	protected double Xcoordinate, Ycoordinate;
 	private int bombNum;
 	private int power, powerNum;
 	
@@ -14,20 +14,21 @@ public abstract class Character implements GameStateDefault {
 		return X;
 	}
 
-	public static void setX(int x) {
-		Character.X = x;
+	public static void setX(double x) {
+		Character.X = (int)x;
 	}
 
 	public static int getY() {
 		return Y;
 	}
 
-	public static void setY(int y) {
-		Character.Y = y;
+	public static void setY(double y) {
+		Character.Y = (int)y;
 	}
 
 	protected boolean left_movable, right_movable, up_movable, down_movable;
-	protected int pace, pace_cnt = 0;
+	protected double pace;
+	protected int pace_cnt = 0;
 	protected int[] ideal_up = new int[2];
 	protected int[] ideal_down = new int[2];
 	protected int[] ideal_left = new int[2];
@@ -49,6 +50,7 @@ public abstract class Character implements GameStateDefault {
 	public void movable() {
 		setX(Xcoordinate);	// bomb
 		setY(Ycoordinate);	// bomb
+		
 		this.up_movable = true;
 		this.down_movable = true;
 		this.left_movable = true;
@@ -88,7 +90,9 @@ public abstract class Character implements GameStateDefault {
 
 	}
 
-
+	public void eatProps() {
+		
+	}
 		
 
 	
