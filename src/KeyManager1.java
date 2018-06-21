@@ -44,6 +44,7 @@ public class KeyManager1 extends KeyAdapter {
 		}
 			
 		if (e.getKeyCode() == moveUp) {
+
 			up = true;
 			state_next = this.moveUp;			
 		} 
@@ -106,6 +107,7 @@ public class KeyManager1 extends KeyAdapter {
 		super.keyReleased(e);
 		state_next = 0;
 		if (e.getKeyCode() == moveUp) {
+
 			up = false;
 		}
 		if (e.getKeyCode() == moveDown) {
@@ -119,11 +121,7 @@ public class KeyManager1 extends KeyAdapter {
 		}
 		if(e.getKeyCode() == putBomb) {
 			put = false;
-		}
-		
-		//////
-		if(module!=2) {
-			return;
+
 		}
 		state_next2 = 0;
 		if (e.getKeyCode() == moveUp2) {
