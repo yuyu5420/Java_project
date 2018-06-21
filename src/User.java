@@ -13,21 +13,22 @@ public abstract class User extends Character {
 	protected int down_key = KeyEvent.VK_DOWN;
 	protected int left_key = KeyEvent.VK_LEFT;
 	protected int right_key = KeyEvent.VK_RIGHT;
+	private Game game;
 
 	public int bomb_counter = 0;
 	
-	public User(double Xcoordinate, double Ycoordinate) {
+	public User(Game game,int Xcoordinate, int Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
+		this.game = game;
 	}
-
-	
 
 	@Override
 	public abstract void render(Graphics g);
 
 	@Override
 	public void tick() {
-
+		collideProps();
+		bombCheck();
 		testIdealLocation();
 		if (state_now == up_key && up_movable) {
 
@@ -70,20 +71,20 @@ public abstract class User extends Character {
 				check();
 			}
 		}
-
-		if (bombSignal && !Game.bomb_exist[((int)this.Xcoordinate-445)/100][((int)this.Ycoordinate-5)/100]) {
-			if (bomb_counter == 50)
-				bomb_counter = 0;System.out.println("aeae");
-			GameState.bomb[bomb_counter] = new Bomb((Character.getX()-445)/100, (Character.getY()-5)/100, 6);
-
-			GameState.first_bb[bomb_counter] = true;
-			GameState.second_bb[bomb_counter] = true;
-			GameState.third_bb[bomb_counter] = true;
-			GameState.fourth_bb[bomb_counter] = true;
-
-			bomb_counter++;
+		
+		if (bombSignal && !Game.bomb_exist[(int)(Player.getX()-445)/100][(int)(Player.getY()-5)/100]&&bombPut<bombTotal) {
+			if (KeyManager1.bomb_counter == 50)
+				KeyManager1.bomb_counter = 0;
+//			System.out.println("AAAA");
+			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(Player.getX()-445)/100, (int)(Player.getY()-5)/100, fire);
+			GameState.first_bb[KeyManager1.bomb_counter] = true;
+			GameState.second_bb[KeyManager1.bomb_counter] = true;
+			GameState.third_bb[KeyManager1.bomb_counter] = true;
+			GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+			KeyManager1.bomb_counter++;
+			bombPlace[(int)(Player.getX()-445)/100][(int)(Player.getY()-5)/100] = true;
+			bombPut++;
 		}
-
 	}
 
 	public void testIdealLocation() {

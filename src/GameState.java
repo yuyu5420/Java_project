@@ -17,14 +17,14 @@ public class GameState extends State implements GameStateDefault {
 	public GameState(Game game) {
 		this.game = game;
 		if(Setting_page.Player_Number == 2) {
-			player2 = new Player(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+			player2 = new Player(game,DEFAULT_MAX_X, DEFAULT_MIN_Y);
 			player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(), game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
 
 			player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2, game.getKeyManager().right2);
 			player2.setStateNow(game.getKeyManager().state_now2);
 			player2.setID(2);
 		}
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		player1 = new Player(game,DEFAULT_MIN_X, DEFAULT_MIN_Y);
 
 		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(), game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
 		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left, game.getKeyManager().right);
@@ -55,11 +55,12 @@ public class GameState extends State implements GameStateDefault {
 				player2.setState(game.getKeyManager().state_now2);
 			}
 			player2.setStateNow(game.getKeyManager().state_now2);
-			player1.setBombSignal(game.getKeyManager().put2);
+			player2.setBombSignal(game.getKeyManager().put2);
 			player2.tick();
 			if(player2.getStateNow()==0) {
 				game.getKeyManager().state_now2 = game.getKeyManager().state_next2;
 			}
+			player2.tick();
 
 		}
 		ai1.tick(player1.Xcoordinate,player1.Ycoordinate);
