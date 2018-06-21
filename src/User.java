@@ -18,9 +18,8 @@ public abstract class User extends Character {
 
 	public int bomb_counter = 0;
 	
-	public User(Game game,int Xcoordinate, int Ycoordinate) {
+	public User(int Xcoordinate, int Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
-		this.game = game;
 	}
 
 	@Override
@@ -28,13 +27,16 @@ public abstract class User extends Character {
 
 	@Override
 	public void tick() {
+		
+		if(deadCheck()) {
+			died_cycle++;
+			return;
+		}
 		collideProps();
 		bombCheck();
 		testIdealLocation();
 		if (state_now == up_key && up_movable) {
-
 			if (up) {
-
 				this.Ycoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -42,9 +44,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == down_key && down_movable) {
-
 			if (down) {
-
 				this.Ycoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -52,9 +52,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == left_key && left_movable) {
-
 			if (left) {
-
 				this.Xcoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -62,9 +60,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == right_key && right_movable) {
-
 			if (right) {
-
 				this.Xcoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -73,17 +69,17 @@ public abstract class User extends Character {
 			}
 		}
 		
-		if (bombSignal && !Game.bomb_exist[(int)(Player.getX()-445)/100][(int)(Player.getY()-5)/100]&&bombPut<bombTotal) {
+		if (bombSignal && !Game.bomb_exist[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100]&&bombPut<bombTotal) {
 			if (KeyManager1.bomb_counter == 50)
 				KeyManager1.bomb_counter = 0;
 //			System.out.println("AAAA");
-			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(Player.getX()-445)/100, (int)(Player.getY()-5)/100, fire);
+			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(this.Xcoordinate-445)/100, (int)(this.Ycoordinate-5)/100, fire);
 			GameState.first_bb[KeyManager1.bomb_counter] = true;
 			GameState.second_bb[KeyManager1.bomb_counter] = true;
 			GameState.third_bb[KeyManager1.bomb_counter] = true;
 			GameState.fourth_bb[KeyManager1.bomb_counter] = true;
 			KeyManager1.bomb_counter++;
-			bombPlace[(int)(Player.getX()-445)/100][(int)(Player.getY()-5)/100] = true;
+			bombPlace[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100] = true;
 			bombPut++;
 		}
 	}

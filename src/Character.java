@@ -16,24 +16,10 @@ public abstract class Character implements GameStateDefault {
 	protected boolean [][] bombPlace = new boolean [11][9];
 	protected int bombTotal=1;
 	protected int fire = 1;
+	protected boolean died = false;
+	protected int died_cycle = 0;
 	
 	public static int X,Y;
-	
-	public static int getX() {
-		return X;
-	}
-
-	public static void setX(double x) {
-		Character.X = (int)x;
-	}
-
-	public static int getY() {
-		return Y;
-	}
-
-	public static void setY(double y) {
-		Character.Y = (int)y;
-	}
 
 	protected boolean left_movable, right_movable, up_movable, down_movable;
 	protected int[] ideal_up = new int[2];
@@ -55,9 +41,6 @@ public abstract class Character implements GameStateDefault {
 	public abstract void tick();
 
 	public void movable() {
-		setX(Xcoordinate);	// bomb
-		setY(Ycoordinate);	// bomb
-		
 		this.up_movable = true;
 		this.down_movable = true;
 		this.left_movable = true;
@@ -134,6 +117,15 @@ public abstract class Character implements GameStateDefault {
 				}
 			}
 		}
+	}
+	
+	public boolean deadCheck() {
+		if (Game.fire_exist[(int) (this.Xcoordinate - 400) / 100][(int) (this.Ycoordinate / 100)] == true) {
+			died = true;
+		} else {
+			died = false;
+		}
+		return died;
 	}
 	
 }
