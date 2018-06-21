@@ -42,12 +42,12 @@ public abstract class Character implements GameStateDefault {
 	protected int[] ideal_right = new int[2];
 	protected int ideal_X, ideal_Y;
 
-	public Character(int Xcoordinate, int Ycoordinate) {
-		this.Xcoordinate = Xcoordinate;
-		this.Ycoordinate = Ycoordinate;
+	public Character(double xcoordinate2, double ycoordinate2) {
+		this.Xcoordinate = xcoordinate2;
+		this.Ycoordinate = ycoordinate2;
 		this.pace = DEFAULT_PACE;
-		ideal_X = Xcoordinate;
-		ideal_Y = Ycoordinate;
+		ideal_X = (int) xcoordinate2;
+		ideal_Y = (int) ycoordinate2;
 	}
 
 	public abstract void render(Graphics g);

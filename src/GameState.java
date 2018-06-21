@@ -72,6 +72,16 @@ public class GameState extends State implements GameStateDefault {
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
+		g.drawImage(Assets.block, 0, 0, 400, 150,null);
+		g.drawImage(Assets.block, 0, 150, 400, 150,null);
+		g.drawImage(Assets.block, 0, 300, 400, 150,null);
+		g.drawImage(Assets.block, 0, 450, 400, 150,null);
+		
+		g.drawImage(Assets.blue_head, 0,0,148,148,null);
+		g.drawImage(Assets.blue_head, 0,150,148,148,null);
+		g.drawImage(Assets.blue_head, 0,300,148,148,null);
+		g.drawImage(Assets.blue_head, 0,450,148,148,null);
+		
 		
 		g.drawImage(Assets.t, 60, 779, 100, 100, null);
 		g.drawImage(Assets.i, 130, 780, 100, 100, null);

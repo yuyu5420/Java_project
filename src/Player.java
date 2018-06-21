@@ -4,11 +4,11 @@ import java.awt.event.KeyEvent;
 
 public class Player extends User {
 	
-	private Game game;
+
 	
-	public Player(Game game, int Xcoordinate, int Ycoordinate) {
-		super(game,Xcoordinate, Ycoordinate);
-		this.game = game;
+	public Player(Game game, double Xcoordinate, double Ycoordinate) {
+		super(Xcoordinate, Ycoordinate);
+
 	}
 
 	@Override
