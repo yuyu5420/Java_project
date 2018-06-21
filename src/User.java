@@ -18,8 +18,10 @@ public abstract class User extends Character {
 
 	public int bomb_counter = 0;
 	
-	public User(int Xcoordinate, int Ycoordinate) {
-		super(Xcoordinate, Ycoordinate);
+
+	public User(double xcoordinate, double ycoordinate) {
+		super(xcoordinate, ycoordinate);
+
 	}
 
 	@Override
@@ -86,14 +88,14 @@ public abstract class User extends Character {
 
 	public void testIdealLocation() {
 		if (ideal_X == this.Xcoordinate && ideal_Y == this.Ycoordinate) {
-			ideal_up[0] = ideal_X;
-			ideal_up[1] = ideal_Y - 100;
-			ideal_down[0] = ideal_X;
-			ideal_down[1] = ideal_Y + 100;
-			ideal_left[0] = ideal_X - 100;
-			ideal_left[1] = ideal_Y;
-			ideal_right[0] = ideal_X + 100;
-			ideal_right[1] = ideal_Y;
+			ideal_up[0] = (int) ideal_X;
+			ideal_up[1] = (int) (ideal_Y - 100);
+			ideal_down[0] = (int) ideal_X;
+			ideal_down[1] = (int) (ideal_Y + 100);
+			ideal_left[0] = (int) (ideal_X - 100);
+			ideal_left[1] = (int) ideal_Y;
+			ideal_right[0] = (int) (ideal_X + 100);
+			ideal_right[1] = (int) ideal_Y;
 			super.movable();
 		}
 		this.setIdealLocation(state_now);

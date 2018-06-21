@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 public class Player extends User {
 	
 
-	public Player(int Xcoordinate, int Ycoordinate) {
+	public Player(double Xcoordinate, double Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
 
 	}
