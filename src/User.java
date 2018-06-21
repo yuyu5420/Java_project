@@ -9,11 +9,12 @@ public abstract class User extends Character {
 
 	protected boolean up, down, left, right, bombSignal;
 
-	protected int up_key = KeyEvent.VK_UP;
-	protected int down_key = KeyEvent.VK_DOWN;
-	protected int left_key = KeyEvent.VK_LEFT;
-	protected int right_key = KeyEvent.VK_RIGHT;
-	private Game game;
+
+	protected int up_key;
+	protected int down_key;
+	protected int left_key;
+	protected int right_key;
+
 
 	public int bomb_counter = 0;
 	
