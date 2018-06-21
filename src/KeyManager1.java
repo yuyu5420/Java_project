@@ -4,7 +4,9 @@ import java.awt.event.KeyEvent;
 public class KeyManager1 extends KeyAdapter {
 
 	private int module=0;
+
 	protected boolean up, down, left, right, put;
+
 	protected int state_now = 0, state_next, state;
 	public static int bomb_counter = 0;
 	private int moveUp = KeyEvent.VK_UP;
@@ -42,6 +44,7 @@ public class KeyManager1 extends KeyAdapter {
 		}
 			
 		if (e.getKeyCode() == moveUp) {
+
 			up = true;
 			state_next = this.moveUp;			
 		} 
@@ -59,6 +62,7 @@ public class KeyManager1 extends KeyAdapter {
 		}
 		if (e.getKeyCode() == putBomb) {
 			put = true;
+
 		}
 		if (state_now == 0) {
 			state_now = state_next;
@@ -67,7 +71,7 @@ public class KeyManager1 extends KeyAdapter {
 			}
 		}
 
-		////////////////
+
 		if(module!=2) {
 			return; 
 		} 
@@ -113,6 +117,7 @@ public class KeyManager1 extends KeyAdapter {
 		super.keyReleased(e);
 		state_next = 0;
 		if (e.getKeyCode() == moveUp) {
+
 			up = false;
 		}
 		if (e.getKeyCode() == moveDown) {
@@ -126,6 +131,7 @@ public class KeyManager1 extends KeyAdapter {
 		}
 		if(e.getKeyCode() == putBomb) {
 			put = false;
+
 		}
 		state_next2 = 0;
 		if (e.getKeyCode() == moveUp2) {

@@ -6,11 +6,14 @@ public abstract class User extends Character {
 
 	protected int ID;
 	protected int state_now, state;
+
 	protected boolean up, down, left, right, bombSignal;
+
 	protected int up_key = KeyEvent.VK_UP;
 	protected int down_key = KeyEvent.VK_DOWN;
 	protected int left_key = KeyEvent.VK_LEFT;
 	protected int right_key = KeyEvent.VK_RIGHT;
+
 	public int bomb_counter = 0;
 	
 	public User(int Xcoordinate, int Ycoordinate) {
@@ -25,7 +28,9 @@ public abstract class User extends Character {
 
 		testIdealLocation();
 		if (state_now == up_key && up_movable) {
+
 			if (up) {
+
 				this.Ycoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -33,7 +38,9 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == down_key && down_movable) {
+
 			if (down) {
+
 				this.Ycoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -41,7 +48,9 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == left_key && left_movable) {
+
 			if (left) {
+
 				this.Xcoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -49,7 +58,9 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == right_key && right_movable) {
+
 			if (right) {
+
 				this.Xcoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -57,16 +68,20 @@ public abstract class User extends Character {
 				check();
 			}
 		}
+
 		if (bombSignal && !Game.bomb_exist[((int)this.Xcoordinate-445)/100][((int)this.Ycoordinate-5)/100]) {
 			if (bomb_counter == 50)
 				bomb_counter = 0;System.out.println("aeae");
 			GameState.bomb[bomb_counter] = new Bomb((Character.getX()-445)/100, (Character.getY()-5)/100, 6);
+
 			GameState.first_bb[bomb_counter] = true;
 			GameState.second_bb[bomb_counter] = true;
 			GameState.third_bb[bomb_counter] = true;
 			GameState.fourth_bb[bomb_counter] = true;
+
 			bomb_counter++;
 		}
+
 	}
 
 	public void testIdealLocation() {
@@ -117,7 +132,9 @@ public abstract class User extends Character {
 		this.right_key = right;
 	}
 	
+
 	public void setDirection(boolean up, boolean down, boolean left, boolean right) {
+
 		this.up = up;
 		this.left = left;
 		this.right = right;
@@ -184,7 +201,9 @@ public abstract class User extends Character {
 		ID = iD;
 	}
 	
+
 	public void setBombSignal(boolean bombSignal) {
+
 		this.bombSignal = bombSignal;
 	}
 }
