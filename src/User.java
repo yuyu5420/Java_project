@@ -18,10 +18,8 @@ public abstract class User extends Character {
 
 	public int bomb_counter = 0;
 	
-
-	public User(double xcoordinate, double ycoordinate) {
-		super(xcoordinate, ycoordinate);
-
+	public User(double Xcoordinate, double Ycoordinate) {
+		super(Xcoordinate, Ycoordinate);
 	}
 
 	@Override
@@ -71,31 +69,18 @@ public abstract class User extends Character {
 			}
 		}
 		
-		if (bombSignal && !Game.bomb_exist[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100]&&bombPut<bombTotal) {
-			if (KeyManager1.bomb_counter == 50)
-				KeyManager1.bomb_counter = 0;
-//			System.out.println("AAAA");
-			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(this.Xcoordinate-445)/100, (int)(this.Ycoordinate-5)/100, fire);
-			GameState.first_bb[KeyManager1.bomb_counter] = true;
-			GameState.second_bb[KeyManager1.bomb_counter] = true;
-			GameState.third_bb[KeyManager1.bomb_counter] = true;
-			GameState.fourth_bb[KeyManager1.bomb_counter] = true;
-			KeyManager1.bomb_counter++;
-			bombPlace[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100] = true;
-			bombPut++;
-		}
 	}
 
 	public void testIdealLocation() {
 		if (ideal_X == this.Xcoordinate && ideal_Y == this.Ycoordinate) {
-			ideal_up[0] = (int) ideal_X;
-			ideal_up[1] = (int) (ideal_Y - 100);
-			ideal_down[0] = (int) ideal_X;
-			ideal_down[1] = (int) (ideal_Y + 100);
-			ideal_left[0] = (int) (ideal_X - 100);
-			ideal_left[1] = (int) ideal_Y;
-			ideal_right[0] = (int) (ideal_X + 100);
-			ideal_right[1] = (int) ideal_Y;
+			ideal_up[0] = ideal_X;
+			ideal_up[1] = ideal_Y - 100;
+			ideal_down[0] = ideal_X;
+			ideal_down[1] = ideal_Y + 100;
+			ideal_left[0] = ideal_X - 100;
+			ideal_left[1] = ideal_Y;
+			ideal_right[0] = ideal_X + 100;
+			ideal_right[1] = ideal_Y;
 			super.movable();
 		}
 		this.setIdealLocation(state_now);
@@ -147,7 +132,6 @@ public abstract class User extends Character {
 
 		if (ideal_X == this.Xcoordinate && ideal_Y == this.Ycoordinate) {
 			state_now = 0;
-			return;
 		} else {
 			if (state_now == up_key || state_now == down_key) {
 				if (Math.abs((ideal_Y - this.Ycoordinate)) == this.pace) {
@@ -184,6 +168,18 @@ public abstract class User extends Character {
 					this.pace_cnt++;
 				}
 			}
+		}
+		if (state_now==0 && bombSignal && !Game.bomb_exist[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100]&&bombPut<bombTotal) {
+			if (KeyManager1.bomb_counter == 50)
+				KeyManager1.bomb_counter = 0;
+			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(this.Xcoordinate-445)/100, (int)(this.Ycoordinate-5)/100, fire);
+			GameState.first_bb[KeyManager1.bomb_counter] = true;
+			GameState.second_bb[KeyManager1.bomb_counter] = true;
+			GameState.third_bb[KeyManager1.bomb_counter] = true;
+			GameState.fourth_bb[KeyManager1.bomb_counter] = true;
+			KeyManager1.bomb_counter++;
+			bombPlace[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100] = true;
+			bombPut++;
 		}
 	}
 
