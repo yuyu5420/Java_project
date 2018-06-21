@@ -4,8 +4,10 @@ import java.awt.event.KeyEvent;
 
 public class Player extends User {
 	
+
 	public Player(int Xcoordinate, int Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
+
 	}
 
 	@Override

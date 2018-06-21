@@ -9,15 +9,18 @@ public abstract class User extends Character {
 
 	protected boolean up, down, left, right, bombSignal;
 
+
 	protected int up_key;
 	protected int down_key;
 	protected int left_key;
 	protected int right_key;
 
+
 	public int bomb_counter = 0;
 	
-	public User(int Xcoordinate, int Ycoordinate) {
+	public User(Game game,int Xcoordinate, int Ycoordinate) {
 		super(Xcoordinate, Ycoordinate);
+		this.game = game;
 	}
 
 	@Override
