@@ -12,17 +12,11 @@ public class Setting_page {
 	public static int Player_Number = 0;
 	public static int character_choose1 = 1;
 	public static int character_choose2 = 1;
-	
-	///////////////
-	// 1 = blue
-	// 2 = green
-	// 3 = purple
-	// 4 = black
-	///////////////
 
 	public Setting_page(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
+
 		this.height = height;
 		Display();
 	}
