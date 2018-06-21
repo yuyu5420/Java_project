@@ -6,7 +6,7 @@ import java.applet.*;
 
 public class Game implements Runnable {
 
-	private KeyManager keyManager;
+	private KeyManager1 keyManager;
 	private Map map;
 	public int width, height;
 	public String title;
@@ -14,7 +14,7 @@ public class Game implements Runnable {
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
-	private static int time = 180;
+	public static int time = 180;
 	public static int minute = time / 60;
 	public static int second = time % 60;
 	private State gameState;
@@ -37,7 +37,7 @@ public class Game implements Runnable {
 
 	private void init() {
 		map = new Map(title, width, height);
-		keyManager = new KeyManager(2);
+		keyManager = new KeyManager1(Setting_page.Player_Number);
 		map.getFrame().addKeyListener(keyManager);
 		for (int x = 0; x < 11; x++)
 			for (int y = 0; y < 9; y++) {
@@ -75,7 +75,7 @@ public class Game implements Runnable {
 		
 	}
 
-	public KeyManager getKeyManager() {
+	public KeyManager1 getKeyManager() {
 		return keyManager;
 
 	}

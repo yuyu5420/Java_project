@@ -6,12 +6,11 @@ public abstract class User extends Character {
 
 	protected int ID;
 	protected int state_now, state;
-	protected Integer up, down, left, right;
+	protected boolean up, down, left, right, bombSignal;
 	protected int up_key = KeyEvent.VK_UP;
 	protected int down_key = KeyEvent.VK_DOWN;
 	protected int left_key = KeyEvent.VK_LEFT;
 	protected int right_key = KeyEvent.VK_RIGHT;
-	protected Integer bombSignal;
 	public int bomb_counter = 0;
 	
 	public User(int Xcoordinate, int Ycoordinate) {
@@ -26,7 +25,7 @@ public abstract class User extends Character {
 
 		testIdealLocation();
 		if (state_now == up_key && up_movable) {
-			if (up==1) {
+			if (up) {
 				this.Ycoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -34,7 +33,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == down_key && down_movable) {
-			if (down==1) {
+			if (down) {
 				this.Ycoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -42,7 +41,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == left_key && left_movable) {
-			if (left==1) {
+			if (left) {
 				this.Xcoordinate -= pace;
 				this.pace_cnt++;
 				return;
@@ -50,7 +49,7 @@ public abstract class User extends Character {
 				check();
 			}
 		} else if (state_now == right_key && right_movable) {
-			if (right==1) {
+			if (right) {
 				this.Xcoordinate += pace;
 				this.pace_cnt++;
 				return;
@@ -58,17 +57,16 @@ public abstract class User extends Character {
 				check();
 			}
 		}
-		if(bombSignal==1 && !Game.bomb_exist[(this.Xcoordinate-445)/100][(this.Ycoordinate-5)/100]) {
+		if (bombSignal && !Game.bomb_exist[((int)this.Xcoordinate-445)/100][((int)this.Ycoordinate-5)/100]) {
 			if (bomb_counter == 50)
-				bomb_counter = 0;
-			GameState.bomb[bomb_counter] = new Bomb((this.Xcoordinate-445)/100, (this.Ycoordinate-5)/100, 6);
+				bomb_counter = 0;System.out.println("aeae");
+			GameState.bomb[bomb_counter] = new Bomb((Character.getX()-445)/100, (Character.getY()-5)/100, 6);
 			GameState.first_bb[bomb_counter] = true;
 			GameState.second_bb[bomb_counter] = true;
 			GameState.third_bb[bomb_counter] = true;
 			GameState.fourth_bb[bomb_counter] = true;
-			bomb_counter++; 
+			bomb_counter++;
 		}
-
 	}
 
 	public void testIdealLocation() {
@@ -119,7 +117,7 @@ public abstract class User extends Character {
 		this.right_key = right;
 	}
 	
-	public void setDirection(Integer up, Integer down, Integer left, Integer right) {
+	public void setDirection(boolean up, boolean down, boolean left, boolean right) {
 		this.up = up;
 		this.left = left;
 		this.right = right;
@@ -186,7 +184,7 @@ public abstract class User extends Character {
 		ID = iD;
 	}
 	
-	public void setBombSignal(Integer bombSignal) {
+	public void setBombSignal(boolean bombSignal) {
 		this.bombSignal = bombSignal;
 	}
 }
