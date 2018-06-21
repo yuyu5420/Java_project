@@ -64,8 +64,7 @@ public class AI {
 
 	}
 
-	public void render(Graphics g, int number) {
-
+	public void render(Graphics g, int number) {		
 		if(number ==1) {
 		if (cnt == 0) {
 			g.drawImage(Assets.purple_down[0], (int) x, (int) y, width, height, null);
