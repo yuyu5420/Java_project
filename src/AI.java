@@ -67,39 +67,39 @@ public class AI {
 	public void render(Graphics g, int number) {		
 		if(number ==1) {
 		if (cnt == 0) {
-			g.drawImage(Assets.purple_down[0], (int) x, (int) y, width, height, null);
+			g.drawImage(Assets.blue_down[0], (int) x, (int) y, width, height, null);
 		}
 		if (right) {
 			hello = 1;
-			g.drawImage(Assets.purple_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+			g.drawImage(Assets.blue_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 		} else if (left) {
 			hello = 2;
-			g.drawImage(Assets.purple_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+			g.drawImage(Assets.blue_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 		} else if (up) {
 			hello = 3;
-			g.drawImage(Assets.purple_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+			g.drawImage(Assets.blue_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 		} else if (down) {
 			hello = 4;
-			g.drawImage(Assets.purple_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+			g.drawImage(Assets.blue_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 		} else {
 			switch (hello) {
 			case 1:
-				g.drawImage(Assets.purple_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.blue_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 				break;
 
 			case 2:
-				g.drawImage(Assets.purple_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.blue_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 				break;
 
 			case 3:
-				g.drawImage(Assets.purple_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.blue_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 				break;
 
 			case 4:
-				g.drawImage(Assets.purple_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.blue_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 				break;
 
 			}
@@ -108,46 +108,127 @@ public class AI {
 		}
 			if(number ==2) {
 			if (cnt == 0) {
-				g.drawImage(Assets.black_down[0], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.green_down[0], (int) x, (int) y, width, height, null);
 			}
 			if (right) {
 				hello = 1;
-				g.drawImage(Assets.black_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.green_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 			} else if (left) {
 				hello = 2;
-				g.drawImage(Assets.black_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.green_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 			} else if (up) {
 				hello = 3;
-				g.drawImage(Assets.black_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.green_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 			} else if (down) {
 				hello = 4;
-				g.drawImage(Assets.black_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				g.drawImage(Assets.green_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 
 			} else {
 				switch (hello) {
 				case 1:
-					g.drawImage(Assets.black_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+					g.drawImage(Assets.green_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 					break;
 
 				case 2:
-					g.drawImage(Assets.black_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+					g.drawImage(Assets.green_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 					break;
 
 				case 3:
-					g.drawImage(Assets.black_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+					g.drawImage(Assets.green_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 					break;
 
 				case 4:
-					g.drawImage(Assets.black_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+					g.drawImage(Assets.green_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
 					break;
 
 				}
 			}
+			}
+			if(number ==3) {
+				if (cnt == 0) {
+					g.drawImage(Assets.purple_down[0], (int) x, (int) y, width, height, null);
+				}
+				if (right) {
+					hello = 1;
+					g.drawImage(Assets.purple_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				} else if (left) {
+					hello = 2;
+					g.drawImage(Assets.purple_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else if (up) {
+					hello = 3;
+					g.drawImage(Assets.purple_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else if (down) {
+					hello = 4;
+					g.drawImage(Assets.purple_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else {
+					switch (hello) {
+					case 1:
+						g.drawImage(Assets.purple_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 2:
+						g.drawImage(Assets.purple_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 3:
+						g.drawImage(Assets.purple_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 4:
+						g.drawImage(Assets.purple_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					}
+				}
+			}
+			if(number ==4) {
+				if (cnt == 0) {
+					g.drawImage(Assets.black_down[0], (int) x, (int) y, width, height, null);
+				}
+				if (right) {
+					hello = 1;
+					g.drawImage(Assets.black_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+				} else if (left) {
+					hello = 2;
+					g.drawImage(Assets.black_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else if (up) {
+					hello = 3;
+					g.drawImage(Assets.black_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else if (down) {
+					hello = 4;
+					g.drawImage(Assets.black_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+
+				} else {
+					switch (hello) {
+					case 1:
+						g.drawImage(Assets.black_right[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 2:
+						g.drawImage(Assets.black_left[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 3:
+						g.drawImage(Assets.black_up[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					case 4:
+						g.drawImage(Assets.black_down[(cnt % 6)/3], (int) x, (int) y, width, height, null);
+						break;
+
+					}
+				}
+			}
 			
 
-		}
+		
 
 		arrive_destination();
 	}
