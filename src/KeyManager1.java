@@ -4,11 +4,9 @@ import java.awt.event.KeyEvent;
 public class KeyManager1 extends KeyAdapter {
 
 	private int module=0;
-	protected Integer up = 0;
-	protected Integer down = 0;
-	protected Integer left = 0;
-	protected Integer right = 0;
-	protected Integer put = 0;
+
+	protected boolean up, down, left, right, put;
+
 	protected int state_now = 0, state_next, state;
 	public static int bomb_counter = 0;
 	private int moveUp = KeyEvent.VK_UP;
@@ -46,23 +44,25 @@ public class KeyManager1 extends KeyAdapter {
 		}
 			
 		if (e.getKeyCode() == moveUp) {
-			up = 1;
+
+			up = true;
 			state_next = this.moveUp;			
 		} 
 		if (e.getKeyCode() == moveDown) {
-			down = 1;
+			down = true;
 			state_next = this.moveDown;
 		} 
 		if (e.getKeyCode() == moveRight) {
-			right = 1;
+			right = true;
 			state_next = this.moveRight;
 		} 
 		if (e.getKeyCode() == moveLeft) {
-			left = 1;
+			left = true;
 			state_next = moveLeft;
 		}
 		if (e.getKeyCode() == putBomb) {
-			put = 1;
+			put = true;
+
 		}
 		if (state_now == 0) {
 			state_now = state_next;
@@ -71,18 +71,7 @@ public class KeyManager1 extends KeyAdapter {
 			}
 		}
 
-		
-		if (e.getKeyCode() == putBomb && !Game.bomb_exist[(Character.getX()-445)/100][(Character.getY()-5)/100]) {
-			if (bomb_counter == 50)
-				bomb_counter = 0;System.out.println("aeae");
-			GameState.bomb[bomb_counter] = new Bomb((Character.getX()-445)/100, (Character.getY()-5)/100, 6);
-			GameState.first_bb[bomb_counter] = true;
-			GameState.second_bb[bomb_counter] = true;
-			GameState.third_bb[bomb_counter] = true;
-			GameState.fourth_bb[bomb_counter] = true;
-			bomb_counter++;
-		}
-			////////////////
+
 		if(module!=2) {
 			return; 
 		} 
@@ -128,19 +117,21 @@ public class KeyManager1 extends KeyAdapter {
 		super.keyReleased(e);
 		state_next = 0;
 		if (e.getKeyCode() == moveUp) {
-			up = 0;
+
+			up = false;
 		}
 		if (e.getKeyCode() == moveDown) {
-			down = 0;
+			down = false;
 		}
 		if (e.getKeyCode() == moveRight) {
-			right = 0;
+			right = false;
 		}
 		if (e.getKeyCode() == moveLeft) {
-			left = 0;
+			left = false;
 		}
 		if(e.getKeyCode() == putBomb) {
-			put = 0;
+			put = false;
+
 		}
 		state_next2 = 0;
 		if (e.getKeyCode() == moveUp2) {
