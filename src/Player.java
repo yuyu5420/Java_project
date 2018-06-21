@@ -7,7 +7,7 @@ public class Player extends User {
 	private Game game;
 	
 	public Player(Game game, int Xcoordinate, int Ycoordinate) {
-		super(Xcoordinate, Ycoordinate);
+		super(game,Xcoordinate, Ycoordinate);
 		this.game = game;
 	}
 
