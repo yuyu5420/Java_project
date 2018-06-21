@@ -14,14 +14,15 @@ public class Player extends User {
 	public void render(Graphics g) { // draw
 	
 		if (this.pace_cnt == 0) {
-			if(ID==1)	// blue
+			if(ID==1) {	// blue
 				g.drawImage(Assets.blue_down[0], (int)this.Xcoordinate, (int)this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-			else if(ID==2)	// green
+			} else if(ID==2)	{	// green
 				g.drawImage(Assets.green_down[0], (int)this.Xcoordinate, (int)this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-			else if(ID==3)	// purple
+			} else if(ID==3) {	// purple
 				g.drawImage(Assets.purple_down[0], (int)this.Xcoordinate, (int)this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
-			else if(ID==4)	// black
+			} else if(ID==4)	{	// black
 				g.drawImage(Assets.black_down[0], (int)this.Xcoordinate, (int)this.Ycoordinate, DEFAULT_WIDTH, DEFAULT_HEIGHT, null);
+			}
 		} else {
 			if(ID==1) {
 				if(state == up_key) {
