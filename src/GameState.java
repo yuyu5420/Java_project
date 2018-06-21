@@ -17,18 +17,19 @@ public class GameState extends State implements GameStateDefault {
 	public GameState(Game game) {
 		this.game = game;
 		if(Setting_page.Player_Number == 2) {
-			player2 = new Player(game, DEFAULT_MAX_X, DEFAULT_MIN_Y);
+			player2 = new Player(DEFAULT_MAX_X, DEFAULT_MIN_Y);
 			player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(), game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
 			player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2, game.getKeyManager().right2);
 			player2.setStateNow(game.getKeyManager().state_now2);
-			player2.setID(2);
+			player2.setBombSignal(game.getKeyManager().put2);
+			player2.setID(Setting_page.character_choose2);
 		}
-		player1 = new Player(game, DEFAULT_MIN_X, DEFAULT_MIN_Y);
+		player1 = new Player(DEFAULT_MIN_X, DEFAULT_MIN_Y);
 		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(), game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
 		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left, game.getKeyManager().right);
 		player1.setBombSignal(game.getKeyManager().put);
 		player1.setStateNow(game.getKeyManager().state_now);
-		player1.setID(1);
+		player1.setID(Setting_page.character_choose1);
 		ai1 = new AI(game, 445,5,player1.Xcoordinate,player1.Ycoordinate);
 		ai2 = new AI(game, 1445,805,player1.Xcoordinate,player1.Ycoordinate);
 		if(Setting_page.Player_Number == 1) ai3 = new AI(game, 1445,5,player1.Xcoordinate,player1.Ycoordinate);
@@ -36,6 +37,7 @@ public class GameState extends State implements GameStateDefault {
 	}
 
 	public void tick() {
+
 		if(game.getKeyManager().state_now!=0) {
 			player1.setState(game.getKeyManager().state_now);
 		}
@@ -45,6 +47,7 @@ public class GameState extends State implements GameStateDefault {
 		if(player1.getStateNow()==0) {
 			game.getKeyManager().state_now = game.getKeyManager().state_next;
 		}
+		
 		if(Setting_page.Player_Number == 2) {
 			if(game.getKeyManager().state_now2!=0) {
 				player2.setState(game.getKeyManager().state_now2);
@@ -66,6 +69,109 @@ public class GameState extends State implements GameStateDefault {
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
+		g.drawImage(Assets.block, 0, 0, 400, 150,null);
+		g.drawImage(Assets.block, 0, 150, 400, 150,null);
+		g.drawImage(Assets.block, 0, 300, 400, 150,null);
+		g.drawImage(Assets.block, 0, 450, 400, 150,null);
+
+
+		if(Setting_page.character_choose1 == 1) {
+			g.drawImage(Assets.blue_head, 0,0,148,148,null);
+			if(Setting_page.Player_Number ==2) {
+			if(Setting_page.character_choose2 == 2) {
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 3) {
+				g.drawImage(Assets.green_head, 0,300,148,148,null);
+				g.drawImage(Assets.purple_head, 0,150,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 4) {
+				g.drawImage(Assets.green_head, 0,450,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,150,148,148,null);
+			}
+			}
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+		}
+
+		if(Setting_page.character_choose1 == 2) {
+			g.drawImage(Assets.green_head, 0,0,148,148,null);
+			if(Setting_page.Player_Number ==2) {
+			if(Setting_page.character_choose2 == 1) {
+				g.drawImage(Assets.blue_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 3) {
+				g.drawImage(Assets.blue_head, 0,300,148,148,null);
+				g.drawImage(Assets.purple_head, 0,150,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 4) {
+				g.drawImage(Assets.blue_head, 0,450,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,150,148,148,null);
+			}
+				
+			}
+			g.drawImage(Assets.blue_head, 0,150,148,148,null);
+			g.drawImage(Assets.purple_head, 0,300,148,148,null);
+			g.drawImage(Assets.black_head, 0,450,148,148,null);
+		}
+		
+		if(Setting_page.character_choose1 == 3) {
+			g.drawImage(Assets.purple_head, 0,0,148,148,null);
+			if(Setting_page.Player_Number ==2) {
+			if(Setting_page.character_choose2 == 2) {
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.blue_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 1) {
+				g.drawImage(Assets.green_head, 0,300,148,148,null);
+				g.drawImage(Assets.blue_head, 0,150,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 4) {
+				g.drawImage(Assets.green_head, 0,450,148,148,null);
+				g.drawImage(Assets.blue_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,150,148,148,null);
+			}
+			}
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.black_head, 0,450,148,148,null);
+			
+		}
+		if(Setting_page.character_choose1 == 4) {
+			g.drawImage(Assets.black_head, 0,0,148,148,null);
+			if(Setting_page.Player_Number ==2) {
+			if(Setting_page.character_choose2 == 2) {
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.blue_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 3) {
+				g.drawImage(Assets.green_head, 0,300,148,148,null);
+				g.drawImage(Assets.purple_head, 0,150,148,148,null);
+				g.drawImage(Assets.blue_head, 0,450,148,148,null);
+			}
+			if(Setting_page.character_choose2 == 1) {
+				g.drawImage(Assets.green_head, 0,450,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.blue_head, 0,150,148,148,null);
+			}
+			}
+				g.drawImage(Assets.green_head, 0,150,148,148,null);
+				g.drawImage(Assets.purple_head, 0,300,148,148,null);
+				g.drawImage(Assets.blue_head, 0,450,148,148,null);
+		}
+		
 		
 		g.drawImage(Assets.t, 60, 779, 100, 100, null);
 		g.drawImage(Assets.i, 130, 780, 100, 100, null);
@@ -437,6 +543,7 @@ public class GameState extends State implements GameStateDefault {
 		}
 
 		player1.render(g);
+
 		if(Setting_page.Player_Number == 2) {
 			player2.render(g);
 		}
@@ -445,6 +552,7 @@ public class GameState extends State implements GameStateDefault {
 		if(Setting_page.Player_Number == 1) {
 			ai3.render(g,2);
 		}
+
 	}
 	
 }

@@ -15,6 +15,6 @@ public interface GameStateDefault {
 	static final int DEFAULT_BOMB_NUM = 1;
 	static final int DEFAULT_POWER_NUM = 0;
 	static final int DEFAULT_POWER_RANGE = 1;
-	static final double DEFAULT_PACE = 12.5;
+	static final double DEFAULT_PACE = 4;
 	static final int DEFAULT_SCORE = 0;
 }

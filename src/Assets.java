@@ -22,8 +22,7 @@ public class Assets {
 	public static BufferedImage[] purple_right = new BufferedImage[2];
 	public static BufferedImage[] cowboys = new BufferedImage[3];
 	
-	public static BufferedImage one, two, three, four, five, six, seven, eight, nine, zero, t, i, m, e, colon, stick,
-			jin;
+	public static BufferedImage one, two, three, four, five, six, seven, eight, nine, zero, t, i, m, e, colon, block, black_head, purple_head, blue_head, green_head;
 	public static BufferedImage[] btn = new BufferedImage[2];
 	public static BufferedImage[] p1 = new BufferedImage[8], p2 = new BufferedImage[8], p3 = new BufferedImage[8],
 			p4 = new BufferedImage[8];
@@ -34,6 +33,11 @@ public class Assets {
 		btn[0] = ImageLoader.loadImage("/images/pause.png");
 		btn[1] = ImageLoader.loadImage("/images/resume.png");
 		background = ImageLoader.loadImage("/images/last_map.png");
+		block = ImageLoader.loadImage("/images/block.png");
+		black_head = ImageLoader.loadImage("/images/black_photo.png");
+		green_head = ImageLoader.loadImage("/images/green_photo.png");
+		purple_head = ImageLoader.loadImage("/images/purple_photo.png");
+		blue_head = ImageLoader.loadImage("/images/blue_photo.png");
 		obstacle1 = ImageLoader.loadImage("/images/obstacle1.png");
 		obstacle2 = ImageLoader.loadImage("/images/obstacle2.png");
 		box = ImageLoader.loadImage("/images/box.png");
@@ -45,7 +49,7 @@ public class Assets {
 		cowboys[0] = ImageLoader.loadImage("/images/cowboy_left.png");
 		cowboys[1] = ImageLoader.loadImage("/images/cowboy_right.png");
 		cowboys[2] = ImageLoader.loadImage("/images/cowboy.png");
-		//jin = ImageLoader.loadImage("/images/jin.png");
+
 		//
 		blue_down[0] = ImageLoader.loadImage("images/blue_down_0.png");
 		blue_down[1] = ImageLoader.loadImage("images/blue_down_1.png");
