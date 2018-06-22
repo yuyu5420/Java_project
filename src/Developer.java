@@ -30,7 +30,7 @@ public class Developer implements ActionListener {
 		lb1.setFont(new Font("SansSerif", Font.BOLD,60));
 		lb1.setForeground(Color.black);
 		
-		JLabel lb2 = new JLabel("¶À·ç½¬");
+		JLabel lb2 = new JLabel("¶À·ç³s");
 		lb2.setLocation(300, 550);
 		lb2.setSize(200, 100);
 		lb2.setFont(new Font("SansSerif", Font.BOLD,60));
