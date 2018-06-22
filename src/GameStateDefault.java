@@ -10,8 +10,8 @@ public interface GameStateDefault {
 	static final int DEFAULT_MAX_X = 1445;
 	static final int DEFAULT_MIN_Y = 5;
 	static final int DEFAULT_MAX_Y = 805;
-	
-	//Properties
+
+	// Properties
 	static final int DEFAULT_BOMB_NUM = 1;
 	static final int DEFAULT_POWER_NUM = 0;
 	static final int DEFAULT_POWER_RANGE = 1;

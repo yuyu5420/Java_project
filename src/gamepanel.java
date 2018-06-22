@@ -74,9 +74,8 @@ public class gamepanel extends JPanel implements KeyListener {
 		return finish;
 	}
 
-	
 	public void keyTyped(KeyEvent e) {
-		
+
 	}
 
 	public void keyPressed(KeyEvent e) {

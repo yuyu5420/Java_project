@@ -14,170 +14,150 @@ public class GameState extends State implements GameStateDefault {
 	public static boolean[] third_bb = new boolean[50];
 	public static boolean[] fourth_bb = new boolean[50];
 	public static boolean explosion_sound = false;
+	public static int result = 100;
+	int appearance[] = new int[4];
+	public static restart rrr;
 	public GameState(Game game) {
 		this.game = game;
-		if(Setting_page.Player_Number == 2) {
+		if (Setting_page.Player_Number == 2) {
 			player2 = new Player(DEFAULT_MAX_X, DEFAULT_MIN_Y);
-			player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(), game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
+			player2.setKey(game.getKeyManager().getMoveUp2(), game.getKeyManager().getMoveDown2(),
+					game.getKeyManager().getMoveLeft2(), game.getKeyManager().getMoveRight2());
 
-			player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2, game.getKeyManager().right2);
+			player2.setDirection(game.getKeyManager().up2, game.getKeyManager().down2, game.getKeyManager().left2,
+					game.getKeyManager().right2);
 			player2.setStateNow(game.getKeyManager().state_now2);
 			player2.setBombSignal(game.getKeyManager().put2);
 			player2.setID(Setting_page.character_choose2);
 		}
-		player1 = new Player(DEFAULT_MIN_X, DEFAULT_MIN_Y);
-		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(), game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
-		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left, game.getKeyManager().right);
+		player1 = new Player(DEFAULT_MIN_X, DEFAULT_MAX_Y);
+		player1.setKey(game.getKeyManager().getMoveUp(), game.getKeyManager().getMoveDown(),
+				game.getKeyManager().getMoveLeft(), game.getKeyManager().getMoveRight());
+		player1.setDirection(game.getKeyManager().up, game.getKeyManager().down, game.getKeyManager().left,
+				game.getKeyManager().right);
 		player1.setBombSignal(game.getKeyManager().put);
 		player1.setStateNow(game.getKeyManager().state_now);
 		player1.setID(Setting_page.character_choose1);
-		ai1 = new AI(game, 445,5,player1.Xcoordinate,player1.Ycoordinate);
-		ai2 = new AI(game, 1445,805,player1.Xcoordinate,player1.Ycoordinate);
-		if(Setting_page.Player_Number == 1) ai3 = new AI(game, 1445,5,player1.Xcoordinate,player1.Ycoordinate);
-		
+
+		if (Setting_page.Player_Number == 1) {
+			ai1 = new AI(game, 445, 5, player1.Xcoordinate, player1.Ycoordinate);
+			ai2 = new AI(game, 1445, 805, player1.Xcoordinate, player1.Ycoordinate);
+			ai3 = new AI(game, 1445, 5, player1.Xcoordinate, player1.Ycoordinate);
+		}
+		if (Setting_page.Player_Number == 2) {
+			ai1 = new AI(game, 445, 5, player1.Xcoordinate, player1.Ycoordinate, player2.Xcoordinate,
+					player2.Ycoordinate);
+			ai2 = new AI(game, 1445, 805, player1.Xcoordinate, player1.Ycoordinate, player2.Xcoordinate,
+					player2.Ycoordinate);
+
+		}
+
 	}
 
 	public void tick() {
-
-		if(game.getKeyManager().state_now!=0) {
-			player1.setState(game.getKeyManager().state_now);
-		}
-		player1.setStateNow(game.getKeyManager().state_now);
-		player1.setBombSignal(game.getKeyManager().put);
-
-		player1.tick();
-		if(player1.died) {
-			player1 = null;
-		} else if(player1.getStateNow()==0) {
-			game.getKeyManager().state_now = game.getKeyManager().state_next;
-		}
+		if(Setting_page.Player_Number == 1) {
+			if(player1 == null)		result = 0;
+			if(ai1 == null && ai2 == null && ai3 == null)	result = 1;
+		}	
 		if(Setting_page.Player_Number == 2) {
+			if(player1 == null && player2 ==null)		result = 0;
+			if(player1 == null && ai1 == null && ai2 == null && ai3 == null)	result = 2;
+			if(player2 == null && ai1 == null && ai2 == null && ai3 == null)	result = 1;
+		}	
+		if(result != 100)	{
+		
+			Game.biubiu = true;
+			rrr = new restart(result);//end game
+			
+		}
+		if (player1 != null && player1.died) {
+			player1.died_cycle += 1;
+			if (player1.died_cycle >= 60) {
+				player1 = null;
+			}
+		} else if (player1 != null) {
+			if (game.getKeyManager().state_now != 0) {
+				player1.setState(game.getKeyManager().state_now);
+			}
+			player1.setStateNow(game.getKeyManager().state_now);
+			player1.setBombSignal(game.getKeyManager().put);
+			player1.tick();
+			if (player1.getStateNow() == 0) {
+				game.getKeyManager().state_now = game.getKeyManager().state_next;
+			}
+			if (player1.bombSignal == false) {
+				game.getKeyManager().put = false;
+			}
+		}
 
-			if(game.getKeyManager().state_now2!=0) {
-				player2.setState(game.getKeyManager().state_now2);
+		if (Setting_page.Player_Number == 2) {
+			if (player2 != null && player2.died) {
+				player2.died_cycle += 1;
+				if (player2.died_cycle >= 60) {
+					player2 = null;
+				}
+			} else if (player2 != null) {
+				if (game.getKeyManager().state_now2 != 0) {
+					player2.setState(game.getKeyManager().state_now2);
+				}
+				player2.setStateNow(game.getKeyManager().state_now2);
+				player2.setBombSignal(game.getKeyManager().put2);
+				player2.tick();
+				if (player2.getStateNow() == 0) {
+					game.getKeyManager().state_now2 = game.getKeyManager().state_next2;
+				}
+				if (player2.bombSignal == false) {
+					game.getKeyManager().put2 = false;
+				}
 			}
-			player2.setStateNow(game.getKeyManager().state_now2);
-			player2.setBombSignal(game.getKeyManager().put2);
-			player2.tick();
-			if(player2.getStateNow()==0) {
-				game.getKeyManager().state_now2 = game.getKeyManager().state_next2;
-			}
+		}
+		if(Game.time <= 0) result = 0;
+		if(ai1 != null)if(ai1.die_counter > 60)	ai1 = null;
+		if(ai2 != null)if(ai2.die_counter > 60)	ai2 = null;
+		if(Setting_page.Player_Number == 1) {
+			if(ai3 != null)if(ai3.die_counter >60 )	ai3 = null;
+		}
+		if (Setting_page.Player_Number == 1 && player1 != null) {
+			if(ai1 != null)	ai1.tick(player1.Xcoordinate, player1.Ycoordinate);
+			if(ai2 != null)ai2.tick(player1.Xcoordinate, player1.Ycoordinate);
+			if(ai3 != null)ai3.tick(player1.Xcoordinate, player1.Ycoordinate);
+		} else if (Setting_page.Player_Number == 1) {
+			if(ai1 != null)ai1.tick();
+			if(ai2 != null)ai2.tick();
+			if(ai3 != null)ai3.tick();
+		}
+		if (Setting_page.Player_Number == 2 && player1 != null && player2 != null) {
+			if(ai1 != null)ai1.tick(player1.Xcoordinate, player1.Ycoordinate, player2.Xcoordinate, player2.Ycoordinate);
+			if(ai2 != null)ai2.tick(player1.Xcoordinate, player1.Ycoordinate, player2.Xcoordinate, player2.Ycoordinate);
+
+		} else if (Setting_page.Player_Number == 2 && player1 == null && player2 != null) {
+			if(ai1 != null)ai1.tick(player2.Xcoordinate, player2.Ycoordinate);
+			if(ai2 != null)ai2.tick(player2.Xcoordinate, player2.Ycoordinate);
+
+		} else if (Setting_page.Player_Number == 2 && player1 != null && player2 == null) {
+			if(ai1 != null)ai1.tick(player1.Xcoordinate, player1.Ycoordinate);
+			if(ai2 != null)ai2.tick(player1.Xcoordinate, player1.Ycoordinate);
+
+		} else if (Setting_page.Player_Number == 2 && player1 == null && player2 == null) {
+			if(ai1 != null)ai1.tick();
+			if(ai2 != null)ai2.tick();
 
 		}
-		ai1.tick(player1.Xcoordinate,player1.Ycoordinate);
-		ai2.tick(player1.Xcoordinate,player1.Ycoordinate);
-		if(Setting_page.Player_Number == 1)	ai3.tick(player1.Xcoordinate,player1.Ycoordinate);
+
 	}
 
 	public void render(Graphics g) {
-		
+
 		g.drawImage(Assets.background, 400, 0, null);
 		g.drawImage(Assets.background2, 0, 0, null);
 		// timer
-		g.drawImage(Assets.block, 0, 0, 400, 150,null);
-		g.drawImage(Assets.block, 0, 150, 400, 150,null);
-		g.drawImage(Assets.block, 0, 300, 400, 150,null);
-		g.drawImage(Assets.block, 0, 450, 400, 150,null);
-
-
-		if(Setting_page.character_choose1 == 1) {
-			g.drawImage(Assets.blue_head, 0,0,148,148,null);
-			if(Setting_page.Player_Number ==2) {
-			if(Setting_page.character_choose2 == 2) {
-				g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 3) {
-				g.drawImage(Assets.green_head, 0,300,148,148,null);
-				g.drawImage(Assets.purple_head, 0,150,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 4) {
-				g.drawImage(Assets.green_head, 0,450,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,150,148,148,null);
-			}
-			}
-			else {	g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-		}}
-
-		if(Setting_page.character_choose1 == 2) {
-			g.drawImage(Assets.green_head, 0,0,148,148,null);
-			if(Setting_page.Player_Number ==2) {
-			if(Setting_page.character_choose2 == 1) {
-				g.drawImage(Assets.blue_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 3) {
-				g.drawImage(Assets.blue_head, 0,300,148,148,null);
-				g.drawImage(Assets.purple_head, 0,150,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 4) {
-				g.drawImage(Assets.blue_head, 0,450,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,150,148,148,null);
-			}
-				
-			}
-			else{g.drawImage(Assets.blue_head, 0,150,148,148,null);
-			g.drawImage(Assets.purple_head, 0,300,148,148,null);
-			g.drawImage(Assets.black_head, 0,450,148,148,null);
-		}}
-		
-		if(Setting_page.character_choose1 == 3) {
-			g.drawImage(Assets.purple_head, 0,0,148,148,null);
-			if(Setting_page.Player_Number ==2) {
-			if(Setting_page.character_choose2 == 2) {
-				g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.blue_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 1) {
-				g.drawImage(Assets.green_head, 0,300,148,148,null);
-				g.drawImage(Assets.blue_head, 0,150,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 4) {
-				g.drawImage(Assets.green_head, 0,450,148,148,null);
-				g.drawImage(Assets.blue_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,150,148,148,null);
-			}
-			}
-			else {	g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.black_head, 0,450,148,148,null);
-			}
-		}
-		if(Setting_page.character_choose1 == 4) {
-			g.drawImage(Assets.black_head, 0,0,148,148,null);
-			if(Setting_page.Player_Number ==2) {
-			if(Setting_page.character_choose2 == 2) {
-				g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.blue_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 3) {
-				g.drawImage(Assets.green_head, 0,300,148,148,null);
-				g.drawImage(Assets.purple_head, 0,150,148,148,null);
-				g.drawImage(Assets.blue_head, 0,450,148,148,null);
-			}
-			if(Setting_page.character_choose2 == 1) {
-				g.drawImage(Assets.green_head, 0,450,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.blue_head, 0,150,148,148,null);
-			}
-			}else {
-				g.drawImage(Assets.green_head, 0,150,148,148,null);
-				g.drawImage(Assets.purple_head, 0,300,148,148,null);
-				g.drawImage(Assets.blue_head, 0,450,148,148,null);
-		}}
+		g.drawImage(Assets.block, 0, 0, 400, 150, null);
+		g.drawImage(Assets.block, 0, 150, 400, 150, null);
+		g.drawImage(Assets.block, 0, 300, 400, 150, null);
+		g.drawImage(Assets.block, 0, 450, 400, 150, null);
 		
 		
+
 		g.drawImage(Assets.t, 60, 779, 100, 100, null);
 		g.drawImage(Assets.i, 130, 780, 100, 100, null);
 		g.drawImage(Assets.m, 200, 780, 100, 100, null);
@@ -313,18 +293,19 @@ public class GameState extends State implements GameStateDefault {
 
 				if (fourth_bb[i]) {
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = true;
-					
+
 				}
 				bomb[i].setB_duration();
 				if (bomb[i].getB_duration() <= 1 && !Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y()]) {// put bomb
-					//explosion_sound = false;
+					// explosion_sound = false;
 					if (Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()])
-						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,bomb[i].getSize(), bomb[i].getSize(), null);
+						g.drawImage(Assets.bomb, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 65,
+								bomb[i].getSize(), bomb[i].getSize(), null);
 					bomb[i].setSize();
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = false;
-					
+
 				} else {// start fire
-					
+
 					fourth_bb[i] = false;
 					Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] = false;
 					Game.go[bomb[i].getB_x()][bomb[i].getB_y()] = true;
@@ -370,7 +351,8 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x() - j][bomb[i].getB_y()] = false;
 										Game.go[bomb[i].getB_x() - j][bomb[i].getB_y()] = true;
 										Game.props[bomb[i].getB_x() - j][bomb[i].getB_y()] = new Props();
-										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
+										g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458,
+												bomb[i].getB_y() * 100 + 59, -j * 100 - 17, 90, null);// left
 										bomb[i].setLeft(j);
 										break;
 									} // (4)
@@ -395,7 +377,8 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() - j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() - j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() - j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
+												bomb[i].getB_y() * 100 + 67, 90, -j * 100 - 17, null);// 銝�
 										bomb[i].setUp(j);
 										break;
 									} else {
@@ -417,7 +400,8 @@ public class GameState extends State implements GameStateDefault {
 										Game.box_exist[bomb[i].getB_x()][bomb[i].getB_y() + j] = false;
 										Game.go[bomb[i].getB_x()][bomb[i].getB_y() + j] = true;
 										Game.props[bomb[i].getB_x()][bomb[i].getB_y() + j] = new Props();
-										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
+										g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458,
+												bomb[i].getB_y() * 100 + 145, 90, j * 100 + 17, null);// 銝�
 										bomb[i].setDown(j);
 										break;
 									} else {
@@ -441,11 +425,16 @@ public class GameState extends State implements GameStateDefault {
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() - hi] = true;
 						for (int hi = 0; hi <= bomb[i].getDown(); hi++)
 							Game.fire_exist[bomb[i].getB_x()][bomb[i].getB_y() + hi] = true;
-						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,null);
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,bomb[i].getRight() * 100 + 20, 90, null);// right
-						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,-bomb[i].getLeft() * 100 - 17, 90, null);// left
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,-bomb[i].getUp() * 100 - 17, null);// up
-						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,bomb[i].getDown() * 100 + 17, null);// down
+						g.drawImage(Assets.fire, bomb[i].getB_x() * 100 + 455, bomb[i].getB_y() * 100 + 60, 93, 93,
+								null);
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 530, bomb[i].getB_y() * 100 + 59,
+								bomb[i].getRight() * 100 + 20, 90, null);// right
+						g.drawImage(Assets.fire_r, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 59,
+								-bomb[i].getLeft() * 100 - 17, 90, null);// left
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 67, 90,
+								-bomb[i].getUp() * 100 - 17, null);// up
+						g.drawImage(Assets.fire_d, bomb[i].getB_x() * 100 + 458, bomb[i].getB_y() * 100 + 145, 90,
+								bomb[i].getDown() * 100 + 17, null);// down
 						third_bb[i] = false;
 
 					} else if (!Game.bomb_exist[bomb[i].getB_x()][bomb[i].getB_y()] && third_bb[i]) {// bomb together
@@ -547,86 +536,165 @@ public class GameState extends State implements GameStateDefault {
 			g.drawImage(Assets.obstacle2, Integer.valueOf(x), Integer.valueOf(y), null);
 		}
 
-		player1.render(g);
-
-		if(Setting_page.Player_Number == 2) {
-			player2.render(g);
+		if (player1 != null) {
+			player1.render(g);
 		}
 
-		if(Setting_page.Player_Number == 1) {
-			if(Setting_page.character_choose1 == 1) {
-			ai3.render(g,2);
-			ai1.render(g,3);
-			ai2.render(g,4);
+		if (Setting_page.Player_Number == 2) {
+			if (player2 != null) {
+				player2.render(g);
 			}
-			if(Setting_page.character_choose1 == 2) {
-				ai3.render(g,1);
-				ai1.render(g,3);
-				ai2.render(g,4);
-				}
-			if(Setting_page.character_choose1 == 3) {
-				ai3.render(g,2);
-				ai1.render(g,1);
-				ai2.render(g,4);
-				}
-			if(Setting_page.character_choose1 == 4) {
-				ai3.render(g,2);
-				ai1.render(g,1);
-				ai2.render(g,3);
-				}
-			
 		}
+		if (Setting_page.character_choose1 == 1) {
+			g.drawImage(Assets.blue_head, 125, 0, 148, 148, null);
+			if (Setting_page.Player_Number == 2) {
+				if (Setting_page.character_choose2 == 2) {
+					g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai2!=null)	ai1.render(g, 4);
+				}
+				if (Setting_page.character_choose2 == 3) {
+					g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 2);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai2!=null)	ai2.render(g, 3);
+				}
+				if (Setting_page.character_choose2 == 4) {
+					g.drawImage(Assets.green_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 2);
+				}
+			} else {
+				g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
+				g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+				g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+				if(ai1!=null)	ai1.render(g, 2);
+				if(ai2!=null)	ai2.render(g, 3);
+				if(ai3!=null)	ai3.render(g, 4);
+
+			}
+		}
+
+		if (Setting_page.character_choose1 == 2) {
+			g.drawImage(Assets.green_head, 125, 0, 148, 148, null);
+			if (Setting_page.Player_Number == 2) {
+				if (Setting_page.character_choose2 == 1) {
+					g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 4);
+				}
+				if (Setting_page.character_choose2 == 3) {
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 1);
+					if(ai2!=null)	ai2.render(g, 4);
+				}
+				if (Setting_page.character_choose2 == 4) {
+					g.drawImage(Assets.blue_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 1);
+				}
+
+			} else {
+				g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+				g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+				g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+				if(ai1!=null)	ai1.render(g, 1);
+				if(ai2!=null)	ai2.render(g, 2);
+				if(ai3!=null)	ai3.render(g, 3);
+			}
+		}
+
+		if (Setting_page.character_choose1 == 3) {
+			g.drawImage(Assets.purple_head, 125, 0, 148, 148, null);
+			if (Setting_page.Player_Number == 2) {
+				if (Setting_page.character_choose2 == 2) {
+					g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 1);
+					if(ai2!=null)	ai2.render(g, 4);
+				}
+				if (Setting_page.character_choose2 == 1) {
+					g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 2);
+					if(ai2!=null)	ai2.render(g, 4);
+				}
+				if (Setting_page.character_choose2 == 4) {
+					g.drawImage(Assets.green_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.black_head, 125, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 1);
+					if(ai2!=null)	ai2.render(g, 2);
+				}
+			} else {
+				g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
+				g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+				g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
+				if(ai1!=null)	ai1.render(g, 2);
+				if(ai2!=null)	ai2.render(g, 3);
+				if(ai3!=null)	ai3.render(g, 4);
+
+			}
+		}
+		if (Setting_page.character_choose1 == 4) {
+			g.drawImage(Assets.black_head, 150, 0, 148, 148, null);
+			if (Setting_page.Player_Number == 2) {
+				if (Setting_page.character_choose2 == 2) {
+					g.drawImage(Assets.green_head, 150, 150, 148, 148, null);
+					g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
+					g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 1);
+				}
+				if (Setting_page.character_choose2 == 3) {
+					g.drawImage(Assets.green_head, 150, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 150, 150, 148, 148, null);
+					g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 2);
+					if(ai2!=null)	ai2.render(g, 1);
+				}
+				if (Setting_page.character_choose2 == 1) {
+					g.drawImage(Assets.green_head, 150, 450, 148, 148, null);
+					g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
+					g.drawImage(Assets.blue_head, 150, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 2);
+				}
+			} else {
+				g.drawImage(Assets.green_head, 150, 150, 148, 148, null);
+				g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
+				g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
+				if(ai1!=null)	ai1.render(g, 2);
+				if(ai2!=null)	ai2.render(g, 3);
+				if(ai3!=null)	ai3.render(g, 1);
+			}
+		}
+		if(Setting_page.Player_Number == 1) {
+			if(player1 == null)	g.drawImage(Assets.cover, 0, 0, 400, 150, null);
+			if(ai1 == null)	g.drawImage(Assets.cover, 0, 150, 400, 150, null);
+			if(ai2 == null)	g.drawImage(Assets.cover, 0, 300, 400, 150, null);
+			if(ai3 == null)	g.drawImage(Assets.cover, 0, 450, 400, 150, null);
+		}
+		else {
+			if(player1 == null)	g.drawImage(Assets.cover, 0, 0, 400, 150, null);
+			if(player2 == null)	g.drawImage(Assets.cover, 0, 150, 400, 150, null);
+			if(ai1 == null)	g.drawImage(Assets.cover, 0, 300, 400, 150, null);
+			if(ai2 == null)	g.drawImage(Assets.cover, 0, 450, 400, 150, null);
 		
-		if(Setting_page.Player_Number == 2) {
-		if(Setting_page.character_choose1 ==1 && Setting_page.character_choose2 ==2 ) {
-			ai1.render(g,3);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==1 && Setting_page.character_choose2 ==3 ) {
-			ai1.render(g,2);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==1 && Setting_page.character_choose2 ==4 ) {
-			ai1.render(g,3);
-			ai2.render(g,2);
-		}
-		if(Setting_page.character_choose1 ==2 && Setting_page.character_choose2 ==1 ) {
-			ai1.render(g,3);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==2 && Setting_page.character_choose2 ==3 ) {
-			ai1.render(g,1);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==2 && Setting_page.character_choose2 ==4 ) {
-			ai1.render(g,1);
-			ai2.render(g,3);
-		}
-		if(Setting_page.character_choose1 ==3 && Setting_page.character_choose2 ==1 ) {
-			ai1.render(g,2);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==3 && Setting_page.character_choose2 ==2 ) {
-			ai1.render(g,1);
-			ai2.render(g,4);
-		}
-		if(Setting_page.character_choose1 ==3 && Setting_page.character_choose2 ==4 ) {
-			ai1.render(g,1);
-			ai2.render(g,2);
-		}
-		if(Setting_page.character_choose1 ==4 && Setting_page.character_choose2 ==1 ) {
-			ai1.render(g,3);
-			ai2.render(g,2);
-		}
-		if(Setting_page.character_choose1 ==4 && Setting_page.character_choose2 ==2 ) {
-			ai1.render(g,1);
-			ai2.render(g,3);
-		}
-		if(Setting_page.character_choose1 ==4 && Setting_page.character_choose2 ==3 ) {
-			ai1.render(g,1);
-			ai2.render(g,2);
 		}
 	}
-	}
-	
+
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-
 public class obstacle {
 	int x, y;
 	BufferedImage image;
@@ -21,10 +20,10 @@ public class obstacle {
 	}
 
 	public void move() {
-		x -= speed;	
+		x -= speed;
 	}
-	
+
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,image.getWidth(),image.getHeight());
+		return new Rectangle(x, y, image.getWidth(), image.getHeight());
 	}
 }

@@ -46,7 +46,8 @@ public class Bomb {
 		long now = System.nanoTime();
 		this.setB_timer(getB_timer() + now - this.start_time);
 		this.start_time = now;
-		if (this.getB_timer() >= 500000000)	this.f_duration += 1;
+		if (this.getB_timer() >= 500000000)
+			this.f_duration += 1;
 		if (this.getB_timer() >= 1000000000) {
 			this.b_duration += 1;
 			this.b_timer = 0;

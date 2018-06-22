@@ -10,31 +10,30 @@ public abstract class Character implements GameStateDefault {
 	protected Game game;
 	protected double pace;
 	protected int pace_cnt;
-	protected int paceLV=0;
+	protected int paceLV = 0;
 	protected int bombPut = 0;
-	protected double[] pace_arr= {5,6.25,10,12.5,20,25};
-	protected boolean [][] bombPlace = new boolean [11][9];
-	protected int bombTotal=1;
+	protected double[] pace_arr = { 5, 6.25, 10, 12.5, 20, 25 };
+	protected boolean[][] bombPlace = new boolean[11][9];
+	protected int bombTotal = 1;
 	protected int fire = 1;
 	protected boolean died = false;
 	protected int died_cycle = 0;
-	
-	public static int X,Y;
+
+	public static int X, Y;
 
 	protected boolean left_movable, right_movable, up_movable, down_movable;
 	protected int[] ideal_up = new int[2];
 	protected int[] ideal_down = new int[2];
 	protected int[] ideal_left = new int[2];
 	protected int[] ideal_right = new int[2];
-	double ideal_X;
-	protected double ideal_Y;
+	protected int ideal_X, ideal_Y;
 
-	public Character(double xcoordinate2, double ycoordinate2) {
-		this.Xcoordinate = xcoordinate2;
-		this.Ycoordinate = ycoordinate2;
+	public Character(double Xcoordinate, double Ycoordinate) {
+		this.Xcoordinate = Xcoordinate;
+		this.Ycoordinate = Ycoordinate;
 		this.pace = DEFAULT_PACE;
-		ideal_X = xcoordinate2;
-		ideal_Y = ycoordinate2;
+		ideal_X = (int) Xcoordinate;
+		ideal_Y = (int) Ycoordinate;
 	}
 
 	public abstract void render(Graphics g);
@@ -82,44 +81,46 @@ public abstract class Character implements GameStateDefault {
 	}
 
 	public void collideProps() {
-		if(Game.props[(int)(this.Xcoordinate-400)/100][(int)this.Ycoordinate/100]!=null&&this.Xcoordinate==ideal_X&&this.Ycoordinate==ideal_Y) {
-			switch(Game.props[(int)(this.Xcoordinate-400)/100][(int)this.Ycoordinate/100].id) {
-				case 1:{
-					this.bombTotal++;
-					Game.props[(int)(this.Xcoordinate-400)/100][(int)this.Ycoordinate/100]=null;
-					break;
+		if (Game.props[(int) (this.Xcoordinate - 400) / 100][(int) this.Ycoordinate / 100] != null
+				&& this.Xcoordinate == ideal_X && this.Ycoordinate == ideal_Y) {
+			switch (Game.props[(int) (this.Xcoordinate - 400) / 100][(int) this.Ycoordinate / 100].id) {
+			case 1: {
+				this.bombTotal++;
+				Game.props[(int) (this.Xcoordinate - 400) / 100][(int) this.Ycoordinate / 100] = null;
+				break;
+			}
+			case 2: {
+				this.fire++;
+				Game.props[(int) (this.Xcoordinate - 400) / 100][(int) this.Ycoordinate / 100] = null;
+				break;
+			}
+			case 3: {
+				if (paceLV <= 5) {
+					this.pace = pace_arr[paceLV];
+					paceLV++;
+					Game.props[(int) ((this.Xcoordinate - 400) / 100)][(int) (this.Ycoordinate / 100)] = null;
+				} else {
+					Game.props[(int) ((this.Xcoordinate - 400) / 100)][(int) (this.Ycoordinate / 100)] = null;
 				}
-				case 2:{
-					this.fire++;
-					Game.props[(int)(this.Xcoordinate-400)/100][(int)this.Ycoordinate/100]=null;
-					break;
-				}
-				case 3:{
-					if(paceLV<=5) {
-						this.pace = pace_arr[paceLV];
-						paceLV++;
-						Game.props[(int) ((this.Xcoordinate-400)/100)][(int) (this.Ycoordinate/100)]=null;
-					}else {
-						Game.props[(int) ((this.Xcoordinate-400)/100)][(int) (this.Ycoordinate/100)]=null;
-					}
-					break;
-				}
+				break;
+			}
 			}
 		}
 	}
+
 	public void bombCheck() {
-		for(int i=0;i<=10;i++) {
-			for(int j=0;j<=8;j++) {
-				if(bombPlace[i][j]) {
-					if(bombPlace[i][j]!=Game.bomb_exist[i][j]) {
+		for (int i = 0; i <= 10; i++) {
+			for (int j = 0; j <= 8; j++) {
+				if (bombPlace[i][j]) {
+					if (bombPlace[i][j] != Game.bomb_exist[i][j]) {
 						bombPlace[i][j] = false;
-						bombPut--;		
+						bombPut--;
 					}
 				}
 			}
 		}
 	}
-	
+
 	public boolean deadCheck() {
 		if (Game.fire_exist[(int) (this.Xcoordinate - 400) / 100][(int) (this.Ycoordinate / 100)] == true) {
 			died = true;
@@ -128,5 +129,5 @@ public abstract class Character implements GameStateDefault {
 		}
 		return died;
 	}
-	
+
 }

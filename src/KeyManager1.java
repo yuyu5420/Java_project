@@ -3,10 +3,9 @@ import java.awt.event.KeyEvent;
 
 public class KeyManager1 extends KeyAdapter {
 
-	private int module=0;
+	private int module = 0;
 
 	protected boolean up, down, left, right, put;
-
 	protected int state_now = 0, state_next, state;
 	public static int bomb_counter = 0;
 	private int moveUp = KeyEvent.VK_UP;
@@ -22,10 +21,9 @@ public class KeyManager1 extends KeyAdapter {
 	private int moveLeft2;
 	private int putBomb2;
 
-	
 	public KeyManager1(int module) {
 		this.module = module;
-		if(module==2) {			// two-person
+		if (module == 2) { // two-person
 			moveUp2 = KeyEvent.VK_W;
 			moveDown2 = KeyEvent.VK_S;
 			moveRight2 = KeyEvent.VK_D;
@@ -42,19 +40,19 @@ public class KeyManager1 extends KeyAdapter {
 		if (ButtonListener.jjjjjj) {
 			return;
 		}
-			
+
 		if (e.getKeyCode() == moveUp) {
 			up = true;
-			state_next = this.moveUp;			
-		} 
+			state_next = this.moveUp;
+		}
 		if (e.getKeyCode() == moveDown) {
 			down = true;
 			state_next = this.moveDown;
-		} 
+		}
 		if (e.getKeyCode() == moveRight) {
 			right = true;
 			state_next = this.moveRight;
-		} 
+		}
 		if (e.getKeyCode() == moveLeft) {
 			left = true;
 			state_next = moveLeft;
@@ -70,22 +68,21 @@ public class KeyManager1 extends KeyAdapter {
 			}
 		}
 
-
-		if(module!=2) {
-			return; 
-		} 
+		if (module != 2) {
+			return;
+		}
 		if (e.getKeyCode() == moveUp2) {
 			up2 = true;
-			state_next2 = this.moveUp2;			
-		} 
+			state_next2 = this.moveUp2;
+		}
 		if (e.getKeyCode() == moveDown2) {
 			down2 = true;
 			state_next2 = this.moveDown2;
-		} 
+		}
 		if (e.getKeyCode() == moveRight2) {
 			right2 = true;
 			state_next2 = this.moveRight2;
-		} 
+		}
 		if (e.getKeyCode() == moveLeft2) {
 			left2 = true;
 			state_next2 = moveLeft2;
@@ -117,12 +114,11 @@ public class KeyManager1 extends KeyAdapter {
 		if (e.getKeyCode() == moveLeft) {
 			left = false;
 		}
-		if(e.getKeyCode() == putBomb) {
-			put = false;
-		}
-		
+		/*
+		 * if(e.getKeyCode() == putBomb) { put = false; }
+		 */
 		//////
-		if(module!=2) {
+		if (module != 2) {
 			return;
 		}
 		state_next2 = 0;
@@ -138,11 +134,10 @@ public class KeyManager1 extends KeyAdapter {
 		if (e.getKeyCode() == moveLeft2) {
 			left2 = false;
 		}
-		if(e.getKeyCode() == putBomb2) {
+/*		if (e.getKeyCode() == putBomb2) {
 			put2 = false;
-		}
+		}*/
 	}
-
 
 	public int getMoveUp() {
 		return moveUp;
@@ -199,10 +194,10 @@ public class KeyManager1 extends KeyAdapter {
 	public void setMoveLeft(int moveLeft) {
 		this.moveLeft = moveLeft;
 	}
-	
+
 	public void setPutBomb(int putBomb) {
 		this.putBomb = putBomb;
-	}	
+	}
 
 	public void setMoveUp2(int moveUp) {
 		this.moveUp2 = moveUp;

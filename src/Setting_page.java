@@ -48,7 +48,6 @@ public class Setting_page {
 		btn2.setLocation(1020, 650);
 		btn2.setSize(400, 180);
 
-
 		btn1.setFont(new Font("SansSerif", Font.ITALIC, 0));
 		btn2.setFont(new Font("SansSerif", Font.ITALIC, 0));
 
@@ -56,7 +55,7 @@ public class Setting_page {
 		lb.setLocation(400, 70);
 		lb.setSize(1600, 100);
 		lb.setFont(new Font("SansSerif", Font.ITALIC, 70));
-		
+
 		JLabel b = new JLabel();
 		JLabel p1 = new JLabel();
 		JLabel p1_1 = new JLabel();

@@ -2,15 +2,13 @@ import java.awt.Graphics;
 import java.awt.image.*;
 import java.applet.*;
 
-
-
 public class Game implements Runnable {
 
 	private KeyManager1 keyManager;
 	private Map map;
 	public int width, height;
 	public String title;
-	public static boolean running = false ;
+	public static boolean running = false;
 	private Thread thread;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -28,7 +26,7 @@ public class Game implements Runnable {
 	public static boolean fire_exist[][] = new boolean[11][9];
 	public static boolean go[][] = new boolean[11][9];
 	public static Props props[][] = new Props[11][9];
-
+	public static boolean biubiu = false;
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -72,7 +70,7 @@ public class Game implements Runnable {
 			String y = tokens2[1];
 			go[Integer.valueOf(x)][Integer.valueOf(y)] = true;
 		}
-		
+
 	}
 
 	public KeyManager1 getKeyManager() {
@@ -107,18 +105,19 @@ public class Game implements Runnable {
 
 	public void run() {
 
-		
 		init();
-		
-		int fps = 100;
+
+		int fps = 60;
 		double timepPerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		
-		while (running) {
 
+		while (running) {
+			while(biubiu){
+				if(restart.bye) stop();
+			}
 			while (ButtonListener.jjjjjj) {
 				System.out.print("");
 			}
@@ -142,19 +141,16 @@ public class Game implements Runnable {
 				second = time % 60;
 
 			}
-			if(time == 180 && play) {//background music
+			if (time == 180 && play) {// background music
 				clip.loop();
 				play = false;
 			}
-			
-			 
-			if(GameState.explosion_sound) {
+
+			if (GameState.explosion_sound) {
 				clip2.play();
 				GameState.explosion_sound = false;
 			}
-				
-			
-			
+
 		}
 	}
 
@@ -170,6 +166,7 @@ public class Game implements Runnable {
 		if (!running)
 			return;
 		running = false;
+		map.getFrame().dispose();
 		try {
 			thread.join();
 		} catch (InterruptedException e) {

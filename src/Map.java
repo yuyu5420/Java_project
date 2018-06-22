@@ -30,9 +30,7 @@ public class Map {
 		yoyoyo.setBorder(null);
 		yoyoyo.setFocusPainted(false);
 		yoyoyo.setFocusable(false);
-		
 
-		
 		yoyoyo.setVisible(true);
 		yoyoyo.setIcon(new ImageIcon(
 				new ImageIcon("./res/images/pause.png").getImage().getScaledInstance(300, 150, Image.SCALE_DEFAULT)));
@@ -44,7 +42,7 @@ public class Map {
 		Color color = new Color(122, 113, 106);
 		yoyoyo.setBackground(color);
 		frame.add(yoyoyo);
-		
+
 		yoyoyo.setPreferredSize(null);
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));

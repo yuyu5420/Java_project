@@ -33,8 +33,8 @@ public class Start_menu implements ActionListener {
 		btn1.setLocation(600, 300);
 		btn1.setSize(400, 180);
 
-		JButton btn2 = new JButton("Setting");
-		ImageIcon btn2icon = new ImageIcon("./res/images/setting.png");
+		JButton btn2 = new JButton("How to play");
+		ImageIcon btn2icon = new ImageIcon("./res/images/how_to_play.png");
 		btn2.setBorder(null);
 		btn2.setFocusPainted(false);
 		btn2.setOpaque(false);
@@ -44,8 +44,8 @@ public class Start_menu implements ActionListener {
 		btn2.setLocation(600, 500);
 		btn2.setSize(400, 180);
 
-		JButton btn3 = new JButton("How to play");
-		ImageIcon btn3icon = new ImageIcon("./res/images/how_to_play.png");
+		JButton btn3 = new JButton("Developer");
+		ImageIcon btn3icon = new ImageIcon("./res/images/Developer.png");
 		btn3.setBorder(null);
 		btn3.setFocusPainted(false);
 		btn3.setOpaque(false);
@@ -95,6 +95,11 @@ public class Start_menu implements ActionListener {
 
 		else if (str.equals("How to play")) {
 			new How_to_play();
+			Menu_frame.setVisible(false);
+		}
+		
+		else if (str.equals("Developer")) {
+			new Developer();
 			Menu_frame.setVisible(false);
 		}
 

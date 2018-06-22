@@ -9,19 +9,15 @@ public abstract class User extends Character {
 
 	protected boolean up, down, left, right, bombSignal;
 
-
 	protected int up_key;
 	protected int down_key;
 	protected int left_key;
 	protected int right_key;
 
-
 	public int bomb_counter = 0;
-	
 
-	public User(double xcoordinate, double ycoordinate) {
-		super(xcoordinate, ycoordinate);
-
+	public User(double Xcoordinate, double Ycoordinate) {
+		super(Xcoordinate, Ycoordinate);
 	}
 
 	@Override
@@ -29,9 +25,8 @@ public abstract class User extends Character {
 
 	@Override
 	public void tick() {
-		
-		if(deadCheck()) {
-			died_cycle++;
+
+		if (deadCheck()) {
 			return;
 		}
 		collideProps();
@@ -70,32 +65,35 @@ public abstract class User extends Character {
 				check();
 			}
 		}
-		
-		if (bombSignal && !Game.bomb_exist[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100]&&bombPut<bombTotal) {
+		if (state_now == 0 && bombSignal
+				&& !Game.bomb_exist[(int) (this.Xcoordinate - 445) / 100][(int) (this.Ycoordinate - 5) / 100]
+				&& bombPut < bombTotal) {
 			if (KeyManager1.bomb_counter == 50)
 				KeyManager1.bomb_counter = 0;
-//			System.out.println("AAAA");
-			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int)(this.Xcoordinate-445)/100, (int)(this.Ycoordinate-5)/100, fire);
+			GameState.bomb[KeyManager1.bomb_counter] = new Bomb((int) (this.Xcoordinate - 445) / 100,
+					(int) (this.Ycoordinate - 5) / 100, fire);
 			GameState.first_bb[KeyManager1.bomb_counter] = true;
 			GameState.second_bb[KeyManager1.bomb_counter] = true;
 			GameState.third_bb[KeyManager1.bomb_counter] = true;
 			GameState.fourth_bb[KeyManager1.bomb_counter] = true;
 			KeyManager1.bomb_counter++;
-			bombPlace[(int)(this.Xcoordinate-445)/100][(int)(this.Ycoordinate-5)/100] = true;
+			bombPlace[(int) (this.Xcoordinate - 445) / 100][(int) (this.Ycoordinate - 5) / 100] = true;
 			bombPut++;
+			this.bombSignal = false;
 		}
+
 	}
 
 	public void testIdealLocation() {
 		if (ideal_X == this.Xcoordinate && ideal_Y == this.Ycoordinate) {
-			ideal_up[0] = (int) ideal_X;
-			ideal_up[1] = (int) (ideal_Y - 100);
-			ideal_down[0] = (int) ideal_X;
-			ideal_down[1] = (int) (ideal_Y + 100);
-			ideal_left[0] = (int) (ideal_X - 100);
-			ideal_left[1] = (int) ideal_Y;
-			ideal_right[0] = (int) (ideal_X + 100);
-			ideal_right[1] = (int) ideal_Y;
+			ideal_up[0] = ideal_X;
+			ideal_up[1] = ideal_Y - 100;
+			ideal_down[0] = ideal_X;
+			ideal_down[1] = ideal_Y + 100;
+			ideal_left[0] = ideal_X - 100;
+			ideal_left[1] = ideal_Y;
+			ideal_right[0] = ideal_X + 100;
+			ideal_right[1] = ideal_Y;
 			super.movable();
 		}
 		this.setIdealLocation(state_now);
@@ -114,7 +112,7 @@ public abstract class User extends Character {
 		} else if (direction == left_key && this.left_movable) {
 			ideal_X = ideal_left[0];
 			ideal_Y = ideal_left[1];
-		}  else {
+		} else {
 			state_now = 0;
 		}
 	}
@@ -122,18 +120,17 @@ public abstract class User extends Character {
 	public void setStateNow(int state_now) {
 		this.state_now = state_now;
 	}
-		
+
 	public int getStateNow() {
 		return state_now;
 	}
-	
+
 	public void setKey(int up, int down, int left, int right) {
 		this.up_key = up;
 		this.down_key = down;
 		this.left_key = left;
 		this.right_key = right;
 	}
-	
 
 	public void setDirection(boolean up, boolean down, boolean left, boolean right) {
 
@@ -142,12 +139,11 @@ public abstract class User extends Character {
 		this.right = right;
 		this.down = down;
 	}
-		
+
 	public void check() {
 
 		if (ideal_X == this.Xcoordinate && ideal_Y == this.Ycoordinate) {
 			state_now = 0;
-			return;
 		} else {
 			if (state_now == up_key || state_now == down_key) {
 				if (Math.abs((ideal_Y - this.Ycoordinate)) == this.pace) {
@@ -185,6 +181,7 @@ public abstract class User extends Character {
 				}
 			}
 		}
+
 	}
 
 	public int getState() {
@@ -202,7 +199,6 @@ public abstract class User extends Character {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	
 
 	public void setBombSignal(boolean bombSignal) {
 

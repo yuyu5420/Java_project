@@ -65,7 +65,8 @@ public class Bomber {
 		jumpstate = true;
 	}
 
-	
-	  public Rectangle getFeetBounds() { return new Rectangle(x+80,y+210,140,70); }
-	 
+	public Rectangle getFeetBounds() {
+		return new Rectangle(x + 80, y + 210, 140, 70);
+	}
+
 }

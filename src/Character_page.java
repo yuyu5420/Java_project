@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.awt.event.*;
 import java.awt.*;
 
-
 public class Character_page extends JFrame implements ActionListener {
 	static JLabel arrow = new JLabel();// get
 	static JLabel arrow2 = new JLabel();// get
