@@ -46,7 +46,7 @@ public class Bomb {
 		long now = System.nanoTime();
 		this.setB_timer(getB_timer() + now - this.start_time);
 		this.start_time = now;
-		if (this.getB_timer() >= 500000000)
+		if (this.getB_timer() >= 250000000)
 			this.f_duration += 1;
 		if (this.getB_timer() >= 1000000000) {
 			this.b_duration += 1;
@@ -141,7 +141,7 @@ public class Bomb {
 		long now = System.nanoTime();
 		this.setE_timer(getE_timer() + now - GameState.start_time[i]);
 		GameState.start_time[i] = now;
-		if (this.getE_timer() >= 500000000) {
+		if (this.getE_timer() >= 250000000) {
 			this.e_duration += 1;
 			this.e_timer = 0;
 		}
