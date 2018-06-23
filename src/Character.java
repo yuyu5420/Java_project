@@ -12,7 +12,7 @@ public abstract class Character implements GameStateDefault {
 	protected int pace_cnt;
 	protected int paceLV = 0;
 	protected int bombPut = 0;
-	protected double[] pace_arr = { 5, 6.25, 10, 12.5, 20, 25 };
+	protected double[] pace_arr = {6.25, 10, 12.5, 20, 25 };
 	protected boolean[][] bombPlace = new boolean[11][9];
 	protected int bombTotal = 1;
 	protected int fire = 1;
@@ -95,7 +95,7 @@ public abstract class Character implements GameStateDefault {
 				break;
 			}
 			case 3: {
-				if (paceLV <= 5) {
+				if (paceLV <= 4) {
 					this.pace = pace_arr[paceLV];
 					paceLV++;
 					Game.props[(int) ((this.Xcoordinate - 400) / 100)][(int) (this.Ycoordinate / 100)] = null;

@@ -35,7 +35,14 @@ public class restart implements ActionListener {
 		lb2.setSize(400, 100);
 		lb2.setFont(new Font("Serif", Font.ITALIC , 40));
 		//lb2.setForeground(Color.white);
-
+		
+		JLabel title = new JLabel();
+		ImageIcon titleicon = new ImageIcon("./res/images/QQMAN.png");
+		title.setIcon(titleicon);
+		title.setSize(1200,300);
+		title.setLocation(350, 0);
+		
+		
 		JButton btn1 = new JButton("EXIT");
 		ImageIcon btn1icon = new ImageIcon("./res/images/EXIT.png");
 		btn1.setBorder(null);
@@ -67,6 +74,7 @@ public class restart implements ActionListener {
 		restart.setLayout(null);
 		restart.add(btn1);
 		restart.add(btn2);
+		restart.add(title);
 		if(i==0) {restart.add(lb0);}
 		if(i==1) {restart.add(lb1);}
 		if(i==2) {restart.add(lb2);}

@@ -116,7 +116,11 @@ public class Game implements Runnable {
 
 		while (running) {
 			while(biubiu){
-				if(restart.bye) stop();
+				if(restart.bye) {
+					clip.stop();
+					stop();
+
+				}
 			}
 			while (ButtonListener.jjjjjj) {
 				System.out.print("");

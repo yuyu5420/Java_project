@@ -553,21 +553,21 @@ public class GameState extends State implements GameStateDefault {
 					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
 					if(ai1!=null)	ai1.render(g, 3);
 					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
-					if(ai2!=null)	ai1.render(g, 4);
+					if(ai2!=null)	ai2.render(g, 4);
 				}
 				if (Setting_page.character_choose2 == 3) {
 					g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
 					g.drawImage(Assets.purple_head, 125, 150, 148, 148, null);
 					if(ai1!=null)	ai1.render(g, 2);
 					g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
-					if(ai2!=null)	ai2.render(g, 3);
+					if(ai2!=null)	ai2.render(g, 4);
 				}
 				if (Setting_page.character_choose2 == 4) {
-					g.drawImage(Assets.green_head, 125, 450, 148, 148, null);
-					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 450, 148, 148, null);
 					g.drawImage(Assets.black_head, 125, 150, 148, 148, null);
-					if(ai1!=null)	ai1.render(g, 3);
-					if(ai2!=null)	ai2.render(g, 2);
+					if(ai1!=null)	ai1.render(g, 2);
+					if(ai2!=null)	ai2.render(g, 3);
 				}
 			} else {
 				g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
@@ -598,11 +598,11 @@ public class GameState extends State implements GameStateDefault {
 					if(ai2!=null)	ai2.render(g, 4);
 				}
 				if (Setting_page.character_choose2 == 4) {
-					g.drawImage(Assets.blue_head, 125, 450, 148, 148, null);
-					g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 450, 148, 148, null);
 					g.drawImage(Assets.black_head, 125, 150, 148, 148, null);
-					if(ai1!=null)	ai1.render(g, 3);
-					if(ai2!=null)	ai2.render(g, 1);
+					if(ai1!=null)	ai1.render(g, 1);
+					if(ai2!=null)	ai2.render(g, 3);
 				}
 
 			} else {
@@ -610,8 +610,8 @@ public class GameState extends State implements GameStateDefault {
 				g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
 				g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
 				if(ai1!=null)	ai1.render(g, 1);
-				if(ai2!=null)	ai2.render(g, 2);
-				if(ai3!=null)	ai3.render(g, 3);
+				if(ai2!=null)	ai2.render(g, 3);
+				if(ai3!=null)	ai3.render(g, 4);
 			}
 		}
 
@@ -640,46 +640,46 @@ public class GameState extends State implements GameStateDefault {
 					if(ai2!=null)	ai2.render(g, 2);
 				}
 			} else {
-				g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
-				g.drawImage(Assets.purple_head, 125, 300, 148, 148, null);
+				g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+				g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
 				g.drawImage(Assets.black_head, 125, 450, 148, 148, null);
-				if(ai1!=null)	ai1.render(g, 2);
-				if(ai2!=null)	ai2.render(g, 3);
+				if(ai1!=null)	ai1.render(g, 1);
+				if(ai2!=null)	ai2.render(g, 2);
 				if(ai3!=null)	ai3.render(g, 4);
 
 			}
 		}
 		if (Setting_page.character_choose1 == 4) {
-			g.drawImage(Assets.black_head, 150, 0, 148, 148, null);
+			g.drawImage(Assets.black_head, 125, 0, 148, 148, null);
 			if (Setting_page.Player_Number == 2) {
 				if (Setting_page.character_choose2 == 2) {
-					g.drawImage(Assets.green_head, 150, 150, 148, 148, null);
-					g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
-					g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
-					if(ai1!=null)	ai1.render(g, 3);
-					if(ai2!=null)	ai2.render(g, 1);
+					g.drawImage(Assets.green_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 1);
+					if(ai2!=null)	ai2.render(g, 3);
 				}
 				if (Setting_page.character_choose2 == 3) {
-					g.drawImage(Assets.green_head, 150, 300, 148, 148, null);
-					g.drawImage(Assets.purple_head, 150, 150, 148, 148, null);
-					g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
-					if(ai1!=null)	ai1.render(g, 2);
-					if(ai2!=null)	ai2.render(g, 1);
-				}
-				if (Setting_page.character_choose2 == 1) {
-					g.drawImage(Assets.green_head, 150, 450, 148, 148, null);
-					g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
-					g.drawImage(Assets.blue_head, 150, 150, 148, 148, null);
-					if(ai1!=null)	ai1.render(g, 3);
+					g.drawImage(Assets.green_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 150, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 300, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 1);
 					if(ai2!=null)	ai2.render(g, 2);
 				}
+				if (Setting_page.character_choose2 == 1) {
+					g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
+					g.drawImage(Assets.purple_head, 125, 450, 148, 148, null);
+					g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+					if(ai1!=null)	ai1.render(g, 2);
+					if(ai2!=null)	ai2.render(g, 3);
+				}
 			} else {
-				g.drawImage(Assets.green_head, 150, 150, 148, 148, null);
-				g.drawImage(Assets.purple_head, 150, 300, 148, 148, null);
-				g.drawImage(Assets.blue_head, 150, 450, 148, 148, null);
-				if(ai1!=null)	ai1.render(g, 2);
-				if(ai2!=null)	ai2.render(g, 3);
-				if(ai3!=null)	ai3.render(g, 1);
+				g.drawImage(Assets.green_head, 125, 300, 148, 148, null);
+				g.drawImage(Assets.purple_head, 125, 450, 148, 148, null);
+				g.drawImage(Assets.blue_head, 125, 150, 148, 148, null);
+				if(ai1!=null)	ai1.render(g, 1);
+				if(ai2!=null)	ai2.render(g, 2);
+				if(ai3!=null)	ai3.render(g, 3);
 			}
 		}
 		if(Setting_page.Player_Number == 1) {
