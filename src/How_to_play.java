@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +6,6 @@ import javax.swing.*;
 
 
 public class How_to_play implements ActionListener {
-	private String title;
 	public  JFrame  How_to_play_frame;
 	private int width, height;
 	

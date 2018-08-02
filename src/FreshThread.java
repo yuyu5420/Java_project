@@ -10,7 +10,7 @@ public class FreshThread extends Thread {
 		while (p.isFinish() == false) {
 			p.repaint();
 			try {
-				Thread.sleep(p.FRESH);
+				Thread.sleep(gamepanel.FRESH);
 			}
 
 			catch (InterruptedException e) {

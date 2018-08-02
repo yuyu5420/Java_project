@@ -7,7 +7,6 @@ import javax.swing.*;
 
 
 public class Developer implements ActionListener {
-	private String title;
 	public  JFrame  DeveloperFrame;
 	private int width, height;
 	

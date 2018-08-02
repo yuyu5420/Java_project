@@ -1,11 +1,7 @@
 
-// MyButtonListener.Player_Number 是玩家數量
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.FlowLayout;
 
 public class MyButtonListener implements ActionListener {
 

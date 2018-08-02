@@ -1,20 +1,14 @@
 
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.util.*;
-import javax.swing.plaf.FontUIResource;
 
 public class Start_menu implements ActionListener {
-	private String title;
 	public static JFrame Menu_frame;
 	private int width, height;
 
 	public Start_menu(String title, int width, int height) {
-		this.title = title;
 		this.width = width;
 		this.height = height;
 		Display();

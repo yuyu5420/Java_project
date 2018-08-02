@@ -1,12 +1,9 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 public abstract class Character implements GameStateDefault {
 
 	protected double Xcoordinate, Ycoordinate;
-	private int bombNum;
-	private int power, powerNum;
 	protected Game game;
 	protected double pace;
 	protected int pace_cnt;

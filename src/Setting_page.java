@@ -1,12 +1,7 @@
 import java.awt.Font;
-import java.awt.Insets;
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.util.*;
-import javax.swing.plaf.FontUIResource;
 
 public class Setting_page {
-	private String title;
 	public static JFrame startframe;
 	private int width, height;
 	public static int Player_Number = 0;
@@ -14,7 +9,6 @@ public class Setting_page {
 	public static int character_choose2 = 1;
 
 	public Setting_page(String title, int width, int height) {
-		this.title = title;
 		this.width = width;
 
 		this.height = height;

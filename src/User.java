@@ -1,6 +1,5 @@
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 public abstract class User extends Character {
 

@@ -1,21 +1,14 @@
 import javax.swing.*;
-import java.awt.image.*;
-import java.io.IOException;
 import java.awt.event.*;
 import java.awt.*;
 
 public class Character_page extends JFrame implements ActionListener {
 	static JLabel arrow = new JLabel();// get
 	static JLabel arrow2 = new JLabel();// get
-	private String title;
 	static JFrame frame_C;// change to get
-	private int width, height;
 	private KeyManager keyManager;
 
 	public Character_page(String title, int width, int height) {
-		this.title = title;
-		this.width = width;
-		this.height = height;
 		keyManager = new KeyManager();
 		frame_C = new JFrame();
 		frame_C.setSize(width, height);
